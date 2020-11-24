@@ -3,9 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class UsersService {
   constructor(private http: HttpClient, private cookies: CookieService) {}
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from 'src/app/users/users.service';
+import { UsersService } from '../../model/users/users.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -36,6 +35,9 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    this.email = this.registerForm.value['email'];
+    this.password = this.registerForm.value['password'];
+
     const user = { email: this.email, password: this.password };
     this.userService.register(user).subscribe(data => {
       //this.userService.setToken(data.token);

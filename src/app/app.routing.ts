@@ -1,17 +1,30 @@
+import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule, Routes } from "@angular/router";
-import { LoginComponent } from "./pages/login/login.component";
-import { RegisterComponent } from "./pages/register/register.component";
+import { AuthBaseComponent } from "./auth-page/auth-base/auth-base.component";
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },//AppComponent
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  {
+    path: '',
+    component: AuthBaseComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: './auth-page/auth-base/auth-base.module#AuthBaseModule'
+      }
+    ]
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    CommonModule,
+    BrowserModule,
+    RouterModule.forRoot(routes)],
+  exports: [
+
+  ]
 })
 
 export class AppRoutingModule { }

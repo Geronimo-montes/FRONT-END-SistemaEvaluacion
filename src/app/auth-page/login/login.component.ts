@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UsersService } from "../../users/users.service";
+import { UsersService } from "../../model/users/users.service";
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -34,6 +34,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
+    this.email = this.loginForm.value['email'];
+    this.password = this.loginForm.value['password'];
+
     const user = {email: this.email, password: this.password };
     this.userService.login(user).subscribe(data => {
       //this.userService.setToken(data.token);
