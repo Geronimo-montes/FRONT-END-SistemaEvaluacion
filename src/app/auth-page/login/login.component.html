@@ -48,8 +48,7 @@
                 </div>
               </div>
 
-              <div *ngIf="isValidInput('password')"
-                class="alert alert-danger">
+              <div *ngIf="isValidInput('password')" class="alert alert-danger">
                 <div *ngIf="loginForm.controls['password'].errors.required">
                   Password is required.
                 </div>
@@ -64,6 +63,10 @@
               <div class="text-center">
                 <!--BUTTON-->
                 <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary my-4">Log in</button>
+              </div>
+
+              <div *ngIf="!loginValidate" class="alert alert-danger text-center" >
+                {{ mensajeError }}
               </div>
             </form>
           </div>

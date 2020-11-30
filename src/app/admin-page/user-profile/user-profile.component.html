@@ -1,0 +1,381 @@
+  <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center">
+    <span class="mask bg-gradient-danger opacity-8"></span>
+  </div>
+  <div *ngIf="!!docente"  class="container-fluid mt--6 bg-secondary">
+    <div class="row">
+      <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+        <div class="card card-profile shadow">
+          <div class="row justify-content-center">
+            <div class="col-lg-3 order-lg-2 mt--5">
+              <div class="card-profile-image">
+                <a href="javascript:void(0)">
+                  <img src="assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body pt-0 pt-md-4">
+            <div class="text-center mt-6">
+            <!--Ficha de presentacion del docente con datos resumidos-->
+              <h2>
+                <span class="font-weight-light"> {{ docente.rol }} </span>
+                {{ "  " + docente.nombre + " " + docente.ap1 + " " + docente.ap2 }}
+              </h2>
+
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="card-profile-stats d-flex justify-content-center">
+                  <div>
+                    <span class="heading">Grupo</span>
+                    <span class="description"> {{ docente.grupo }} </span>
+                  </div>
+                  <div>
+                    <span class="heading">Grado</span>
+                    <span class="description"> {{ docente.grado }} </span>
+                  </div>
+                  <div>
+                    <span class="heading">Turno</span>
+                    <span class="description"> {{ docente.turno }} </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-10 mb-4 mt-5">
+                <div class="card card-stats mb-4 mb-lg-0 border  shadow">
+                  <div class="card-body rounded bg-secondary" >
+                    <div class="row justify-content-center mb-7">
+                      <div class="col-lg-3 order-lg-2 mt--4">
+                        <div class="card-profile-image">
+                          <a href="javascript:void(0)">
+                            <img src="https://images.adsttc.com/media/images/5b87/2acf/f197/ccda/a100/01a9/newsletter/_MG_6827-1-DAVILA-BONILLA-SAN-JOSE-2016-11-MEDIA.jpg?1535584951" class="rounded-circle">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row justify-content-center">
+                      <h3 class="card-title text-uppercase mb-0 mt-2"> {{ docente.nombreEscuela }} </h3>
+                    </div>  
+                    <div class="row justify-content-center">
+                      <div class="col-4">
+                        <p class="mt-2 mb-0 h5">
+                          Clave Escuela:
+                        </p>
+                        <p class="mt-2 mb-0 h5">
+                          Zona Escolar:
+                        </p>
+                        <p class="mt-2 mb-0 h5">
+                          Sector:
+                        </p>
+                        <p class="mt-2 mb-0 h5">
+                          Direccion:
+                        </p>
+                        <p class="mt-2 mb-0 h5">
+                          Telefono:
+                        </p>
+                      </div>
+
+                      <div class="col-7">
+                        <p class="mt-2 mb-0 h5 text-muted">
+                          {{ docente.claveEscuela }}
+                        </p>
+                        <p class="mt-2 mb-0 h5 text-muted">
+                          {{ docente.zonaEscolarEscuela }}
+                        </p>
+                        <p class="mt-2 mb-0 h5 text-muted">
+                          {{ docente.sectorEscuela }}
+                        </p>
+                        <p class="mt-2 mb-0 h5 text-muted">
+                          {{ docente.direccionEscuela }}
+                        </p>
+                        <p class="mt-2 mb-0 h5 text-muted"> 
+                          {{ docente.telefonoEscuela }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-10">
+                <div class="card card-stats mb-4 mb-lg-0 bg-secondary " >
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h2 class="card-title text-uppercase text-muted mb-0"> Ciclo Escolar </h2>
+                        <h5 class="card-title text-uppercase text-muted mb-0"> Dias Habiles </h5>
+                        <span class="h2 font-weight-bold mb-0"> {{ docente.diasHabilesCiclo }} </span>
+                      </div>
+                      <div class="col-auto">
+                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                          <i class="fas fa-calendar"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-2 mb-0 text-muted text-sm">
+                      <span class="text-success mr-2 h4"><i class="fa fa-arrow-up"></i> {{ docente.inicioCicloCiclo | date:'mediumDate' }} </span>
+                      <span class="text-danger mr-2 h4"><i class="fa fa-arrow-down"></i> {{ docente.finCicloCiclo | date:'mediumDate' }} </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-8 order-xl-1">
+        <!--Informacion del usuario-->
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0 shadow">
+            <div class="row align-items-center">
+              <div class="col-11">
+                <h2 class="mb-0">Ficha de Información</h2>
+              </div>
+
+              <button class="col-1 btn btn-icon"  type="button" [ngClass]="{'btn-primary': inputDisable, 'btn-danger': !inputDisable}" (click)="inputDisable = !inputDisable"  
+              data-toggle="popover" title="Editar Datos" data-content="Some content inside the popover">
+                <span class="btn-inner-icon"><i class="ni ni-settings-gear-65"></i></span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <!--Formulario de actualizacion de datos del docente-->
+            <form [formGroup]="form" (ngSubmit)="updateDocente()" method="post">
+              <input type="hidden" formControlName = "idDocente">
+              <input type="hidden" formControlName = "grupo">
+              <input type="hidden" formControlName = "grado">
+              <input type="hidden" formControlName = "turno">
+              <input type="hidden" formControlName = "rol">
+              <input type="hidden" formControlName = "estatus">
+              <h6 class="heading-small text-muted mb-2">Información de Usuario</h6>
+              <div class="pl-lg-4 pr-lg-4">
+                <div class="row">
+                  <!--Nombre-->
+                  <div class="col-lg-4">
+                    <label class="form-control-label">Nombre</label>
+                    <div class="form-group" [ngClass]="isValidInput('nombre', 'div')">
+                      <input class="form-control text-dark" [ngClass]="isValidInput('nombre', 'input')"
+                        type="text" 
+                        formControlName = "nombre"
+                        placeholder="Nombre(s)"
+                        [readonly] = "inputDisable"
+                      >
+
+                    </div>
+                  </div>
+                  <!--ap1--> 
+                  <div class="col-lg-4">
+                    <label class="form-control-label">Apellido Paterno</label>
+                    <div class="form-group" [ngClass]="isValidInput('ap1', 'div')">
+                      <input class="form-control text-dark" [ngClass]="isValidInput('ap1', 'input') "
+                        type="text" 
+                        formControlName = "ap1"
+                        placeholder="Apellido Paterno" 
+                        [readonly] = "inputDisable"
+                      >
+                    </div>
+                  </div>
+                  <!--ap2-->
+                  <div class="col-lg-4">
+                    <label class="form-control-label">Apellido Materno</label>
+                    <div class="form-group" [ngClass]="isValidInput('ap2', 'div')">
+                      <input class="form-control text-dark" [ngClass]="isValidInput('ap2', 'input') "
+                        type="text" 
+                        formControlName = "ap2"
+                        placeholder="Apellido Materno" 
+                        [readonly] = "inputDisable"
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <!--curp-->
+                  <div class="col-lg-6">
+                    <label class="form-control-label">CURP</label>
+                    <div class="form-group" [ngClass]="isValidInput('curp', 'div')">
+                      <input class="form-control text-dark" [ngClass]="isValidInput('curp', 'input')"
+                        type="text" 
+                        formControlName = "curp" 
+                        placeholder="CURP" 
+                        [readonly] = "inputDisable"
+                      >
+                    </div>
+                  </div>
+                  <!--rfc-->
+                  <div class="col-lg-6">
+                    <label class="form-control-label">RFC</label>
+                    <div class="form-group" [ngClass]="isValidInput('rfc', 'div')">
+                      <input class="form-control text-dark" [ngClass]="isValidInput('rfc', 'input')"
+                        type="text" 
+                        formControlName = "rfc" 
+                        placeholder="RFC" 
+                        [readonly] = "inputDisable"
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class="my-4"/>
+              <!-- Address -->
+              <h6 class="heading-small text-muted mb-2">Información de Contacto</h6>
+              <div class="pl-lg-4 pr-lg-4">
+                <div class="row">
+                <!--Direccion-->
+                  <div class="col-md-12">
+                    <label class="form-control-label">Dirección</label>
+                    <div class="form-group" [ngClass]="isValidInput('direccion', 'div')">
+                      <input class="form-control text-dark" [ngClass]="isValidInput('direccion', 'input')" 
+                        type="text"
+                        formControlName = "direccion"
+                        placeholder="Home Address"
+                        [readonly] = "inputDisable"
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <!--telefono-->
+                  <div class="col-lg-6">
+                    <label class="form-control-label">Telefono</label>
+                    <div class="form-group" [ngClass]="isValidInput('telefono', 'div')">
+                      <input class="form-control text-dark" [ngClass]="isValidInput('telefono', 'input')" 
+                        type="tel"
+                        formControlName = "telefono"
+                        placeholder="Numero de Telefono"
+                        [readonly] = "inputDisable"
+                      >
+                    </div>
+                  </div>
+                  <!--Facebook-->
+                  <div class="col-lg-6">
+                    <label class="form-control-label">Facebook</label>
+                    <div class="form-group" [ngClass]="isValidInput('facebook', 'div')">
+                      <input class="form-control text-dark" [ngClass]="isValidInput('facebook', 'input')" 
+                        type="text"
+                        formControlName = "facebook"
+                        placeholder="Facebook"
+                        [readonly] = "inputDisable"
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--BUTTON-->
+              <div class="pl-lg-4 pr-lg-4 btn-group float-left col-lg-12">
+                <div class="col-lg-9"></div>
+                  <button type="submit" class="btn btn-primary col-lg-3 rounded" [disabled] = "validForm()">
+                    Guardar Cambios
+                  </button>
+              </div>
+              <hr class="my-4" />
+            </form>
+          </div>
+        </div>
+
+        <!--Informacion de la cuenta-->
+        <div class="card bg-secondary shadow mt-3">
+          <div class="card-header bg-white border-0 shadow">
+            <div class="row align-items-center">
+              <div class="col-11">
+                <h2 class="mb-0">Cuenta de Usuario</h2>
+              </div>
+            </div>
+          </div>
+          <!--Formulario de actualizacion de datos de cuenta-->          
+          <div class="card-body">
+            <form [formGroup]="formUser" (ngSubmit)="updateUser()" method="post">
+              <!--Datos de la Cuenta-->
+              <h6 class="heading-small text-muted mb-2">Información de la Cuenta</h6>
+              <div class="pl-lg-4 pr-lg-4">
+                <div class="row">
+                  <!--email-->
+                  <div class="col-lg-4">
+                    <label class="form-control-label">Email</label>
+                    <div class="form-group" [ngClass]="isValidInputUser('email', 'div')">
+                      <input class="form-control text-dark" [ngClass]="isValidInputUser('email', 'input')"
+                        type="text" 
+                        formControlName = "email"
+                        placeholder="Nombre(s)" 
+                      >
+                    </div>
+                  </div>
+                  <!--pass-->
+                  <div class="col-lg-4">
+                    <label class="form-control-label">Password</label>
+                    <div class="form-group" [ngClass]="isValidInputUser('password', 'div')">
+                      <input class="form-control text-dark" [ngClass]="isValidInputUser('password', 'input') "
+                        type="password" 
+                        formControlName = "password"
+                        placeholder="Password" 
+                      >
+                    </div>
+                  </div>
+                  <!--pass confirm-->
+                  <div class="col-lg-4">
+                    <label class="form-control-label">Confirmar Password</label>
+                    <div class="form-group" [ngClass]="isValidInputUser('passwordConfirm', 'div')">
+                      <input class="form-control text-dark" [ngClass]="isValidInputUser('passwordConfirm', 'input')"
+                        type="password" 
+                        formControlName = "passwordConfirm"
+                        placeholder="Confirmar Password" 
+                      >
+                    </div>
+                  </div>
+
+                  <!--Mensjes de error-->
+                  <div *ngIf="(formUser.controls['email'].invalid && (formUser.controls['email'].dirty || formUser.controls['email'].touched))"
+                    class="col-lg-12">
+                    <div *ngIf="formUser.controls['email'].errors.required" class="alert alert-danger">
+                      Email es requerido.
+                    </div>
+                    <div *ngIf="formUser.controls['email'].errors.pattern" class="alert alert-danger">
+                      Formato de correo no valido.
+                    </div>
+                  </div>
+
+                  <div *ngIf="(formUser.controls['password'].invalid && (formUser.controls['password'].dirty || formUser.controls['password'].touched))"
+                    class="col-lg-12">
+                    <div *ngIf="formUser.controls['password'].errors.required" class="alert alert-danger">
+                      Password es requerido.
+                    </div>
+                    <div *ngIf="formUser.controls['password'].errors.pattern" class="alert alert-danger">
+                      Password debe contener: <br>
+                        8-20 carateres <br>
+                        1 mayuscula <br>
+                        1 Numero <br>
+                        1 simbolo especial <br>
+                    </div>
+                  </div>
+
+                  <div *ngIf="isValidPasswordConfirm()" class="col-lg-12">
+                    <div class="alert alert-danger">
+                      Las contraseñas no coiciden.
+                    </div>
+                  </div>
+
+                  <div *ngIf="validUserUpdate" class="col-lg-12">
+                    <div *ngIf="tipoMensaje" class="alert alert-success">
+                      {{ mensaje }}
+                    </div>
+
+                    <div *ngIf="!tipoMensaje" class="alert alert-danger">
+                      {{ mensaje }}
+                    </div>
+                  </div>
+                  <!--BUTTON-->
+                  <div class="btn-group float-left col-lg-12">
+                    <div class="col-lg-9 ml-4"></div>
+                      <button type="submit" class="btn btn-primary col-lg-3 rounded" [disabled] = "!formUser.valid">
+                        Cambar Contraseña
+                      </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  

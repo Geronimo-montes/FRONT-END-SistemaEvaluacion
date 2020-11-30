@@ -3,26 +3,38 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
 
+const PROTOCOL = "http";
+const PORT = "80";
 @Injectable()
 export class UsersService {
-  constructor(private http: HttpClient, private cookies: CookieService) {}
+  baseURL: string;
+  constructor(private http: HttpClient, private cookies: CookieService) {
+    this.baseURL = `${PROTOCOL}://sistemaevaluacion:${PORT}/`;
+  }
 
   login(user: any): Observable<any> {
-    return this.http.post("http://sistemaevaluacion/login", user);
+    return this.http.post(this.baseURL + 'login', user);
   }
 
-  register(user: any): Observable<any> {
-    return this.http.get("http://sistemaevaluacion/alumno/1");
+  updateUser(user: any): Observable<any> {
+    return this.http.post(this.baseURL + 'user/update', user);
   }
-
+    
   setToken(token: string) { //cookie que espira en 3 horas
-    this.cookies.set('token', token, new Date(new Date().getTime() + 1000*60*60*3));
+    this.cookies.set('token', token, new Date(new Date().getTime() + 1000*60*60));
   }
-
+  
   getToken() {
     return this.cookies.get("token");
   }
+  
+  validarUser(): Observable<any>{
+    const data = { token: this.getToken() };
+    return this.http.post(this.baseURL + 'validarUser', data);
+  }
 
-  //Pendiente Metodo Para validar la sesion mediante el token
-  //al validar se retorna el nombre de usuario correspondiente al token
+  register(user: any): Observable<any> {
+    //sin implementar
+    return this.http.get("http://sistemaevaluacion/alumno/1");
+  }
 }

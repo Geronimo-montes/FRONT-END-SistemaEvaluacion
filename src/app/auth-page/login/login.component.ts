@@ -10,7 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
-
+  loginValidate = true;
+  mensajeError: string;
   email: string;
   password: string;
 
@@ -39,9 +40,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     const user = {email: this.email, password: this.password };
     this.userService.login(user).subscribe(data => {
-      //this.userService.setToken(data.token);
-      //this.router.navigateByUrl('/');
-      console.log("Valor data: " + data[0]['token']);
+      if(data[0]['token'] !== undefined) {
+        this.userService.setToken(data[0]['token']);
+        this.loginValidate = true;
+        this.router.navigateByUrl('/profile');
+      } else {
+        this.loginValidate = false;
+        this.mensajeError = data[0]['error'];
+      }
     });
   }
 }

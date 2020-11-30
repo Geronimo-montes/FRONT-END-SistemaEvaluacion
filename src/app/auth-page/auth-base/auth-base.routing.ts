@@ -9,8 +9,5 @@ export const AuthBaseRoutes: Routes = [
     },{
         path: 'register',
         component: RegisterComponent,
-    },{
-        path: '**',
-        redirectTo: 'login',
     }
 ];
