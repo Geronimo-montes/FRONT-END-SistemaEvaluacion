@@ -2,11 +2,11 @@ import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { ModelModule } from "src/app/model/model.module";
-import { UserProfileComponent } from "../user-profile/user-profile.component";
+import { UserProfileComponent } from "./user-profile/user-profile.component";
 import { AdminBaseRoutes } from "./admin-base.routing";
+import { AdminGuard } from "./admin.guard";
 
 @NgModule({
     imports: [
@@ -21,7 +21,7 @@ import { AdminBaseRoutes } from "./admin-base.routing";
         UserProfileComponent,
     ],
     providers:[
-
+        AdminGuard,
     ]
 })
 export class AdminBaseModule { }

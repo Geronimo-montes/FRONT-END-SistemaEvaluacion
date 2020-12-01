@@ -9,14 +9,14 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-     pathMatch: 'full',
+    pathMatch: 'full',
   }, {
     path: '',
     component: AuthBaseComponent,
     children: [
       {
         path: '',
-        loadChildren: './auth-page/auth-base/auth-base.module#AuthBaseModule'
+        loadChildren: './auth-page/auth-base.module#AuthBaseModule',
       }
     ]
   },  {
@@ -25,7 +25,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './admin-page/admin-base/admin-base.module#AdminBaseModule'
+        loadChildren: './admin-page/admin-base.module#AdminBaseModule',
       }
     ]
   }, {
@@ -41,6 +41,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes)],
   exports: [
 
+  ],
+  providers: [
   ]
 })
 

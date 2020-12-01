@@ -14,6 +14,7 @@ export class UserProfileComponent implements OnInit{
   private formUser: FormGroup;
   inputDisable: boolean = true;
   validUserUpdate: boolean = false;
+  validDocenteUpdate: boolean = false;
 
   constructor(private repository: DocenteRepository, private fb: FormBuilder) { } 
 
@@ -123,6 +124,10 @@ export class UserProfileComponent implements OnInit{
   get mensaje(): string {
     return this.repository.getMensaje();
   }
+
+  get tipoMensaje(): string {
+    return this.repository.getTipoMensaje();
+  }
   
   updateDocente(): void{
     const docente = {
@@ -142,13 +147,19 @@ export class UserProfileComponent implements OnInit{
       estatus_docente:    this.form.controls['estatus'].value,    
     };
     this.repository.updateDocnete(docente);
+    this.validDocenteUpdate = true;
+    this.validUserUpdate = false;
   }
 
   updateUser(): void {
-    const user= { email: this.formUser.controls['email'].value, 
-                  password: this.formUser.controls['password'].value,
-                  id: this.form.controls['idDocente'].value };
+    const user= { 
+      email: this.formUser.controls['email'].value, 
+      password: this.formUser.controls['password'].value,
+      id: this.form.controls['idDocente'].value,
+    };
+
     this.repository.updateUser(user);
+    this.validDocenteUpdate = false;
     this.validUserUpdate = true;
   }
 }

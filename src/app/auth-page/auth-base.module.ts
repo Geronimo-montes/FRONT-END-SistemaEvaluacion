@@ -6,10 +6,12 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 
 import { AuthBaseRoutes } from "./auth-base.routing";
-import { LoginComponent } from "../login/login.component";
-import { RegisterComponent } from "../register/register.component";
+import { LoginComponent } from "./login/login.component";
+import { RegisterComponent } from "./register/register.component";
 import { CommonModule } from "@angular/common";
 import { ModelModule } from "src/app/model/model.module";
+import { AuthGuard } from "./auth.guard";
+import { AdminGuard } from "../admin-page/admin.guard";
 
 @NgModule({
     imports: [
@@ -25,7 +27,7 @@ import { ModelModule } from "src/app/model/model.module";
         RegisterComponent,
     ],
     providers: [
-
+        AuthGuard,
     ]
 })
 export class AuthBaseModule { }

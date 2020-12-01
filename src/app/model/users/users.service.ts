@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
 
@@ -17,7 +17,7 @@ export class UsersService {
   }
 
   updateUser(user: any): Observable<any> {
-    return this.http.post(this.baseURL + 'user/update', user);
+    return this.http.put(this.baseURL + 'user/update', user, this.getOptions());
   }
     
   setToken(token: string) { //cookie que espira en 3 horas
@@ -27,14 +27,17 @@ export class UsersService {
   getToken() {
     return this.cookies.get("token");
   }
-  
-  validarUser(): Observable<any>{
-    const data = { token: this.getToken() };
-    return this.http.post(this.baseURL + 'validarUser', data);
-  }
 
   register(user: any): Observable<any> {
     //sin implementar
     return this.http.get("http://sistemaevaluacion/alumno/1");
+  }
+
+  getOptions() {
+    return {
+      headers: new HttpHeaders({
+        Authorization: this.cookies.get('token'),
+      }),
+    };
   }
 }

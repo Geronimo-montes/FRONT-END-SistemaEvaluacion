@@ -1,22 +1,30 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { Docente } from './docente.model';
 
 const PROTOCOL = "http";
 const PORT = "80";
 @Injectable()
 export class DocenteService {
   baseURL: string;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cookies: CookieService) {
     this.baseURL = `${PROTOCOL}://sistemaevaluacion:${PORT}/`;
   }
 
-  getDocenteById(id: number): Observable<any> {
-    return this.http.get(this.baseURL + 'docente/' + id);
+  getDocenteById(): Observable<any> {
+    return this.http.get(this.baseURL + 'docente', this.getOptions());
   }
 
   updateDocenteById(docente: any): Observable<any> {
-    return this.http.post(this.baseURL + 'docente/update', docente);
+    return this.http.put(this.baseURL + 'docente/update', docente, this.getOptions());
+  }
+
+  getOptions() {
+    return {
+      headers: new HttpHeaders({
+        Authorization: this.cookies.get('token'),
+      }),
+    };
   }
 }
