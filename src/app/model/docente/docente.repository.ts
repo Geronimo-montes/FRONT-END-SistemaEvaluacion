@@ -1,7 +1,7 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Docente } from "./docente.model";
 import { UsersService } from "../users/users.service";
-import { DocenteService } from "./docente.service";
+import { DataSourceService } from "../dataSource.service";
 
 @Injectable()
 export class DocenteRepository{
@@ -9,8 +9,8 @@ export class DocenteRepository{
   private mensaje: string;
   private tipoMensaje: string;
 
-  constructor(private docenteService: DocenteService, private userService: UsersService) { 
-    this.docenteService.getDocenteById().subscribe((data) => {
+  constructor(private datasource: DataSourceService, private userService: UsersService) { 
+    this.datasource.getDocenteById().subscribe((data) => {
       this.docente = <Docente>data[0];
     });
   }
@@ -28,7 +28,7 @@ export class DocenteRepository{
   }
 
   updateDocnete(docente: any): void {
-    this.docenteService.updateDocenteById(docente).subscribe((data) => {
+    this.datasource.updateDocenteById(docente).subscribe((data) => {
       if(data['success']){
         this.docente = <Docente>data['data'][0];
         this.mensaje = data['mensaje'];

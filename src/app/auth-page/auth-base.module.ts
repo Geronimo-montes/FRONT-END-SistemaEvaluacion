@@ -11,7 +11,6 @@ import { RegisterComponent } from "./register/register.component";
 import { CommonModule } from "@angular/common";
 import { ModelModule } from "src/app/model/model.module";
 import { AuthGuard } from "./auth.guard";
-import { AdminGuard } from "../admin-page/admin.guard";
 
 @NgModule({
     imports: [

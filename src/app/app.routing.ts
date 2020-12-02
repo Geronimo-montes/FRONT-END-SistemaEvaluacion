@@ -40,9 +40,7 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes)],
   exports: [
-
-  ],
-  providers: [
+    RouterModule
   ]
 })
 

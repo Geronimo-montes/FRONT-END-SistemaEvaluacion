@@ -57,30 +57,23 @@ export class UserProfileComponent implements OnInit{
     });
   }
 
-  isValidInput(fieldName, etiqueta): string {
-    if(this.form.controls[fieldName].value == '')
+  isValidInput(fieldName, form): string {
+    if(form.controls[fieldName].value == '')
       return '';
-    else if (this.form.controls[fieldName].invalid && (this.form.controls[fieldName].dirty || this.form.controls[fieldName].touched))
-      return (etiqueta == 'div') ? 'has-danger' : 'is-invalid';
-    else
-    return (etiqueta == 'div') ? 'has-success' : 'is-valid';
-  }
-
-  isValidInputUser(fieldName, etiqueta): string {
-    if(this.formUser.controls[fieldName].value == '')
-      return '';
-    else if (this.formUser.controls[fieldName].invalid && (this.formUser.controls[fieldName].dirty || this.formUser.controls[fieldName].touched))
-      return (etiqueta == 'div') ? 'has-danger' : 'is-invalid';
     else 
-    return (etiqueta == 'div') ? 'has-success' : 'is-valid';
+      return (form.controls[fieldName].invalid 
+        && (form.controls[fieldName].dirty 
+          || form.controls[fieldName].touched)) ? 'is-invalid' : 'is-valid';
   }
 
-  isValidPasswordConfirm(): boolean{
-    if(this.formUser.controls['passwordConfirm'].value.length > 0)
-      if(this.formUser.controls['password'].value == this.formUser.controls['passwordConfirm'].value){
-        return false;
+  isValidPasswordConfirm(): string{
+    if(this.formUser.controls['passwordConfirm'].value == '')
+      return '';
+    else if(this.formUser.controls['passwordConfirm'].value.length > 0)
+      if(this.formUser.controls['password'].value === this.formUser.controls['passwordConfirm'].value){
+        return 'is-valid';
       }else{
-        return true;
+        return 'is-invalid';
       }
   }
 

@@ -9,7 +9,8 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   //Para el menu lateral: se crea un arreglo con las rutas, agregando nombre e icono luego se recorre en el html
-  { path: '/profile', title: 'Mi Perfil', icon: 'ni-circle-08 text-yellow', class: '' }
+  { path: '/profile', title: 'Mi Perfil', icon: 'ni-circle-08 text-yellow', class: '' },
+  { path: '/alumnos', title: 'Alumnos', icon: 'ni-hat-3 text-blue', class: '' },
 ];
 
 @Component({
