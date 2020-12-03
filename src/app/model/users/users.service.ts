@@ -15,6 +15,12 @@ export class UsersService {
   login(user: any): Observable<any> {
     return this.http.post(this.baseURL + 'login', user);
   }
+  
+  logOut(): Observable<boolean> {
+    let res = this.http.put<boolean>(this.baseURL + 'logout', null, this.getOptions());
+    this.cookies.delete('token');
+    return res;
+  }
 
   updateUser(user: any): Observable<any> {
     return this.http.put(this.baseURL + 'user/update', user, this.getOptions());

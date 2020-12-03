@@ -1,0 +1,30 @@
+<div class="card bg-secondary shadow">
+  <div class="card-header bg-white border-0 shadow">
+    <div class="row align-items-center">
+      <div class="col-11">
+        <h2 class="mb-0">Lista de alumnos</h2>
+      </div>
+      <a class="nav-link nav-link-icon" routerLinkActive="active" [routerLink]="['/alumno/table']">
+
+        <button class="btn btn-primary"></button>
+      </a>
+    </div>
+  </div>
+  <div class="card-body">
+    <!--Formulario de actualizacion de datos del docente-->
+    <form (ngSubmit)="console.log('exito')" method="post">
+      <h6 class="heading-small text-muted mb-2">Información de Usuario</h6>
+        <!--Nombre-->
+        <div class="col-lg-4">
+          <label class="form-control-label">Nombre</label>
+          <div class="form-group">
+            <input class="form-control text-dark"
+              type="text" 
+              placeholder="Nombre(s)"
+              [readonly] = "inputDisable"
+            >
+          </div>
+        </div>
+    </form>
+  </div>
+</div>

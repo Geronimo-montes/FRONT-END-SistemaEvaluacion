@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { Alumno } from './alumno/alumno.model';
+import { Docente } from './docente/docente.model';
 
 const PROTOCOL = "http";
 const PORT = "80";
@@ -13,8 +14,9 @@ export class DataSourceService {
     this.baseURL = `${PROTOCOL}://sistemaevaluacion:${PORT}/`;
   }
 
-  getDocenteById(): Observable<any> {
-    return this.http.get(this.baseURL + 'docente', this.getOptions());
+  getDocenteById(): Observable<Docente> {
+    return this.http.get<Docente>(this.baseURL + 'docente', 
+    this.getOptions());
   }
 
   updateDocenteById(docente: any): Observable<any> {
@@ -23,8 +25,7 @@ export class DataSourceService {
 
   getAlumnos(grupo: string, grado: string, turno: string): Observable<Alumno[]> {
     return this.http.get<Alumno[]>(this.baseURL + 'alumno/' + grupo + '/' + grado + '/' + turno,
-      this.getOptions()
-    );
+    this.getOptions());
   }
 
   getOptions() {

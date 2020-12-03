@@ -1,0 +1,84 @@
+<div class="container-fluid mt--6 bg-secondary">
+  <div class="row">
+    <!--Ficha de alumno seleccionado-->
+    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+      <div class="card card-profile shadow">
+        <div class="row justify-content-center">
+          <div class="col-lg-3 order-lg-2 mt--5">
+            <div class="card-profile-image">
+              <a href="javascript:void(0)">
+                <img src="assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
+              </a>
+            </div>
+          </div>
+        </div>
+        <!--Ficha de informacion del alumno-->
+        <div class="card-body pt-0 pt-md-4">
+          <div *ngIf="!!alumnoSeleccionado" class="text-center mt-6">
+            <div class="col-8 text-left m-auto">
+              <div class="text-left ml--4">
+                <span class="font-weight-light"> Nombre: </span>
+              </div>
+              <h4>
+                {{ alumnoSeleccionado.nombre + ' ' + alumnoSeleccionado.ap1 + ' ' + alumnoSeleccionado.ap2  }}
+              </h4>
+              <div class="text-left ml--4">
+                <span class="font-weight-light"> CURP: </span>
+              </div>
+              <h4>
+                {{ alumnoSeleccionado.curp }}
+              </h4>
+              <div class="text-left ml--4">
+                <span class="font-weight-light"> Grupo - Grado - Turno: </span>
+              </div>
+              <h4>
+                {{ alumnoSeleccionado.grado + '0' + alumnoSeleccionado.grupo + '-' + alumnoSeleccionado.turno  }}
+              </h4>
+            </div>
+            <!--tutor-->
+            <div class="card mt-3 align-items-center border border-dark">
+              <img class="card-img-top rounded-circle col-4 mt-4" src="assets/img/theme/team-4-800x800.jpg" alt="Card image cap">
+              <div class="card-body text-left">
+                <h3 class="card-title text-center">
+                  {{ alumnoSeleccionado.nombreTutor}}
+                </h3>
+                <h4>
+                  <span class="font-weight-light mr-2">
+                    <li class="ni ni-map-big mr-2"></li>
+                    Dirección: 
+                  </span>
+                  {{ alumnoSeleccionado.direccion }}
+                </h4>
+                <h4>
+                  <span class="font-weight-light mr-2">
+                    <li class="ni ni-map-big mr-2"></li>
+                    Telefono: 
+                  </span>
+                  {{ alumnoSeleccionado.telefono }}
+                </h4>
+                <h4>
+                  <span class="font-weight-light mr-2">
+                    <li class="ni ni-map-big mr-2"></li>
+                    Correo Electronico: 
+                  </span>
+                  {{ alumnoSeleccionado.email }}
+                </h4>
+                <h4>
+                  <span class="font-weight-light mr-2">
+                    <li class="ni ni-map-big mr-2"></li>
+                    Dirección: 
+                  </span>
+                  {{ alumnoSeleccionado.direccion }}
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Tabla de alumnos-->
+    <div class="col-xl-8 order-xl-1">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

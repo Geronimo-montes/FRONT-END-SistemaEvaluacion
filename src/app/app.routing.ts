@@ -1,9 +1,5 @@
-import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule, Routes } from "@angular/router";
-import { AdminBaseComponent } from "./admin-page/admin-base/admin-base.component";
-import { AuthBaseComponent } from "./auth-page/auth-base/auth-base.component";
 
 const routes: Routes = [
   {
@@ -12,22 +8,10 @@ const routes: Routes = [
     pathMatch: 'full',
   }, {
     path: '',
-    component: AuthBaseComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: './auth-page/auth-base.module#AuthBaseModule',
-      }
-    ]
+    loadChildren: './auth-page/auth-base.module#AuthBaseModule',
   },  {
     path: '',
-    component: AdminBaseComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: './admin-page/admin-base.module#AdminBaseModule',
-      }
-    ]
+    loadChildren: './admin-page/admin-base.module#AdminBaseModule',
   }, {
     path: '**',
     redirectTo: 'login',
@@ -35,13 +19,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    BrowserModule,
-    RouterModule.forRoot(routes)],
-  exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 
 export class AppRoutingModule { }
