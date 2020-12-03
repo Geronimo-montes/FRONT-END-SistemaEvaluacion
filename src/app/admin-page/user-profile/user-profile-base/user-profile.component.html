@@ -1,0 +1,17 @@
+<div *ngIf="!!docente"  class="container-fluid mt--6 bg-secondary">
+  <div class="row">
+    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+      <app-ficha-informacion></app-ficha-informacion>
+    </div>
+    <div class="col-xl-8 order-xl-1">
+      <!--Informacion del usuario-->
+      <div class="card bg-secondary shadow">
+        <app-form-docente></app-form-docente>
+      </div>
+      <!--Informacion de la cuenta-->
+      <div class="card bg-secondary shadow mt-3">
+        <app-form-user></app-form-user>
+      </div>
+    </div>
+  </div>
+</div>  

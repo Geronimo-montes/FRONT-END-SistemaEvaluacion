@@ -8,7 +8,6 @@ import { TableAlumnoComponent } from './table-alumno/table-alumno.component';
 import { CrudAlumnosComponent } from './crud-alumnos/crud-alumnos.component';
 import { CrudGuard } from './crud.guard';
 import { ProfilealumnoComponent } from './profilealumno/profilealumno.component';
-
 @NgModule({
   declarations: [
     CrudAlumnosComponent,

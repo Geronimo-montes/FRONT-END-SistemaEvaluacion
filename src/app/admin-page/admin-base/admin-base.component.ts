@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-base',
@@ -7,9 +6,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin-base.component.css']
 })
 export class AdminBaseComponent implements OnInit {
-
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void { }
-
 }

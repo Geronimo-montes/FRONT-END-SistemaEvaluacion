@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminBaseComponent } from './admin-base/admin-base.component';
-import { AdminGuard } from './admin.guard';
-import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -11,9 +9,8 @@ const routes: Routes = [
     children: 
     [
       {
-        path: 'profile',
-        component: UserProfileComponent,
-        canActivate: [ AdminGuard ]
+        path: '',
+        loadChildren: './user-profile/user-profile.module#UserProfileModule',
       }, {
         path: '',
         loadChildren: './alumno/crud-alumnos.module#CrudAlumnosModule',

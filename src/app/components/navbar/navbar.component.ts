@@ -3,6 +3,8 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/model/users/users.service';
+import { DocenteRepository } from 'src/app/model/docente/docente.repository';
+import { Docente } from 'src/app/model/docente/docente.model';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +15,8 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router, private userService: UsersService) {
+  constructor(location: Location,  private element: ElementRef, private router: Router, 
+    private userService: UsersService, private repository: DocenteRepository) {
     this.location = location;
   }
 
@@ -32,7 +35,11 @@ export class NavbarComponent implements OnInit {
             return this.listTitles[item].title;
         }
     }
-    return 'Profile';
+    return 'Alumnos';
+  }
+
+  get docente(): Docente{
+    return this.repository.getDocente();
   }
 
   logOut() {

@@ -15,6 +15,7 @@ export class Docente {
         public grado ?: string,
         public turno ?: string,
         public rol ?: string,
+        public rutaPerfil ?: string,
         public estatus ?: string,
         public idEscuelaEscuela ?: number,
         public nombreEscuela ?: string,
