@@ -1,13 +1,19 @@
 <div class="card bg-secondary shadow">
   <div class="card-header bg-white border-0 shadow">
     <div class="row align-items-center">
-      <div class="col-11">
-        <h2 class="mb-0">Lista de alumnos</h2>
+      <h2 class="ml-lg-4">Lista de alumnos</h2>
+      <!-- Form Quitar y poner otra cosa-->
+      <div class="navbar-search navbar-search-white form-inline d-none d-md-flex ml-lg-auto mr-7">
+        <div class="form-group mb-0">
+          <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-search"></i></span>
+            </div>
+            <!--Barra de busqueda-->
+            <input [(ngModel)]="filtro" class="form-control text-dark" placeholder="Search" type="text">
+          </div>
+        </div>
       </div>
-
-      <a class="nav-link nav-link-icon" routerLinkActive="active" [routerLink]="['/alumno/profilealumno']">
-        <button class="btn btn-primary"></button>
-      </a>
     </div>
   </div>
   <div class="card-body align-items-center">
@@ -19,17 +25,16 @@
             <th scope="col" class="h1">No. Matircula</th>
             <th scope="col" class="h1">Nombre completo</th>
             <th scope="col" class="h1">Grupo</th>
-            <th scope="col" class="h1">Tutor</th>
             <th scope="col" class="h1">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let alumno of alumnos">
+          <tr *ngFor="let alumno of alumnos |filter:filtro" (click)="cambiarAlumnoSeleccionado(alumno)">
             <!--Foto-->
             <th scope="row">
               <div class="media align-items-center">
                 <a class="avatar rounded-circle mr-3">
-                  <img alt="Image placeholder" src="assets/img/theme/bootstrap.jpg">
+                  <img alt="Image placeholder" src="{{alumno.rutaPerfil}}">
                 </a>
               </div>
             </th>
@@ -63,16 +68,6 @@
                 </div>
               </div>
             </th>
-            <!--Tutor-->
-            <th>
-              <div class="align-items-center">
-                <div class="media-body">
-                  <span class="mb-0 text-sm">
-                    {{ alumno.nombreTutor }}  
-                  </span>
-                </div>
-              </div>
-            </th>
             
             <td>
               <div ngbDropdown placement="left">
@@ -81,7 +76,7 @@
                 </a>
                 <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
                   <button class="dropdown-item" (click)="cambiarAlumnoSeleccionado(alumno);" >Ver información</button>
-                  <button class="dropdown-item" >Editar información</button>
+                  <button class="dropdown-item" (click)="editarDatosAlumno(alumno);">Editar información</button>
                   <button class="dropdown-item" >Otra acción</button>
                 </div>
               </div>

@@ -17,5 +17,6 @@ export class Alumno {
     public preferennciaContacto ?: string,
     public estatus ?: string,
     public rutaExpediente ?: string,
+    public rutaPerfil ?: string,
   ) { }
 }

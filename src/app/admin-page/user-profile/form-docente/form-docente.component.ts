@@ -11,7 +11,6 @@ import { DocenteRepository } from 'src/app/model/docente/docente.repository';
 export class FormDocenteComponent implements OnInit {
   private form: FormGroup;
   public inputDisable: boolean = true;
-  public imgPerfil: string;
 
   constructor(private repository: DocenteRepository, private fb: FormBuilder) { }
 
@@ -30,7 +29,6 @@ export class FormDocenteComponent implements OnInit {
       grado           : new FormControl(this.docente['grado'],      { validators: [Validators.required] }),
       turno           : new FormControl(this.docente['turno'],      { validators: [Validators.required] }),
       rol             : new FormControl(this.docente['rol'],        { validators: [Validators.required] }),
-      perfil          : new FormControl(this.docente['perfil'],     { validators: [Validators.required] }),
       estatus         : new FormControl(this.docente['estatus'],    { validators: [Validators.required] }),
     });
   }
@@ -56,41 +54,21 @@ export class FormDocenteComponent implements OnInit {
 
   updateDocente(): void{
     const docente = {
-      idDocente_docente:  this.form.controls['idDocente'].value,
-      nombre_docente:     this.form.controls['nombre'].value,
-      ap1_docente:        this.form.controls['ap1'].value,
-      ap2_docente:        this.form.controls['ap2'].value,
-      curp_docente:       this.form.controls['curp'].value,
-      rfc_docente:        this.form.controls['rfc'].value,
-      direccion_docente:  this.form.controls['direccion'].value,
-      telefono_docente:   this.form.controls['telefono'].value,
-      facebook_docente:   this.form.controls['facebook'].value,
-      grupo_docente:      this.form.controls['grupo'].value,
-      grado_docente:      this.form.controls['grado'].value,
-      turno_docente:      this.form.controls['turno'].value,
-      rol_docente:        this.form.controls['rol'].value,
-      estatus_docente:    this.form.controls['estatus'].value,    
+      idDocente:  this.form.controls['idDocente'].value,
+      nombre:     this.form.controls['nombre'].value,
+      ap1:        this.form.controls['ap1'].value,
+      ap2:        this.form.controls['ap2'].value,
+      curp:       this.form.controls['curp'].value,
+      rfc:        this.form.controls['rfc'].value,
+      direccion:  this.form.controls['direccion'].value,
+      telefono:   this.form.controls['telefono'].value,
+      facebook:   this.form.controls['facebook'].value,
+      grupo:      this.form.controls['grupo'].value,
+      grado:      this.form.controls['grado'].value,
+      turno:      this.form.controls['turno'].value,
+      rol:        this.form.controls['rol'].value,
+      estatus:    this.form.controls['estatus'].value,    
     };
     this.repository.updateDocnete(docente);
-    //this.validDocenteUpdate = true;
-    //this.validUserUpdate = false;
   }
-
-  load(event){
-    const reader = new FileReader();    
-    if(event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
-      
-      reader.onload = () => {
-        this.imgPerfil = reader.result as string;
-        this.form.patchValue({
-          fileSource: reader.result
-        });
-      };
-    }
-    console.log(this.form.controls['perfil'].value);
-    let img = document.getElementById('imgPerfil').setAttribute("src", this.form.controls['perfil'].value);
-  }
-
 }

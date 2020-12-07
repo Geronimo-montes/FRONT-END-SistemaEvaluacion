@@ -8,6 +8,7 @@ import { TableAlumnoComponent } from './table-alumno/table-alumno.component';
 import { CrudAlumnosComponent } from './crud-alumnos/crud-alumnos.component';
 import { CrudGuard } from './crud.guard';
 import { ProfilealumnoComponent } from './profilealumno/profilealumno.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [
     CrudAlumnosComponent,
@@ -21,6 +22,7 @@ import { ProfilealumnoComponent } from './profilealumno/profilealumno.component'
     NgbModule,
     CommonModule,
     CrudAlumnosRoutingModule,
+    Ng2SearchPipeModule,
   ],
   providers: [
     CrudGuard,

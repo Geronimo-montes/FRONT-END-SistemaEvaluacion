@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Docente } from 'src/app/model/docente/docente.model';
 import { DocenteRepository } from 'src/app/model/docente/docente.repository';
 
@@ -8,12 +9,36 @@ import { DocenteRepository } from 'src/app/model/docente/docente.repository';
   styleUrls: ['./ficha-informacion.component.css']
 })
 export class FichaInformacionComponent implements OnInit {
+  private form: FormGroup;
+  public imgPerfil: string;
 
-  constructor(private repository: DocenteRepository) { }
+  constructor(private repository: DocenteRepository, private fb: FormBuilder) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      perfil: new FormControl(null, {validators: [Validators.required]})
+    });
+    this.imgPerfil = this.docente['rutaPerfil'];
+   }
 
   get docente(): Docente {
     return this.repository.getDocente();
+  }
+
+  load(event){
+    const reader = new FileReader();    
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+      
+      reader.onload = () => {
+        this.imgPerfil = reader.result as string;
+        this.form.patchValue({
+          fileSource: reader.result
+        });
+      };
+    }
+    let file = event.target.files[0];
+    this.repository.updatePerfil(file);
   }
 }

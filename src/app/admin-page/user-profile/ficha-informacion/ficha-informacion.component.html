@@ -1,14 +1,22 @@
 <div class="card card-profile shadow">
-  <div class="row justify-content-center">
-    <div class="col-lg-3 order-lg-2 mt--5">
-      <div class="card-profile-image">
-        <a href="javascript:void(0)">
-          <img src="{{ docente.rutaPerfil }}" class="rounded-circle">
-        </a>
+  <form [formGroup]="form" method="post">
+    <div class="row justify-content-center">
+      <div class="col-lg-3 order-lg-2 mt--5">
+        <div class="card-profile-image">
+          <img [src]="imgPerfil" class="rounded-circle">
+          <!--<img src="{{ docente.rutaPerfil }}" class="rounded-circle">-->
+        </div>
       </div>
     </div>
-  </div>
-  <div class="card-body pt-0 pt-md-4">
+    <input type="file" formControlName="perfil" #perfil style="visibility: hidden;" (change)="load($event)" />
+    <div class="row justify-content-center mt-4">
+      <button class="btn btn-icon btn-primary rounded-circle" (click)="perfil.click()"
+      placement="bottom" ngbTooltip="Actualizar Perfil">
+        <span class="btn-inner--icon"><i class="ni ni-image"></i></span>
+      </button>
+    </div>
+  </form>
+  <div class="card-body pt-0 pt-md-4 mt--6">
     <div class="text-center mt-6">
     <!--Ficha de presentacion del docente con datos resumidos-->
       <h2>

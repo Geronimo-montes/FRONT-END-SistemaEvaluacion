@@ -14,6 +14,9 @@ const routes: Routes = [
       }, {
         path: '',
         loadChildren: './alumno/crud-alumnos.module#CrudAlumnosModule',
+      }, {
+        path: '',
+        loadChildren: './actividad/actividad.module#ActividadModule',
       } 
     ]
   }

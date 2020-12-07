@@ -1,0 +1,205 @@
+<div class="container-fluid mt--6 bg-secondary">
+  <div class="row">
+    <!--Ficha de alumno seleccionado-->
+    <div class="col-xl-11 m-auto">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0 shadow">
+          <div class="row">
+            <div class="col-9">
+              <h1 class="mb-0">Actividad</h1>
+            </div>
+            <button class="btn btn-icon btn-2 btn-outline-primary m-auto" type="button" routerLinkActive="active" [routerLink]="['/actividad/table']">
+              <span class="btn-inner--icon"><i class="ni ni-bold-left"></i></span>
+              <span class="btn-inner--text">Regresar</span>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <!--Formulario de actualizacion de datos del alumno-->
+          <form [formGroup]="form"  (ngSubmit)="agregarActividad(form, perfil);" method="post">
+            <div class="row">
+              <div class="col-xl-6 order-xl-1">
+                <div class="pl-lg-4 pr-lg-4">
+                  <h6 class="heading-small text-muted mb-2">Datos Princiaples de la Actividad</h6>
+                  <div class="row">
+                    <!--Img-->
+                    <div class="col-xl-6">
+                      <!--imagen-->
+                      <div class="row-lg justify-content-center">
+                        <div class="card m-auto mb-0" style="width: 8rem;">
+                            <img [src]="imgPerfil" class="card-image">
+                        </div>
+                      </div>
+                      <!--inpur-->
+                      <input type="file" style="visibility: hidden;" (change)="load($event)" 
+                        #perfil
+                        formControlName="perfil" 
+                      />
+                      <!--button-->
+                      <div class="row-lg justify-content-center form-group">
+                        <button type="button" class="btn btn-icon btn-outline-primary form-control" (click)="perfil.click()">
+                          <span class="btn-inner--icon"><i class="ni ni-image"></i></span>
+                          <span class="btn-inner--text">Buscar Imagen</span>
+                        </button>
+                      </div>
+                    </div>
+                    <!--Nombre / duracion / check-->
+                    <div class="col-xl-6">
+                      <!--situacionDidactica-->
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <label class="form-control-label">Situación Didactica</label>
+                          <div class="form-group">
+                            <input class="form-control text-dark"
+                              type="text" 
+                              formControlName="situacionDidactica"
+                              placeholder="Situación Didactica"
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <!--duracion-->
+                        <div class="col-lg-8">
+                          <label class="form-control-label">Duración(Minutos)</label>
+                          <div class="form-group">
+                            <input class="form-control text-dark"
+                              type="text" 
+                              formControlName="duracion"
+                              placeholder="Duración (minutos)"
+                            >
+                          </div>
+                        </div>
+                        <!--tipoActividad-->
+                        <div class="col-lg-4">
+                          <label class="form-control-label">Diagnostico</label>
+                          <span class="clearfix"></span>
+                          <label class="custom-toggle mt-2 ml-3">
+                            <input type="checkbox" formControlName="tipoActividad">
+                            <span class="custom-toggle-slider rounded-circle"></span>
+                          </label>
+                        </div>           
+                      </div>           
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!--areaFormacion-->
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Área de formación</label>
+                        <select type="text" class="form-control text-dark" formControlName="areaFormacion" (change)="changeAreaFormacion();">
+                          <option value="0" >Seleccione un area de formación</option>
+                          <option *ngFor="let area of areasFormacion" [ngValue]="area.idAreaFormacion">{{area.descripcion}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--aprendizajeEsperado / diagnostico-->
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Aprendizaje Esperado</label>
+                        <select class="form-control text-dark" formControlName="aprendizajeEsperado">
+                          <option value="0" selected>Seleccione un aprendizaje esperado</option>
+                          <option *ngFor="let aprendizaje of aprendizajesEsperados" [ngValue]="aprendizaje.idAprendizajeEsperado">{{aprendizaje.descripcion}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="my-4"/>
+                  <h6 class="heading-small text-muted mb-2">Evidencia Esperada</h6>
+                  <div class="row">
+                    <!--nombreEvidencia-->
+                    <div class="col-lg-6">
+                      <label class="form-control-label">Nombre de la Evidencia</label>
+                      <div class="form-group">
+                        <input class="form-control text-dark"
+                          type="text" 
+                          formControlName = "nombreEvidencia"
+                          placeholder="Nombre de la Evidencia" 
+                        >
+                      </div>
+                    </div>
+                    <!--formatoEsperado-->
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label for="areaFormacion">Formato Esperado</label>
+                        <select class="form-control text-dark" formControlName="formatoEsperado">
+                          <option value="0">Seleccione el formato de la evidencia</option>
+                          <option value="PDF" >*.PDF</option>
+                          <option value="PNG" >*.PNG</option>
+                          <option value="JPG" >*.JPG</option>
+                          <option value="DOC" >*.DOC</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!--descripcionEvidencia-->
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label class="form-control-label">Descripción</label>
+                        <textarea class="form-control text-dark" formControlName="descripcionEvidencia"
+                        rows="3" style="resize: none;" placeholder="Escriba la descripción de la evidencia"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6 order-xl-2 mb-5 mb-xl-0 mycontent-left" style="border-left: 1px solid #cccccc;">
+                <div class="pl-lg-4 pr-lg-4">
+                  <h6 class="heading-small text-muted mb-2">Desarrollo de la Actividad</h6>
+                  <div class="row">
+                    <!--inicio-->
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label class="form-control-label">Inicio</label>
+                        <textarea class="form-control text-dark" formControlName="inicio"
+                        rows="3" style="resize: none;" placeholder="Escriba las instrucciones de inicio..."></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!--desarrollo-->
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label class="form-control-label">Desarrollo</label>
+                        <textarea class="form-control text-dark" formControlName="desarrollo"
+                        rows="3" style="resize: none;" placeholder="Escriba las instrucciones de desarrollo..."></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!--cierre-->
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label class="form-control-label">Cierre</label>
+                        <textarea class="form-control text-dark" formControlName="cierre"
+                        rows="3" style="resize: none;" placeholder="Escriba las instrucciones de cierre..."></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!--recursos-->
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label class="form-control-label">Recursos</label>
+                        <textarea class="form-control text-dark" formControlName="recursos"
+                        rows="3" style="resize: none;" placeholder="Recursos requeridos por la actividad..."></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--BUTTON-->
+            <div class="pl-lg-4 pr-lg-4 btn-group float-left col-lg-12">
+              <div class="col-lg-9"></div>
+                <button type="submit" class="btn btn-primary col-lg-3 rounded" [disabled] = "!form.valid">
+                  Guardar Cambios
+                </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

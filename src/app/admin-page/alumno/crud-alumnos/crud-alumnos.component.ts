@@ -8,6 +8,7 @@ import { AlumnoRepository } from 'src/app/model/alumno/alumno.repository';
   styleUrls: ['./crud-alumnos.component.css']
 })
 export class CrudAlumnosComponent implements OnInit {
+  public imgPerfil: string;
   constructor(private repository: AlumnoRepository) { }
 
   ngOnInit(){ }

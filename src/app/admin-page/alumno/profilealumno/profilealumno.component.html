@@ -1,30 +1,244 @@
 <div class="card bg-secondary shadow">
   <div class="card-header bg-white border-0 shadow">
-    <div class="row align-items-center">
-      <div class="col-11">
+    <div class="row">
+      <div class="col-9">
         <h2 class="mb-0">Lista de alumnos</h2>
       </div>
-      <a class="nav-link nav-link-icon" routerLinkActive="active" [routerLink]="['/alumno/table']">
-
-        <button class="btn btn-primary"></button>
-      </a>
+      <button class="btn btn-icon btn-2 btn-outline-primary m-auto" type="button" routerLinkActive="active" [routerLink]="['/alumno/table']">
+        <span class="btn-inner--icon"><i class="ni ni-bold-left"></i></span>
+        <span class="btn-inner--text">Regresar</span>
+      </button>
     </div>
   </div>
   <div class="card-body">
-    <!--Formulario de actualizacion de datos del docente-->
-    <form (ngSubmit)="console.log('exito')" method="post">
-      <h6 class="heading-small text-muted mb-2">Información de Usuario</h6>
-        <!--Nombre-->
-        <div class="col-lg-4">
-          <label class="form-control-label">Nombre</label>
-          <div class="form-group">
-            <input class="form-control text-dark"
-              type="text" 
-              placeholder="Nombre(s)"
-              [readonly] = "inputDisable"
-            >
+    <!--Formulario de actualizacion de datos del alumno-->
+    <form [formGroup]="form" (ngSubmit)="updateAlumno(form)" method="post">
+      <h6 class="heading-small text-muted mb-2">Información del Alumno</h6>
+      <div class="pl-lg-4 pr-lg-4">
+        <div class="row">
+          <div class="col-lg-6">
+            <!--imagen-->
+            <div class="row-lg justify-content-center">
+              <div class="card m-auto mb-0" style="width: 13rem;">
+                  <img [src]="imgPerfil" class="card-image">
+              </div>
+            </div>
+            <!--inpur-->
+            <input type="file" style="visibility: hidden;" (change)="load($event)" 
+              #perfil
+              formControlName="perfil" 
+            />
+            <!--button-->
+            <div class="row-lg justify-content-center form-group">
+              <button type="button" class="btn btn-icon btn-outline-primary form-control" (click)="perfil.click()">
+                <span class="btn-inner--icon"><i class="ni ni-image"></i></span>
+                <span class="btn-inner--text">Buscar Imagen</span>
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <!--Matricula-->
+            <div class="row-lg">
+              <label class="form-control-label">Matricula</label>
+              <div class="form-group">
+                <input class="form-control text-dark"
+                  type="text" 
+                  formControlName = "idAlumno"
+                  placeholder="Matricula"
+                  [readonly] = "inputDisable"
+                >
+              </div>
+            </div>
+            <!--Nombre-->
+            <div class="row-lg">
+              <label class="form-control-label">Nombre(s)</label>
+              <div class="form-group">
+                <input class="form-control text-dark"
+                  type="text" 
+                  formControlName = "nombre"
+                  placeholder="Nombre(s)"
+                  [readonly] = "inputDisable"
+                >
+              </div>
+            </div>
+            <div class="row">
+              <!--ap1--> 
+              <div class="col-lg-6">
+                <label class="form-control-label">Apellido Paterno</label>
+                <div class="form-group">
+                  <input class="form-control text-dark"
+                    type="text" 
+                    formControlName = "ap1"
+                    placeholder="Apellido Paterno" 
+                    [readonly] = "inputDisable"
+                  >
+                </div>
+              </div>
+              <!--ap2-->
+              <div class="col-lg-6">
+                <label class="form-control-label">Apellido Materno</label>
+                <div class="form-group">
+                  <input class="form-control text-dark"
+                    type="text" 
+                    formControlName = "ap2"
+                    placeholder="Apellido Materno" 
+                    [readonly] = "inputDisable"
+                  >
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <div class="row">
+          <!--curp-->
+          <div class="col-lg-6">
+            <label class="form-control-label">CURP</label>
+            <div class="form-group">
+              <input class="form-control text-dark"
+                type="text" 
+                formControlName = "curp" 
+                placeholder="CURP" 
+                [readonly] = "inputDisable"
+              >
+            </div>
+          </div>
+          <!--grupo-->
+          <div class="col-lg-2">
+            <label class="form-control-label">Grupo</label>
+            <div class="form-group">
+              <input class="form-control text-dark"
+                type="text" 
+                formControlName = "grupo" 
+                placeholder="Grupo" 
+                [readonly] = "inputDisable"
+              >
+            </div>
+          </div>
+          <!--grado-->
+          <div class="col-lg-2">
+            <label class="form-control-label">Grado</label>
+            <div class="form-group">
+              <input class="form-control text-dark"
+                type="text" 
+                formControlName = "grado" 
+                placeholder="Grado" 
+                [readonly] = "inputDisable"
+              >
+            </div>
+          </div>
+          <!--turno-->
+          <div class="col-lg-2">
+            <label class="form-control-label">Turno</label>
+            <div class="form-group">
+              <input class="form-control text-dark"
+                type="text" 
+                formControlName = "turno" 
+                placeholder="Turno" 
+                [readonly] = "inputDisable"
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4">
+      <h6 class="heading-small text-muted mb-2">Información del Tutor</h6>
+      <div class="pl-lg-4 pr-lg-4">
+        <div class="row">
+            <!--Nombre-->
+            <div class="col-lg-4">
+              <label class="form-control-label">Nombre</label>
+              <div class="form-group">
+                <input class="form-control text-dark"
+                  type="text" 
+                  formControlName = "nombreTutor"
+                  placeholder="Nombre(s)"
+                  [readonly] = "inputDisable"
+                >
+              </div>
+            </div>
+            <!--ap1--> 
+            <div class="col-lg-4">
+              <label class="form-control-label">Apellido Paterno</label>
+              <div class="form-group">
+                <input class="form-control text-dark"
+                  type="text" 
+                  formControlName = "ap1Tutor"
+                  placeholder="Apellido Paterno" 
+                  [readonly] = "inputDisable"
+                >
+              </div>
+            </div>
+            <!--ap2-->
+            <div class="col-lg-4">
+              <label class="form-control-label">Apellido Materno</label>
+              <div class="form-group">
+                <input class="form-control text-dark"
+                  type="text" 
+                  formControlName = "ap2Tutor"
+                  placeholder="Apellido Materno" 
+                  [readonly] = "inputDisable"
+                >
+              </div>
+            </div>
+        </div>
+        <div class="row">
+          <!--direccion-->
+          <div class="col-lg-12">
+            <label class="form-control-label">Direcció</label>
+            <div class="form-group">
+              <input class="form-control text-dark"
+                type="text" 
+                formControlName = "direccion" 
+                placeholder="Dirección" 
+                [readonly] = "inputDisable"
+              >
+            </div>
+          </div>
+          <!--tel-->
+          <div class="col-lg-4">
+            <label class="form-control-label">Telefono</label>
+            <div class="form-group">
+              <input class="form-control text-dark"
+                type="text" 
+                formControlName = "telefono" 
+                placeholder="Telefono" 
+                [readonly] = "inputDisable"
+              >
+            </div>
+          </div>
+          <!--email-->
+          <div class="col-lg-4">
+            <label class="form-control-label">Email</label>
+            <div class="form-group">
+              <input class="form-control text-dark"
+                type="email" 
+                formControlName = "email" 
+                placeholder="Email" 
+                [readonly] = "inputDisable"
+              >
+            </div>
+          </div>
+          <!--facebook-->
+          <div class="col-lg-4">
+            <label class="form-control-label">Facebook</label>
+            <div class="form-group">
+              <input class="form-control text-dark"
+                type="text" 
+                formControlName = "facebook" 
+                placeholder="Facebook" 
+                [readonly] = "inputDisable"
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--BUTTON-->
+      <div class="pl-lg-4 pr-lg-4 btn-group float-left col-lg-12">
+        <div class="col-lg-9"></div>
+          <button type="submit" class="btn btn-primary col-lg-3 rounded">
+            Guardar Cambios
+          </button>
+      </div>
     </form>
   </div>
 </div>

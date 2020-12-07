@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { Actividad, AprendizajeEsperado, AreaFormacion } from './actividad/aformacion.model';
 import { Alumno } from './alumno/alumno.model';
 import { Docente } from './docente/docente.model';
 
@@ -26,6 +27,24 @@ export class DataSourceService {
   getAlumnos(grupo: string, grado: string, turno: string): Observable<Alumno[]> {
     return this.http.get<Alumno[]>(this.baseURL + 'alumno/' + grupo + '/' + grado + '/' + turno,
     this.getOptions());
+  }
+
+  updatePerfil(perfil: any): any{
+    let input = new FormData();
+    input.append("file", perfil);
+    return this.http.post(this.baseURL + 'updateperfil', input, this.getOptions());
+  }
+
+  getAreaFormacion(): Observable<AreaFormacion[]>{
+    return this.http.get<AreaFormacion[]>(this.baseURL + 'areaFormacion');
+  }
+
+  getAprendizajeEsperado(id: number): Observable<AprendizajeEsperado[]>{
+    return this.http.get<AprendizajeEsperado[]>(this.baseURL + 'aprendizajeEsperado/' + id);
+  }
+
+  insertActividad(actividad: FormData): Observable<any> {
+    return this.http.post(this.baseURL + 'actividadInsert', actividad, this.getOptions());
   }
 
   getOptions() {

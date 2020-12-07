@@ -40,6 +40,12 @@ export class DocenteRepository{
     });
   }
 
+  updatePerfil(perfil: any) {
+    this.datasource.updatePerfil(perfil).subscribe((data) => {
+      true;
+    })
+  }
+
   updateUser(user: any): void{ 
     this.userService.updateUser(user).subscribe((data) => {
       if(data['success']){
