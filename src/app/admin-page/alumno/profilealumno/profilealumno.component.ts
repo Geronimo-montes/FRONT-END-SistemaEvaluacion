@@ -23,7 +23,7 @@ export class ProfilealumnoComponent implements OnInit {
       ap2             : new FormControl(this.alumnoSeleccionado['ap2'], { validators: [Validators.required] }),
       curp            : new FormControl(this.alumnoSeleccionado['curp'], { validators: [Validators.required] }),
       grupo           : new FormControl(this.alumnoSeleccionado['grupo'], { validators: [Validators.required] }),
-      grado           : new FormControl(this.alumnoSeleccionado['grupo'], { validators: [Validators.required] }),
+      grado           : new FormControl(this.alumnoSeleccionado['grado'], { validators: [Validators.required] }),
       turno           : new FormControl(this.alumnoSeleccionado['turno'], { validators: [Validators.required] }),
      
       nombreTutor     : new FormControl(this.alumnoSeleccionado['nombreTutor'], { validators: [Validators.required] }),
@@ -41,6 +41,15 @@ export class ProfilealumnoComponent implements OnInit {
   get alumnoSeleccionado(): Alumno {
     return this.repository.getalumnoSeleccionado();
   }
+  get mensaje(): string {
+    return this.repository.getMensaje();
+  }
+  get tipoMensaje(): string {
+    return this.repository.getTipoMensaje();
+  }
+  get formDestino(): string {
+    return this.repository.getFormDestino();
+  }
   
   load(event){
     const reader = new FileReader();    
@@ -57,8 +66,8 @@ export class ProfilealumnoComponent implements OnInit {
     }
   }
 
-  updateAlumno(form: FormGroup){
-    console.log(form.value);
+  updateAlumno(form: FormGroup): void {
+    this.repository.updateAlumno(form.value);
   }
 
 }

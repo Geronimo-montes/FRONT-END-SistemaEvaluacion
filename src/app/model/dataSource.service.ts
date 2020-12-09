@@ -29,6 +29,10 @@ export class DataSourceService {
     this.getOptions());
   }
 
+  updateAlumnoById(alumno: any): Observable<any> {
+    return this.http.put(this.baseURL + 'alumno/update', alumno, this.getOptions());
+  }
+
   updatePerfil(perfil: any): any{
     let input = new FormData();
     input.append("file", perfil);

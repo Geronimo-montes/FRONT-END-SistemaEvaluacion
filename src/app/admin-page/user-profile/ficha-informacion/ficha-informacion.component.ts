@@ -19,10 +19,19 @@ export class FichaInformacionComponent implements OnInit {
       perfil: new FormControl(null, {validators: [Validators.required]})
     });
     this.imgPerfil = this.docente['rutaPerfil'];
-   }
+  }
 
-  get docente(): Docente {
+  get docente(): Docente{ 
     return this.repository.getDocente();
+  }
+  get mensaje(): string {
+    return this.repository.getMensaje();
+  }
+  get tipoMensaje(): string {
+    return this.repository.getTipoMensaje();
+  }
+  get formDestino(): string {
+    return this.repository.getFormDestino();
   }
 
   load(event){

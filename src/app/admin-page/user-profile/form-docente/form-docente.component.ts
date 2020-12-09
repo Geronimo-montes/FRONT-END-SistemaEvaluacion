@@ -42,6 +42,9 @@ export class FormDocenteComponent implements OnInit {
   get tipoMensaje(): string {
     return this.repository.getTipoMensaje();
   }
+  get formDestino(): string {
+    return this.repository.getFormDestino();
+  }
 
   isValidInput(fieldName, form): string {
     if(form.controls[fieldName].value == '')

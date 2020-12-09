@@ -32,7 +32,10 @@ export class FormUserComponent implements OnInit {
   get tipoMensaje(): string {
     return this.repository.getTipoMensaje();
   }
-
+  get formDestino(): string {
+    return this.repository.getFormDestino();
+  }
+  
   isValidPasswordConfirm(): string{
     if(this.formUser.controls['passwordConfirm'].value == '')
       return '';
@@ -61,7 +64,5 @@ export class FormUserComponent implements OnInit {
     };
 
     this.repository.updateUser(user);
-    //this.validDocenteUpdate = false;
-    //this.validUserUpdate = true;
   }
 }

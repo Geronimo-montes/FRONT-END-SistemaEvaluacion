@@ -29,7 +29,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let alumno of alumnos |filter:filtro" (click)="cambiarAlumnoSeleccionado(alumno)">
+          <tr *ngFor="let alumno of alumnos | filter:filtro" (click)="cambiarAlumnoSeleccionado(alumno)">
             <!--Foto-->
             <th scope="row">
               <div class="media align-items-center">

@@ -4,16 +4,20 @@
       <div class="col-lg-3 order-lg-2 mt--5">
         <div class="card-profile-image">
           <img [src]="imgPerfil" class="rounded-circle">
-          <!--<img src="{{ docente.rutaPerfil }}" class="rounded-circle">-->
         </div>
       </div>
     </div>
     <input type="file" formControlName="perfil" #perfil style="visibility: hidden;" (change)="load($event)" />
     <div class="row justify-content-center mt-4">
-      <button class="btn btn-icon btn-primary rounded-circle" (click)="perfil.click()"
+      <button class="btn btn-icon btn-primary" style="padding: .5em;" (click)="perfil.click()"
       placement="bottom" ngbTooltip="Actualizar Perfil">
-        <span class="btn-inner--icon"><i class="ni ni-image"></i></span>
+        <span class="btn-inner--icon"><i class="ni ni-2x ni-image"></i></span>
       </button>
+    </div>
+    <div *ngIf="formDestino == 'p'" class="col-lg-12 pl-lg-4 pr-lg-4 mt-2">
+      <div class="alert" [ngClass] ="tipoMensaje" >
+        {{ mensaje }}
+      </div>
     </div>
   </form>
   <div class="card-body pt-0 pt-md-4 mt--6">

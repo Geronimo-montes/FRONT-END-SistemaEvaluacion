@@ -8,6 +8,7 @@ export class DocenteRepository{
   private docente: Docente;
   private mensaje: string;
   private tipoMensaje: string;
+  private formDestino: string; /*d: docente | u: credenciales | p: perfil*/
 
   constructor(private datasource: DataSourceService, private userService: UsersService) { 
     this.datasource.getDocenteById().subscribe((data) => {
@@ -27,6 +28,10 @@ export class DocenteRepository{
     return this.tipoMensaje;
   }
 
+  getFormDestino(): string {
+    return this.formDestino;
+  }
+
   updateDocnete(docente: any): void {
     this.datasource.updateDocenteById(docente).subscribe((data) => {
       if(data['success']){
@@ -37,12 +42,15 @@ export class DocenteRepository{
         this.mensaje= data['mensaje'];
         this.tipoMensaje = 'alert-danger';
       }
+      this.formDestino = data['destino'];
     });
   }
 
   updatePerfil(perfil: any) {
     this.datasource.updatePerfil(perfil).subscribe((data) => {
-      true;
+      this.tipoMensaje = (data['success']) ? 'alert-success':'alert-danger';
+      this.mensaje = data['mensaje'];
+      this.formDestino = data['destino'];
     })
   }
 
@@ -55,6 +63,7 @@ export class DocenteRepository{
         this.mensaje= data['mensaje'];
         this.tipoMensaje = 'alert-danger';
       }
+      this.formDestino = data['destino'];
     });
   }
 }

@@ -16,19 +16,19 @@ export class ActividadFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      perfil                : new FormControl(''),
-      situacionDidactica    : new FormControl(''),
-      duracion              : new FormControl(''),
-      tipoActividad         : new FormControl(''),
-      areaFormacion         : new FormControl(0),
-      aprendizajeEsperado   : new FormControl(0),
-      nombreEvidencia       : new FormControl(''),
-      formatoEsperado       : new FormControl(0),
-      descripcionEvidencia  : new FormControl(''),
-      inicio                : new FormControl(''),
-      desarrollo            : new FormControl(''),
-      cierre                : new FormControl(''),
-      recursos              : new FormControl(''),
+      perfil                : '',
+      situacionDidactica    : '',
+      duracion              : '',
+      tipoActividad         : '',
+      areaFormacion         : 0,
+      aprendizajeEsperado   : 0,
+      nombreEvidencia       : '',
+      formatoEsperado       : 0,
+      descripcionEvidencia  : '',
+      inicio                : '',
+      desarrollo            : '',
+      cierre                : '',
+      recursos              : '',
     });
     this.form.get('aprendizajeEsperado').disable();
   }
