@@ -3,14 +3,79 @@
     <!-- Toggler no se muestra/ (arreglar)-->
     <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
        aria-controls="sidenav-collapse-main">
-      <span class="ni ni-user-run"></span>
+      <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Imagen de Cabezera -->
-    <a class="" routerLinkActive="active" [routerLink]="['/profile']">
-      <img src="https://www.jing.fm/clipimg/full/40-406578_gorilla-kids-logo-kids-png.png" class="img-responsive col-11" style="display: block; margin-left: auto; margin-right: auto;" alt="...">
+    <a class="navbar-brand p-auto mb-0" routerLinkActive="active" [routerLink]="['/profile']">
+      <img src="https://www.jing.fm/clipimg/full/40-406578_gorilla-kids-logo-kids-png.png" class="navbar-brand-img" alt="...">
     </a>
-    <!-- Menu Lateral -->
+    <!-- User -->
+    <ul *ngIf="!!docente" class="nav align-items-center d-md-none">
+      <li class="nav-item" ngbDropdown placement="bottom-right">
+        <a class="nav-link nav-link-icon" role="button" ngbDropdownToggle>
+          <i class="ni ni-bell-55"></i>
+        </a>
+        <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
+          <a class="dropdown-item" href="javascript:void(0)">Action</a>
+          <a class="dropdown-item" href="javascript:void(0)">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item" ngbDropdown placement="bottom-right">
+        <a class="nav-link" role="button" ngbDropdownToggle>
+          <div class="media align-items-center">
+            <span class="avatar avatar-sm rounded-circle">
+              <img alt="Image placeholder" src="{{docente.rutaPerfil}}">
+            </span>
+          </div>
+        </a>
+        <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
+          <div class=" dropdown-header noti-title">
+            <h4 class="text-overflow m-0">¡Bienvanid@ {{docente.nombre}}!</h4>
+          </div>
+          <button routerLinkActive="active" [routerLink]="['/uprofile']" class="dropdown-item">
+            <i class="ni ni-single-02"></i>
+            <span>Mi Perfil</span>
+          </button>
+          <button routerLinkActive="active" [routerLink]="['/user-profile']" class="dropdown-item">
+            <i class="ni ni-settings-gear-65"></i>
+            <span>Settings</span>
+          </button>
+          <button routerLinkActive="active" [routerLink]="['/user-profile']" class="dropdown-item">
+            <i class="ni ni-calendar-grid-58"></i>
+            <span>Activity</span>
+          </button>
+          <button routerLinkActive="active" [routerLink]="['/user-profile']" class="dropdown-item">
+            <i class="ni ni-support-16"></i>
+            <span>Support</span>
+          </button>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item" (click)="logOut()">
+            <i class="ni ni-user-run"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </li>
+    </ul>
+    <!-- Menu Lateral collapse -->
     <div class="collapse navbar-collapse"  [ngbCollapse]="isCollapsed" id="sidenav-collapse-main">
+      <!-- Collapse header -->
+      <div class="navbar-collapse-header d-md-none">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+            <a  routerLinkActive="active" [routerLink]="['/dashboard']">
+              <img src="https://www.jing.fm/clipimg/full/40-406578_gorilla-kids-logo-kids-png.png">
+            </a>
+          </div>
+          <div class="col-6 collapse-close">
+            <button type="button" class="navbar-toggler" (click)="isCollapsed=!isCollapsed">
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
       <!-- Menu lateral superior-->
       <ul class="navbar-nav">
           <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item col-12">

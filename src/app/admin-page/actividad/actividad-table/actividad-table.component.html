@@ -10,56 +10,48 @@
               <div class="text-left ml--4">
                 <span class="font-weight-light"> Nombre: </span>
               </div>
-              <h4>
-                
-              </h4>
+              <h4></h4>
               <div class="text-left ml--4">
                 <span class="font-weight-light"> CURP: </span>
               </div>
-              <h4>
-                
-              </h4>
+              <h4></h4>
               <div class="text-left ml--4">
                 <span class="font-weight-light"> Grupo - Grado - Turno: </span>
               </div>
-              <h4>
-                
-              </h4>
+              <h4></h4>
             </div>
             <!--tutor-->
             <div class="card mt-3 align-items-center border border-dark">
-              <img class="card-img-top rounded-circle col-4 mt-4" src="assets/img/theme/team-4-800x800.jpg" alt="Card image cap">
+              <img
+                class="card-img-top rounded-circle col-4 mt-4"
+                src="assets/img/theme/team-4-800x800.jpg"
+                alt="Card image cap"
+              />
               <div class="card-body text-left">
-                <h3 class="card-title text-center">
-                  
-                </h3>
+                <h3 class="card-title text-center"></h3>
                 <h4>
                   <span class="font-weight-light mr-2">
                     <li class="ni ni-map-big mr-2"></li>
-                    Dirección: 
+                    Dirección:
                   </span>
-                  
                 </h4>
                 <h4>
                   <span class="font-weight-light mr-2">
                     <li class="ni ni-map-big mr-2"></li>
-                    Telefono: 
+                    Telefono:
                   </span>
-                  
                 </h4>
                 <h4>
                   <span class="font-weight-light mr-2">
                     <li class="ni ni-map-big mr-2"></li>
-                    Correo Electronico: 
+                    Correo Electronico:
                   </span>
-                  
                 </h4>
                 <h4>
                   <span class="font-weight-light mr-2">
                     <li class="ni ni-map-big mr-2"></li>
-                    Dirección: 
+                    Dirección:
                   </span>
-                  
                 </h4>
               </div>
             </div>
@@ -75,24 +67,39 @@
           <div class="row align-items-center">
             <h2 class="ml-lg-4">Lista de Actividades</h2>
             <!-- Form Quitar y poner otra cosa-->
-            <form class="navbar-search navbar-search-white form-inline d-none d-md-flex ml-lg-auto mr-4">
+            <div
+              class="navbar-search navbar-search-white form-inline d-none d-md-flex ml-lg-auto mr-lg-auto"
+            >
               <div class="form-group mb-0">
                 <div class="input-group input-group-alternative mr-4">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    <span class="input-group-text"
+                      ><i class="fas fa-search"></i
+                    ></span>
                   </div>
                   <!--Barra de busqueda-->
-                  <input class="form-control text-dark" placeholder="Search" type="text">
+                  <input
+                    class="form-control text-dark"
+                    [(ngModel)]="filtro"
+                    placeholder="Search"
+                    type="text"
+                  />
                 </div>
-                <button class="btn btn-icon btn-2 btn-outline-primary m-auto" type="button" placement="bottom" ngbTooltip="Agregar Actividad"
-                  routerLinkActive="active" [routerLink]="['/actividad/form']"
+                <button
+                  class="btn btn-icon btn-2 btn-outline-primary m-auto"
+                  type="button"
+                  placement="bottom"
+                  ngbTooltip="Agregar Actividad"
+                  routerLinkActive="active"
+                  [routerLink]="['/actividad/form']"
                 >
-                  <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+                  <span class="btn-inner--icon"
+                    ><i class="ni ni-fat-add"></i
+                  ></span>
                   <span class="btn-inner--text">Agregar Actividad</span>
                 </button>
               </div>
-            </form>
-      
+            </div>
           </div>
         </div>
         <div class="card-body align-items-center">
@@ -108,12 +115,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr *ngFor="let actividad of actividades">
                   <!--Foto-->
                   <th scope="row">
                     <div class="media align-items-center">
                       <a class="avatar rounded-circle mr-3">
-                        <img alt="Image placeholder" src="assets/img/theme/bootstrap.jpg">
+                        <img
+                          alt="Image placeholder"
+                          src="assets/img/theme/bootstrap.jpg"
+                        />
                       </a>
                     </div>
                   </th>
@@ -122,7 +132,7 @@
                     <div class="align-items-center">
                       <div class="media-body">
                         <span class="mb-0 text-sm">
-                          
+                          {{ actividad.nombre }}
                         </span>
                       </div>
                     </div>
@@ -131,9 +141,7 @@
                   <th>
                     <div class="align-items-center">
                       <div class="media-body">
-                        <span class="mb-0 text-sm">
-                          
-                        </span>
+                        <span class="mb-0 text-sm"> </span>
                       </div>
                     </div>
                   </th>
@@ -141,22 +149,28 @@
                   <th>
                     <div class="align-items-center">
                       <div class="media-body">
-                        <span class="mb-0 text-sm">
-                           
-                        </span>
+                        <span class="mb-0 text-sm"> </span>
                       </div>
                     </div>
                   </th>
-                  
+
                   <td>
                     <div ngbDropdown placement="left">
-                      <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                      <a
+                        class="btn btn-sm btn-icon-only text-light"
+                        ngbDropdownToggle
+                      >
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
-                      <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                        <button class="dropdown-item" >Ver información</button>
-                        <button class="dropdown-item" >Editar información</button>
-                        <button class="dropdown-item" >Otra acción</button>
+                      <div
+                        ngbDropdownMenu
+                        class="dropdown-menu-right dropdown-menu-arrow"
+                      >
+                        <button class="dropdown-item">Ver información</button>
+                        <button class="dropdown-item">
+                          Editar información
+                        </button>
+                        <button class="dropdown-item">Otra acción</button>
                       </div>
                     </div>
                   </td>
@@ -167,14 +181,16 @@
           <div class="row">
             <nav class="ml-auto mr-auto" aria-label="...">
               <ul class="pagination">
-      
-                <li *ngFor="let page of controls" class="page-item"
-                  [class.active]="page == SelectedPage" (click)="changePage(page)">
+                <li
+                  *ngFor="let page of controls"
+                  class="page-item"
+                  [class.active]="page == SelectedPage"
+                  (click)="changePage(page)"
+                >
                   <button class="page-link">
-      
+                    {{ page }}
                   </button>
                 </li>
-      
               </ul>
             </nav>
           </div>

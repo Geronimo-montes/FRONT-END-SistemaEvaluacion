@@ -1,28 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Alumno } from 'src/app/model/alumno/alumno.model';
-import { AlumnoRepository } from 'src/app/model/alumno/alumno.repository';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { Alumno } from "src/app/model/alumno/alumno.model";
+import { AlumnoRepository } from "src/app/model/alumno/alumno.repository";
 
 @Component({
-  selector: 'app-table-alumno',
-  templateUrl: './table-alumno.component.html',
-  styleUrls: ['./table-alumno.component.css']
+  selector: "app-table-alumno",
+  templateUrl: "./table-alumno.component.html",
+  styleUrls: ["./table-alumno.component.css"],
 })
 export class TableAlumnoComponent implements OnInit {
   public NumRowPage: number = 5;
   public SelectedPage: number = 1;
+  public filtro: string = "";
   constructor(private repository: AlumnoRepository, private route: Router) { }
 
   ngOnInit(): void { }
 
   get alumnos(): Alumno[] {
     let pageIndex = (this.SelectedPage - 1) * this.NumRowPage;
-    return this.repository.getAlumnos().slice(pageIndex, pageIndex + this.NumRowPage);
+    let b = this.filtro;
+    return this.repository
+      .getAlumnos()
+      .filter(function (a) {
+        return (
+          (a.nombre + " " + a.ap1 + " " + a.ap2)
+            .toLocaleLowerCase()
+            .indexOf(b.toLocaleLowerCase()) > -1
+        );
+      })
+      .slice(pageIndex, pageIndex + this.NumRowPage);
   }
 
   get NumberPage(): number {
-    return Math.ceil(this.repository.getAlumnos().length 
-    / this.NumRowPage);
+    let b = this.filtro;
+    return Math.ceil(
+      this.repository.getAlumnos().filter(function (a) {
+        return (
+          (a.nombre + " " + a.ap1 + " " + a.ap2)
+            .toLocaleLowerCase()
+            .indexOf(b.toLocaleLowerCase()) > -1
+        );
+      }).length / this.NumRowPage
+    );
   }
 
   get controls(): number[] {
@@ -32,7 +51,7 @@ export class TableAlumnoComponent implements OnInit {
     return numeros;
   }
 
-  changePage(page){
+  changePage(page) {
     this.SelectedPage = page;
   }
 
@@ -42,6 +61,6 @@ export class TableAlumnoComponent implements OnInit {
 
   editarDatosAlumno(alumno: Alumno) {
     this.repository.setalumnoSeleccionado(alumno);
-    this.route.navigateByUrl('alumno/profilealumno');
+    this.route.navigateByUrl("alumno/profilealumno");
   }
 }

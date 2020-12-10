@@ -1,36 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActividadRepository } from 'src/app/model/actividad/actividad.repository';
-import { AprendizajeEsperado, AreaFormacion } from 'src/app/model/actividad/aformacion.model';
+import { Actividad, AprendizajeEsperado, AreaFormacion, } from 'src/app/model/actividad/aformacion.model';
+import { AlumnoRepository } from 'src/app/model/alumno/alumno.repository';
 
 @Component({
   selector: 'app-actividad-form',
   templateUrl: './actividad-form.component.html',
-  styleUrls: ['./actividad-form.component.css']
+  styleUrls: ['./actividad-form.component.css'],
 })
 export class ActividadFormComponent implements OnInit {
   public imgPerfil: string;
   public enableAprendizaje: boolean = true;
   private form: FormGroup;
+  public hidden = false;
+
   constructor(private reposytory: ActividadRepository, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      perfil                : '',
-      situacionDidactica    : '',
-      duracion              : '',
-      tipoActividad         : '',
-      areaFormacion         : 0,
-      aprendizajeEsperado   : 0,
-      nombreEvidencia       : '',
-      formatoEsperado       : 0,
-      descripcionEvidencia  : '',
-      inicio                : '',
-      desarrollo            : '',
-      cierre                : '',
-      recursos              : '',
+      perfil: new FormControl('',),
+      areaFormacion: new FormControl(0, { validators: [Validators.required] }),
+      nombre: new FormControl('', { validators: [Validators.required, Validators.minLength(4), Validators.maxLength(200), Validators.pattern('[A-Za-z0-9 ][A-Za-z0-9 ]*')] }),
+      duracionMinutos: new FormControl('', { validators: [Validators.required, Validators.pattern('[0-9]{1,3}')] }),
+      tipoActividad: new FormControl(0, { validators: [Validators.required] }),
+      idAprendizajeEsperado: new FormControl(0, { validators: [Validators.required] }),
+      idDiagnostico: new FormControl(0, { validators: [Validators.required] }),
+      inicio: new FormControl('', { validators: [Validators.required, Validators.minLength(4), Validators.maxLength(2000), Validators.pattern('[A-Za-z ][A-Za-z ]*')] }),
+      desarrollo: new FormControl('', { validators: [Validators.required, Validators.minLength(4), Validators.maxLength(2000), Validators.pattern('[A-Za-z ][A-Za-z ]*')] }),
+      cierre: new FormControl('', { validators: [Validators.required, Validators.minLength(4), Validators.maxLength(2000), Validators.pattern('[A-Za-z ][A-Za-z ]*')] }),
+      evaluacion: new FormControl(''),
+      recursos: new FormControl('', { validators: [Validators.required, Validators.minLength(4), Validators.maxLength(2000), Validators.pattern('[A-Za-z ][A-Za-z ]*')] }),
+      nombreEvidencia: new FormControl('',),
+      formatoEsperado: new FormControl(0,),
+      descripcion: new FormControl('',),
     });
-    this.form.get('aprendizajeEsperado').disable();
+    this.form.get('idAprendizajeEsperado').disable();
   }
 
   get areasFormacion(): AreaFormacion[] {
@@ -41,44 +46,56 @@ export class ActividadFormComponent implements OnInit {
     return this.reposytory.getAprendizajeEsperado();
   }
 
+  get mensaje(): string {
+    return this.reposytory.getMensaje();
+  }
+
+  get tipoMensaje(): string {
+    return this.reposytory.getTipoMensaje();
+  }
+
+  isValidInput(fieldName, form): string {
+    if (form.controls[fieldName].value == '' || form.controls[fieldName].value == null)
+      return '';
+    else
+      return (form.controls[fieldName].invalid
+        && (form.controls[fieldName].dirty
+          || form.controls[fieldName].touched)) ? 'is-invalid' : 'is-valid';
+  }
+
   changeAreaFormacion(): void {
     let idAreaFormacion = this.form.get('areaFormacion').value;
-    if(idAreaFormacion != 0){
+    if (idAreaFormacion != 0) {
       this.reposytory.getAprendizajeEsperadoByAreaFormacion(idAreaFormacion);
-      this.form.get('aprendizajeEsperado').enable();
-    }else{
-      this.form.get('aprendizajeEsperado').disable();
+      this.form.get('idAprendizajeEsperado').enable();
+    } else {
+      this.form.get('idAprendizajeEsperado').disable();
     }
   }
 
-  load(event){
-    const reader = new FileReader();    
-    if(event.target.files && event.target.files.length) {
+  load(event) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
-      
+
       reader.onload = () => {
         this.imgPerfil = reader.result as string;
         this.form.patchValue({
-          fileSource: reader.result
+          fileSource: reader.result,
         });
       };
     }
   }
 
-  agregarActividad(form: FormGroup, perfil: HTMLInputElement) {
-    let data = new FormData();
-    data.append('nombre', this.form.controls['situacionDidactica'].value);
-    data.append('duracionMinutos', this.form.controls['duracion'].value);
-    data.append('tipoActividad', this.form.controls['tipoActividad'].value);
-    data.append('idAprendizajeEsperado', this.form.controls['aprendizajeEsperado'].value);
-    data.append('idDiagnostico', null);
-    data.append('inicio', this.form.controls['inicio'].value);
-    data.append('desarrollo', this.form.controls['desarrollo'].value);
-    data.append('cierre', this.form.controls['cierre'].value);
-    data.append('recursos', this.form.controls['recursos'].value);
-    data.append('evaluacion', '');
-    data.append('perfil', perfil.files[0]);
-    this.reposytory.insterActividad(data);
+  agregarActividad(perfil: HTMLInputElement) {
+    /*let data = new FormData();
+    data.append('perfil', perfil.files[0]);*/
+    this.reposytory.insterActividad(this.form.value);
+    document.getElementById('id_mensaje').style.display = 'block';
+    this.form.reset();
+    setInterval(() => {
+      document.getElementById('id_mensaje').style.display = 'none';
+    }, 10000);
   }
 }

@@ -8,9 +8,9 @@ describe('ActividadFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ActividadFormComponent ]
+      declarations: [ActividadFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

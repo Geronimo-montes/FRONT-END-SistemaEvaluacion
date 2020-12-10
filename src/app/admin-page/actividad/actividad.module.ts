@@ -8,13 +8,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ActividadRoutingModule } from './actividad-routing.module';
 import { ActividadGuard } from './actividad.guard';
-
-
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [
-    ActividadFichaComponent, 
-    ActividadTableComponent, 
+    ActividadFichaComponent,
+    ActividadTableComponent,
     ActividadFormComponent
   ],
   imports: [
@@ -24,6 +22,7 @@ import { ActividadGuard } from './actividad.guard';
     NgbModule,
     CommonModule,
     ActividadRoutingModule,
+    Ng2SearchPipeModule,
   ],
   providers: [
     ActividadGuard

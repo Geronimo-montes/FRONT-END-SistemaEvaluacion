@@ -9,8 +9,9 @@ export class AlumnoRepository {
   private mensaje: string;
   private tipoMensaje: string;
   private formDestino: string; /*d: docente | u: credenciales | p: perfil*/
+
   constructor(private datasource: DataSourceService) {
-    this.datasource.getAlumnos('a','3','v').subscribe((data) => {
+    this.datasource.getAlumnos('a', '3', 'v').subscribe((data) => {
       this.alumnos = data;
       this.alumnoSeleccionado = data[0];
     });
@@ -42,16 +43,16 @@ export class AlumnoRepository {
 
   updateAlumno(alumno: any): void {
     this.datasource.updateAlumnoById(alumno).subscribe((data) => {
-      if(data['success']){
+      if (data['success']) {
         this.alumnoSeleccionado = <Alumno>data['data'][0];
         this.mensaje = data['mensaje'];
         this.tipoMensaje = 'alert-success';
-      }else{
-        this.mensaje= data['mensaje'];
+      } else {
+        this.mensaje = data['mensaje'];
         this.tipoMensaje = 'alert-danger';
       }
       this.formDestino = data['destino'];
-      this.datasource.getAlumnos('a','3','v').subscribe((data) => {
+      this.datasource.getAlumnos('a', '3', 'v').subscribe((data) => {
         this.alumnos = data;
       });
     });

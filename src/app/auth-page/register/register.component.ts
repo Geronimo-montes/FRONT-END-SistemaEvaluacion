@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../model/users/users.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastData, ToastOptions, ToastyConfig, ToastyService } from 'ng2-toasty';
+import { Observable, Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +17,10 @@ export class RegisterComponent implements OnInit {
   confirmPassword: string;
   passwordError: boolean;
 
-  constructor(public userService: UsersService, private fb: FormBuilder) { }
+  constructor(public userService: UsersService, private fb: FormBuilder,
+    private toastyService: ToastyService, private toastyConfig: ToastyConfig) { 
+      //this.toastyConfig.theme = 'bootstrap';
+  }
   
   ngOnInit(): void {
     this.initForm();
@@ -34,19 +39,30 @@ export class RegisterComponent implements OnInit {
       (this.registerForm.controls[fieldName].dirty || this.registerForm.controls[fieldName].touched);
   }
 
-  register() {
-    this.email = this.registerForm.value['email'];
-    this.password = this.registerForm.value['password'];
-
-    const user = { email: this.email, password: this.password };
-    this.userService.register(user).subscribe(data => {
-      //this.userService.setToken(data.token);
-      console.log("Valor data: " + data[0]['nombre']);
-    },
-    error => {
-      console.log(error);
-    });
+  sirve(){
+    console.log("sirve;");
   }
 
+  register() {
+    let toastOptions: ToastOptions = {
+      title: 'Prueba Toasty',
+      msg: 'Contenido MSM',
+      showClose: true,
+      timeout: 50000,
+      theme: 'bootstrap',
+      onAdd: (toast: ToastData) => {
+          console.log('Toast ' + toast.id + ' has been added!');
+      },
+      onRemove: function(toast: ToastData) {
+          console.log('Toast ' + toast.id + ' has been removed!');
+      }
+    };
 
+    this.toastyService.default(toastOptions);
+    this.toastyService.info(toastOptions);
+    this.toastyService.success(toastOptions);
+    this.toastyService.wait(toastOptions);
+    this.toastyService.error(toastOptions);
+    this.toastyService.warning(toastOptions);
+  }
 }

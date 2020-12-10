@@ -69,4 +69,11 @@
 @import "custom/vendors";
 
 // Angular Differences
-@import "angular-differences/angular-differences"
+@import "angular-differences/angular-differences";
+
+
+// toasty (notificaciones push)
+@import 'toasty/style-bootstrap.css';
+@import 'toasty/style-default.css';
+@import 'toasty/style-material.css';
+@import 'toasty/style.css';

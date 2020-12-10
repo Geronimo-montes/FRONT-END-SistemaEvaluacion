@@ -8,6 +8,7 @@ import { AuthGuard } from "./auth.guard";
 import { AuthBaseRoutingModule } from "./auth-base-routing.module";
 import { AuthBaseComponent } from "./auth-base/auth-base.component";
 import { ComponentsModule } from "../components/components.module";
+import { ToastyModule } from "ng2-toasty";
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { ComponentsModule } from "../components/components.module";
         ComponentsModule,
         ModelModule,
         AuthBaseRoutingModule,
+        ToastyModule
     ],
     declarations: [
         AuthBaseComponent,
