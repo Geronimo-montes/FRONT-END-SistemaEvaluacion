@@ -1,1 +1,64 @@
-<router-outlet></router-outlet>
+<div class="container-fluid mt--8 bg-secondary">
+  <div *ngIf="!!actividades" class="row">
+    <!--Ficha de alumno seleccionado-->
+    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+      <div class="card card-profile shadow">
+        <!--Ficha de informacion del alumno-->
+        <div class="card-body pt-0 pt-md-4">
+          <div class="text-center mt-6">
+            <div class="col-8 text-left m-auto">
+              <div class="text-left ml--4">
+                <span class="font-weight-light"> Nombre: </span>
+              </div>
+              <h4></h4>
+              <div class="text-left ml--4">
+                <span class="font-weight-light"> CURP: </span>
+              </div>
+              <h4></h4>
+              <div class="text-left ml--4">
+                <span class="font-weight-light"> Grupo - Grado - Turno: </span>
+              </div>
+              <h4></h4>
+            </div>
+            <!--tutor-->
+            <div class="card mt-3 align-items-center border border-dark">
+              <img class="card-img-top rounded-circle col-4 mt-4" src="assets/img/theme/team-4-800x800.jpg"
+                alt="Card image cap" />
+              <div class="card-body text-left">
+                <h3 class="card-title text-center"></h3>
+                <h4>
+                  <span class="font-weight-light mr-2">
+                    <li class="ni ni-map-big mr-2"></li>
+                    Dirección:
+                  </span>
+                </h4>
+                <h4>
+                  <span class="font-weight-light mr-2">
+                    <li class="ni ni-map-big mr-2"></li>
+                    Telefono:
+                  </span>
+                </h4>
+                <h4>
+                  <span class="font-weight-light mr-2">
+                    <li class="ni ni-map-big mr-2"></li>
+                    Correo Electronico:
+                  </span>
+                </h4>
+                <h4>
+                  <span class="font-weight-light mr-2">
+                    <li class="ni ni-map-big mr-2"></li>
+                    Dirección:
+                  </span>
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Tabla de alumnos-->
+    <div class="col-xl-8 order-xl-1">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

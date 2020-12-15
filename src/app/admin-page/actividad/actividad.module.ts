@@ -7,8 +7,8 @@ import { ModelModule } from 'src/app/model/model.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ActividadRoutingModule } from './actividad-routing.module';
-import { ActividadGuard } from './actividad.guard';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AdminGuard } from '../admin.guard';
 @NgModule({
   declarations: [
     ActividadFichaComponent,
@@ -25,7 +25,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     Ng2SearchPipeModule,
   ],
   providers: [
-    ActividadGuard
+    AdminGuard,
   ]
 })
 export class ActividadModule { }

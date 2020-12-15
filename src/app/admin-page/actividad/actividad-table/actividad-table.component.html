@@ -1,201 +1,98 @@
-<div class="container-fluid mt--6 bg-secondary">
-  <div class="row">
-    <!--Ficha de alumno seleccionado-->
-    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
-      <div class="card card-profile shadow">
-        <!--Ficha de informacion del alumno-->
-        <div class="card-body pt-0 pt-md-4">
-          <div class="text-center mt-6">
-            <div class="col-8 text-left m-auto">
-              <div class="text-left ml--4">
-                <span class="font-weight-light"> Nombre: </span>
-              </div>
-              <h4></h4>
-              <div class="text-left ml--4">
-                <span class="font-weight-light"> CURP: </span>
-              </div>
-              <h4></h4>
-              <div class="text-left ml--4">
-                <span class="font-weight-light"> Grupo - Grado - Turno: </span>
-              </div>
-              <h4></h4>
-            </div>
-            <!--tutor-->
-            <div class="card mt-3 align-items-center border border-dark">
-              <img
-                class="card-img-top rounded-circle col-4 mt-4"
-                src="assets/img/theme/team-4-800x800.jpg"
-                alt="Card image cap"
-              />
-              <div class="card-body text-left">
-                <h3 class="card-title text-center"></h3>
-                <h4>
-                  <span class="font-weight-light mr-2">
-                    <li class="ni ni-map-big mr-2"></li>
-                    Dirección:
-                  </span>
-                </h4>
-                <h4>
-                  <span class="font-weight-light mr-2">
-                    <li class="ni ni-map-big mr-2"></li>
-                    Telefono:
-                  </span>
-                </h4>
-                <h4>
-                  <span class="font-weight-light mr-2">
-                    <li class="ni ni-map-big mr-2"></li>
-                    Correo Electronico:
-                  </span>
-                </h4>
-                <h4>
-                  <span class="font-weight-light mr-2">
-                    <li class="ni ni-map-big mr-2"></li>
-                    Dirección:
-                  </span>
-                </h4>
-              </div>
-            </div>
+<div class="card bg-secondary shadow">
+  <div class="card-header bg-white border-0 shadow">
+    <div class="row align-items-center justify-content-between pl-lg-4 pr-lg-4">
+      <!-- Form Quitar y poner otra cosa-->
+      <h1>Lista de Actividades</h1>
+
+      <div class="navbar-search navbar-search-white form-inline d-none d-md-flex">
+        <div class="input-group input-group-alternative">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
           </div>
+          <!--Barra de busqueda-->
+          <input class="form-control text-dark" [(ngModel)]="filtro" placeholder="Search" type="text" />
         </div>
       </div>
-    </div>
-    <!--Tabla de alumnos-->
-    <div class="col-xl-8 order-xl-1">
-      <!--<router-outlet></router-outlet>-->
-      <div class="card bg-secondary shadow">
-        <div class="card-header bg-white border-0 shadow">
-          <div class="row align-items-center">
-            <h2 class="ml-lg-4">Lista de Actividades</h2>
-            <!-- Form Quitar y poner otra cosa-->
-            <div
-              class="navbar-search navbar-search-white form-inline d-none d-md-flex ml-lg-auto mr-lg-auto"
-            >
-              <div class="form-group mb-0">
-                <div class="input-group input-group-alternative mr-4">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"
-                      ><i class="fas fa-search"></i
-                    ></span>
-                  </div>
-                  <!--Barra de busqueda-->
-                  <input
-                    class="form-control text-dark"
-                    [(ngModel)]="filtro"
-                    placeholder="Search"
-                    type="text"
-                  />
-                </div>
-                <button
-                  class="btn btn-icon btn-2 btn-outline-primary m-auto"
-                  type="button"
-                  placement="bottom"
-                  ngbTooltip="Agregar Actividad"
-                  routerLinkActive="active"
-                  [routerLink]="['/actividad/form']"
-                >
-                  <span class="btn-inner--icon"
-                    ><i class="ni ni-fat-add"></i
-                  ></span>
-                  <span class="btn-inner--text">Agregar Actividad</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card-body align-items-center">
-          <div class="table-responsive">
-            <table class="table align-items-center table-flush">
-              <thead class="thead-ligth">
-                <tr>
-                  <th scope="col" class="h1">Foto de Perfil</th>
-                  <th scope="col" class="h1">No. Matircula</th>
-                  <th scope="col" class="h1">Nombre completo</th>
-                  <th scope="col" class="h1">Grupo</th>
-                  <th scope="col" class="h1">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let actividad of actividades">
-                  <!--Foto-->
-                  <th scope="row">
-                    <div class="media align-items-center">
-                      <a class="avatar rounded-circle mr-3">
-                        <img
-                          alt="Image placeholder"
-                          src="assets/img/theme/bootstrap.jpg"
-                        />
-                      </a>
-                    </div>
-                  </th>
-                  <!--Matricula-->
-                  <th>
-                    <div class="align-items-center">
-                      <div class="media-body">
-                        <span class="mb-0 text-sm">
-                          {{ actividad.nombre }}
-                        </span>
-                      </div>
-                    </div>
-                  </th>
-                  <!--Nombre completo-->
-                  <th>
-                    <div class="align-items-center">
-                      <div class="media-body">
-                        <span class="mb-0 text-sm"> </span>
-                      </div>
-                    </div>
-                  </th>
-                  <!--Grupo Grado Truno-->
-                  <th>
-                    <div class="align-items-center">
-                      <div class="media-body">
-                        <span class="mb-0 text-sm"> </span>
-                      </div>
-                    </div>
-                  </th>
 
-                  <td>
-                    <div ngbDropdown placement="left">
-                      <a
-                        class="btn btn-sm btn-icon-only text-light"
-                        ngbDropdownToggle
-                      >
-                        <i class="fas fa-ellipsis-v"></i>
-                      </a>
-                      <div
-                        ngbDropdownMenu
-                        class="dropdown-menu-right dropdown-menu-arrow"
-                      >
-                        <button class="dropdown-item">Ver información</button>
-                        <button class="dropdown-item">
-                          Editar información
-                        </button>
-                        <button class="dropdown-item">Otra acción</button>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="row">
-            <nav class="ml-auto mr-auto" aria-label="...">
+      <button class="btn btn-icon btn-2 btn-outline-primary" type="button" routerLinkActive="active"
+        [routerLink]="['/actividad/form']">
+        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+        <span class="btn-inner--text">Nueva Actividad</span>
+      </button>
+    </div>
+  </div>
+  <div class="card-body align-items-center">
+    <div class="table-responsive">
+      <table class="table align-items-center table-flush">
+        <thead class="thead-ligth">
+          <tr>
+            <th scope="col" class="h1">No. Actividad</th>
+            <th scope="col" class="h1">Nombre</th>
+            <th scope="col" class="h1">Duración</th>
+            <th scope="col" class="h1">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let actividad of actividades">
+            <!--No. Actividad-->
+            <th>
+              <div class="align-items-center">
+                <div class="media-body">
+                  <span class="mb-0 text-sm">
+                    {{ actividad.idPlanTrabajo }}
+                  </span>
+                </div>
+              </div>
+            </th>
+            <!--Nombre-->
+            <th>
+              <div class="align-items-center">
+                <div class="media-body">
+                  <span class="mb-0 text-sm">
+                    {{ actividad.nombre }}
+                  </span>
+                </div>
+              </div>
+            </th>
+            <!--Duracion-->
+            <th>
+              <div class="align-items-center">
+                <div class="media-body">
+                  <span class="mb-0 text-sm">
+                    {{actividad.duracionMinutos}} minutos
+                  </span>
+                </div>
+              </div>
+            </th>
+            <td>
+              <div ngbDropdown placement="left">
+                <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                  <i class="fas fa-ellipsis-v"></i>
+                </a>
+                <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+                  <button class="dropdown-item">Ver información</button>
+                  <button class="dropdown-item">Editar información</button>
+                  <button class="dropdown-item">Otra acción</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="pt-3">
+            <nav class="m-auto mr-auto" aria-label="...">
               <ul class="pagination">
-                <li
-                  *ngFor="let page of controls"
-                  class="page-item"
-                  [class.active]="page == SelectedPage"
-                  (click)="changePage(page)"
-                >
+                <li *ngFor="let page of controls" class="page-item" [class.active]="page == SelectedPage"
+                  (click)="changePage(page)">
                   <button class="page-link">
                     {{ page }}
                   </button>
                 </li>
               </ul>
             </nav>
-          </div>
-        </div>
-      </div>
+          </tr>
+        </tfoot>
+      </table>
     </div>
   </div>
 </div>

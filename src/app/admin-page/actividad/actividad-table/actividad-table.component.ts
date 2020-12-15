@@ -5,7 +5,7 @@ import { Actividad } from "src/app/model/actividad/aformacion.model";
 @Component({
   selector: "app-actividad-table",
   templateUrl: "./actividad-table.component.html",
-  styleUrls: ["./actividad-table.component.css"],
+  styleUrls: ["./actividad-table.component.scss"],
 })
 export class ActividadTableComponent implements OnInit {
   public NumRowPage: number = 5;

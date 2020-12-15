@@ -41,7 +41,7 @@ export class AlumnoRepository {
     return this.alumnoSeleccionado;
   }
 
-  updateAlumno(alumno: any): void {
+  updateAlumno(alumno: FormData): void {
     this.datasource.updateAlumnoById(alumno).subscribe((data) => {
       if (data['success']) {
         this.alumnoSeleccionado = <Alumno>data['data'][0];

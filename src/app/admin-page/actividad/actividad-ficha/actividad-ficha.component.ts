@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActividadRepository } from 'src/app/model/actividad/actividad.repository';
+import { Actividad } from 'src/app/model/actividad/aformacion.model';
 
 @Component({
   selector: 'app-actividad-ficha',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActividadFichaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private repository: ActividadRepository) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  get actividades(): Actividad[] {
+    return this.repository.getActiviades();
   }
 
 }

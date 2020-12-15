@@ -6,9 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserProfileRoutingModule } from './user-profile-routing.module';
 import { UserProfileComponent } from './user-profile-base/user-profile.component';
-import { ProfileGuard } from './user-profile-base/profile.guard';
 import { FormDocenteComponent } from './form-docente/form-docente.component';
 import { FormUserComponent } from './form-user/form-user.component';
+import { AdminGuard } from '../admin.guard';
 @NgModule({
   declarations: [
     UserProfileComponent,
@@ -25,7 +25,7 @@ import { FormUserComponent } from './form-user/form-user.component';
     UserProfileRoutingModule,
   ],
   providers: [
-    ProfileGuard,
+    AdminGuard,
   ]
 })
 export class UserProfileModule { }

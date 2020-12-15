@@ -15,21 +15,21 @@ export class UsersService {
   login(user: any): Observable<any> {
     return this.http.post(this.baseURL + 'login', user);
   }
-  
+
   logOut(): Observable<boolean> {
     let res = this.http.put<boolean>(this.baseURL + 'logout', null, this.getOptions());
-    this.cookies.delete('token');
+    this.cookies.set('token', '', new Date(new Date().getTime() - 1000 * 60 * 60));
     return res;
   }
 
   updateUser(user: any): Observable<any> {
     return this.http.put(this.baseURL + 'user/update', user, this.getOptions());
   }
-    
+
   setToken(token: string) { //cookie que espira en 3 horas
-    this.cookies.set('token', token, new Date(new Date().getTime() + 1000*60*60));
+    this.cookies.set('token', token, new Date(new Date().getTime() + 1000 * 60 * 60));
   }
-  
+
   getToken() {
     return this.cookies.get("token");
   }

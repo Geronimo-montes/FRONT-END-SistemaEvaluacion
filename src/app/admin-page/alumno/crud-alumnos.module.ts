@@ -6,9 +6,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CrudAlumnosRoutingModule } from './crud-alumnos-routing.module';
 import { TableAlumnoComponent } from './table-alumno/table-alumno.component';
 import { CrudAlumnosComponent } from './crud-alumnos/crud-alumnos.component';
-import { CrudGuard } from './crud.guard';
 import { ProfilealumnoComponent } from './profilealumno/profilealumno.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AdminGuard } from '../admin.guard';
 @NgModule({
   declarations: [
     CrudAlumnosComponent,
@@ -25,7 +25,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     Ng2SearchPipeModule,
   ],
   providers: [
-    CrudGuard,
+    AdminGuard,
   ]
 })
 export class CrudAlumnosModule { }

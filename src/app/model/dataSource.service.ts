@@ -29,8 +29,8 @@ export class DataSourceService {
       this.getOptions());
   }
 
-  updateAlumnoById(alumno: any): Observable<any> {
-    return this.http.put(this.baseURL + 'alumno/update', alumno, this.getOptions());
+  updateAlumnoById(alumno: FormData): Observable<any> {
+    return this.http.post(this.baseURL + 'alumno/update', alumno, this.getOptions());
   }
 
   updatePerfil(perfil: any): any {

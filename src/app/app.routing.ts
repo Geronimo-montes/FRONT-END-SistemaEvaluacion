@@ -9,7 +9,7 @@ const routes: Routes = [
   }, {
     path: '',
     loadChildren: './auth-page/auth-base.module#AuthBaseModule',
-  },  {
+  }, {
     path: '',
     loadChildren: './admin-page/admin-base.module#AdminBaseModule',
   }, {
