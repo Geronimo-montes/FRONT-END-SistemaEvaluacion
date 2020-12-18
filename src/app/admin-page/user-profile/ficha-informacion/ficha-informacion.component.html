@@ -7,29 +7,31 @@
         </div>
       </div>
     </div>
-    <input type="file" formControlName="perfil" #perfil style="visibility: hidden;" (change)="load($event)" />
+    <input type="file" formControlName="perfil" #perfil
+      style="visibility: hidden;" (change)="load($event)" />
     <div class="row justify-content-center mt-4">
-      <button class="btn btn-icon btn-primary" style="padding: .5em;" (click)="perfil.click()"
-      placement="bottom" ngbTooltip="Actualizar Perfil">
+      <button class="btn btn-icon btn-primary" style="padding: .5em;"
+        (click)="perfil.click()" placement="bottom"
+        ngbTooltip="Actualizar Perfil">
         <span class="btn-inner--icon"><i class="ni ni-2x ni-image"></i></span>
       </button>
     </div>
     <div *ngIf="formDestino == 'p'" class="col-lg-12 pl-lg-4 pr-lg-4 mt-2">
-      <div class="alert" [ngClass] ="tipoMensaje" >
+      <div class="alert" [ngClass]="tipoMensaje">
         {{ mensaje }}
       </div>
     </div>
   </form>
   <div class="card-body pt-0 pt-md-4 mt--6">
     <div class="text-center mt-6">
-    <!--Ficha de presentacion del docente con datos resumidos-->
+      <!--Ficha de presentacion del docente con datos resumidos-->
       <h2>
         <span class="font-weight-light">No. Docente </span>
         {{" #" + docente.idDocente}}
       </h2>
       <h2>
         <span class="font-weight-light"> {{ docente.rol }} </span>
-        {{ "  " + docente.nombre + " " + docente.ap1 + " " + docente.ap2 }}
+        {{ " " + docente.nombre + " " + docente.ap1 + " " + docente.ap2 }}
       </h2>
 
     </div>
@@ -54,19 +56,22 @@
     <div class="row justify-content-center">
       <div class="col-10 mb-4 mt-5">
         <div class="card card-stats mb-4 mb-lg-0 border  shadow">
-          <div class="card-body rounded bg-secondary" >
+          <div class="card-body rounded bg-secondary">
             <div class="row justify-content-center mb-7">
               <div class="col-lg-3 order-lg-2 mt--4">
                 <div class="card-profile-image">
                   <a href="javascript:void(0)">
-                    <img src="https://images.adsttc.com/media/images/5b87/2acf/f197/ccda/a100/01a9/newsletter/_MG_6827-1-DAVILA-BONILLA-SAN-JOSE-2016-11-MEDIA.jpg?1535584951" class="rounded-circle">
+                    <img
+                      src="https://images.adsttc.com/media/images/5b87/2acf/f197/ccda/a100/01a9/newsletter/_MG_6827-1-DAVILA-BONILLA-SAN-JOSE-2016-11-MEDIA.jpg?1535584951"
+                      class="rounded-circle">
                   </a>
                 </div>
               </div>
             </div>
             <div class="row justify-content-center">
-              <h3 class="card-title text-uppercase mb-0 mt-2"> {{ docente.nombreEscuela }} </h3>
-            </div>  
+              <h3 class="card-title text-uppercase mb-0 mt-2"> {{
+                docente.nombreEscuela }} </h3>
+            </div>
             <div class="row justify-content-center">
               <div class="col-4">
                 <p class="mt-2 mb-0 h5">
@@ -99,7 +104,7 @@
                 <p class="mt-2 mb-0 h5 text-muted">
                   {{ docente.direccionEscuela }}
                 </p>
-                <p class="mt-2 mb-0 h5 text-muted"> 
+                <p class="mt-2 mb-0 h5 text-muted">
                   {{ docente.telefonoEscuela }}
                 </p>
               </div>
@@ -107,25 +112,31 @@
           </div>
         </div>
       </div>
-      
+
       <div class="col-10">
-        <div class="card card-stats mb-4 mb-lg-0 bg-secondary " >
+        <div class="card card-stats mb-4 mb-lg-0 bg-secondary ">
           <div class="card-body">
             <div class="row">
               <div class="col">
-                <h2 class="card-title text-uppercase text-muted mb-0"> Ciclo Escolar </h2>
-                <h5 class="card-title text-uppercase text-muted mb-0"> Dias Habiles </h5>
-                <span class="h2 font-weight-bold mb-0"> {{ docente.diasHabilesCiclo }} </span>
+                <h2 class="card-title text-uppercase text-muted mb-0"> Ciclo
+                  Escolar </h2>
+                <h5 class="card-title text-uppercase text-muted mb-0"> Dias
+                  Habiles </h5>
+                <span class="h2 font-weight-bold mb-0"> {{
+                  docente.diasHabilesCiclo }} </span>
               </div>
               <div class="col-auto">
-                <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                <div
+                  class="icon icon-shape bg-danger text-white rounded-circle shadow">
                   <i class="fas fa-calendar"></i>
                 </div>
               </div>
             </div>
             <p class="mt-2 mb-0 text-muted text-sm">
-              <span class="text-success mr-2 h4"><i class="fa fa-arrow-up"></i> {{ docente.inicioCicloCiclo | date:'mediumDate' }} </span>
-              <span class="text-danger mr-2 h4"><i class="fa fa-arrow-down"></i> {{ docente.finCicloCiclo | date:'mediumDate' }} </span>
+              <span class="text-success mr-2 h4"><i class="fa fa-arrow-up"></i>
+                {{ docente.inicioCicloCiclo | date:'mediumDate' }} </span>
+              <span class="text-danger mr-2 h4"><i class="fa fa-arrow-down"></i>
+                {{ docente.finCicloCiclo | date:'mediumDate' }} </span>
             </p>
           </div>
         </div>

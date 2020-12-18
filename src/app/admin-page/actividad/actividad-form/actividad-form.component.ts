@@ -15,7 +15,7 @@ export class ActividadFormComponent implements OnInit {
   private form: FormGroup;
   public hidden = false;
 
-  constructor(private reposytory: ActividadRepository, private fb: FormBuilder) { }
+  constructor(private repository: ActividadRepository, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -39,19 +39,19 @@ export class ActividadFormComponent implements OnInit {
   }
 
   get areasFormacion(): AreaFormacion[] {
-    return this.reposytory.getAreaFormacion();
+    return this.repository.getAreaFormacion();
   }
 
   get aprendizajesEsperados(): AprendizajeEsperado[] {
-    return this.reposytory.getAprendizajeEsperado();
+    return this.repository.getAprendizajeEsperado();
   }
 
   get mensaje(): string {
-    return this.reposytory.getMensaje();
+    return this.repository.getMensaje();
   }
 
   get tipoMensaje(): string {
-    return this.reposytory.getTipoMensaje();
+    return this.repository.getTipoMensaje();
   }
 
   isValidInput(fieldName, form): string {
@@ -66,7 +66,7 @@ export class ActividadFormComponent implements OnInit {
   changeAreaFormacion(): void {
     let idAreaFormacion = this.form.get('areaFormacion').value;
     if (idAreaFormacion != 0) {
-      this.reposytory.getAprendizajeEsperadoByAreaFormacion(idAreaFormacion);
+      this.repository.getAprendizajeEsperadoByAreaFormacion(idAreaFormacion);
       this.form.get('idAprendizajeEsperado').enable();
     } else {
       this.form.get('idAprendizajeEsperado').disable();
@@ -91,7 +91,7 @@ export class ActividadFormComponent implements OnInit {
   agregarActividad(perfil: HTMLInputElement) {
     /*let data = new FormData();
     data.append('perfil', perfil.files[0]);*/
-    this.reposytory.insterActividad(this.form.value);
+    this.repository.insterActividad(this.form.value);
     document.getElementById('id_mensaje').style.display = 'block';
     this.form.reset();
     setInterval(() => {

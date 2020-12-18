@@ -1,0 +1,93 @@
+<div class="col-xl-12 order-xl-1 pl-lg-4 pr-lg-4">
+  <div class="row justify-content-center">
+    <h1>Selecciona el tipo de actividad:</h1>
+  </div>
+</div>
+<div class="row mt-4 mb-4">
+  <div class="col-xl-6 order-xl-1 pl-lg-4 pr-lg-4 mb-4">
+    <div class="row justify-content-center">
+      <div class="card bg-secondary shadow" style="width: 23rem;">
+        <div class="card-header bg-white border-0 shadow ">
+          <div class="row align-items-center pl-lg-4 pr-lg-4">
+            <h2>Actividad de Diagnostico</h2>
+          </div>
+        </div>
+        <div class="card-body m-auto">
+          <div class="row">
+            <div class="col-auto">
+              <div
+                class="icon icon-shape icon-lg bg-danger text-white rounded-circle">
+                <i class="ni ni-collection"></i>
+              </div>
+            </div>
+            <div class="col">
+              <h5 class="card-title text-uppercase font-weight-regular mb-2">
+                Actividad de
+                Diagnostico</h5>
+              <span class="h4 text-muted text-center mb-0">Actividad
+                que tiene la
+                finalidad de medir el desempeño del alumno</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 mt-4 pl-lg-5 pr-lg-4">
+              <button class="btn btn-icon btn-primary"
+                (click)="setTipoActividad('d')">
+                <span class="btn-inner--icon">
+                  <i class="ni ni-fat-add"></i>
+                </span>
+                <span class="btn-inner--text">
+                  Crear Actividad Diagnostico
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-6 order-xl-1 pl-lg-4 pr-lg-4 mb-4 mycontent-left"
+    style="border-left: 1px solid #cccccc;">
+    <div class="row justify-content-center">
+      <div class="card bg-secondary shadow" style="width: 23rem;">
+        <div class="card-header bg-white border-0 shadow ">
+          <div class="row align-items-center pl-lg-4 pr-lg-4">
+            <h2>Actividad de Evaluación</h2>
+          </div>
+        </div>
+        <div class="card-body m-auto">
+          <div class="row">
+            <div class="col-auto">
+              <div
+                class="icon icon-shape icon-lg bg-success text-white rounded-circle">
+                <i class="ni ni-hat-3"></i>
+              </div>
+            </div>
+            <div class="col">
+              <h5 class="card-title text-uppercase font-weight-regular mb-2">
+                Actividad de
+                Evaluación</h5>
+              <span class="h4 text-muted text-center mb-0">Actividad que el
+                alumno realiza a lo largo del curso, para evaluar un
+                periodo.</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 mt-4 pl-lg-5 pr-lg-4">
+              <button class="btn btn-icon btn-primary"
+                (click)="setTipoActividad('e')">
+                <span class="btn-inner--icon">
+                  <i class="ni ni-fat-add"></i>
+                </span>
+                <span class="btn-inner--text">
+                  Crear Actividad Evaluación
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

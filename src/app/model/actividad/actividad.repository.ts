@@ -18,6 +18,10 @@ export class ActividadRepository {
     this.datasource.getAreaFormacion().subscribe((data) => {
       this.areasFormacion = data;
     });
+
+    this.datasource.getAprendizajeEsperado(1).subscribe((data) => {
+      this.aprendizajeEsperado = data;
+    })
   }
 
   getAprendizajeEsperadoByAreaFormacion(idAreaFormacion) {

@@ -11,6 +11,7 @@ import { AlumnoRepository } from "src/app/model/alumno/alumno.repository";
 export class TableAlumnoComponent implements OnInit {
   public NumRowPage: number = 5;
   public SelectedPage: number = 1;
+  public primerControl: number = 1;
   public filtro: string = "";
   constructor(private repository: AlumnoRepository, private route: Router) { }
 
@@ -46,14 +47,40 @@ export class TableAlumnoComponent implements OnInit {
 
   get controls(): number[] {
     let numeros: number[] = [];
-    for (let index = 0; index < this.NumberPage; index++)
-      numeros.push(index + 1);
+    let inicio, fin;
+    if (this.SelectedPage === 1) {
+      inicio = this.primerControl - 1;
+      fin = this.primerControl + 2;
+    } else if (this.SelectedPage === this.NumberPage) {
+      inicio = this.primerControl - 3;
+      fin = this.primerControl + 1;
+    } else {
+      inicio = this.primerControl - 2;
+      fin = this.primerControl + 1;
+    }
+
+    for (let index = inicio; index < fin; index++)
+      if (index < this.NumberPage && index > -1)
+        numeros.push(index + 1);
     return numeros;
   }
 
   changePage(page) {
     this.SelectedPage = page;
+    this.primerControl = page;
   }
+
+  changePrimerControl(control) {
+    if (control < 0)
+      this.primerControl = (this.primerControl > 2) ?
+        this.primerControl + control :
+        this.primerControl;
+    else
+      this.primerControl = (this.primerControl < this.NumberPage - 1) ?
+        this.primerControl + control :
+        this.primerControl;
+  }
+
 
   cambiarAlumnoSeleccionado(alumno: Alumno) {
     this.repository.setalumnoSeleccionado(alumno);

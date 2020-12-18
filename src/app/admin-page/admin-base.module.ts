@@ -19,7 +19,7 @@ import { ComponentsModule } from "../components/components.module";
   declarations: [
     AdminBaseComponent,
   ],
-  providers:[
+  providers: [
 
   ]
 })

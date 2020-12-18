@@ -5,17 +5,19 @@ import { DataSourceService } from "./dataSource.service";
 import { UsersService } from "./users/users.service";
 import { AlumnoRepository } from "./alumno/alumno.repository";
 import { ActividadRepository } from "./actividad/actividad.repository";
+import { NewActividadRepository } from "./actividad/newActividad.repository";
 
 @NgModule({
-    imports:[
+    imports: [
         HttpClientModule,
     ],
-    providers:[
+    providers: [
         UsersService,
         DataSourceService,
         DocenteRepository,
         AlumnoRepository,
         ActividadRepository,
+        NewActividadRepository,
     ]
 })
 export class ModelModule { }

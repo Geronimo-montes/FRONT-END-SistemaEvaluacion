@@ -1,64 +1,410 @@
-<div class="container-fluid mt--8 bg-secondary">
-  <div *ngIf="!!actividades" class="row">
-    <!--Ficha de alumno seleccionado-->
-    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
-      <div class="card card-profile shadow">
-        <!--Ficha de informacion del alumno-->
-        <div class="card-body pt-0 pt-md-4">
-          <div class="text-center mt-6">
-            <div class="col-8 text-left m-auto">
-              <div class="text-left ml--4">
-                <span class="font-weight-light"> Nombre: </span>
+<form [formGroup]="form" (ngSubmit)="prueba();" method="post">
+  <div *ngIf="!!newActividad" class="card card-profile shadow">
+    <div class="row justify-content-center">
+      <div class="col-lg-3 order-lg-2 mt--5">
+        <div class="card-profile-image">
+          <img [src]="perfil" class="rounded-circle">
+        </div>
+      </div>
+    </div>
+    <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0">
+      <div class="d-flex justify-content-between text-center">
+        <!--Tipo-->
+        <!--Evaluacion-->
+        <div class="col-lg-3">
+          <div *ngIf="newActividad.tipoActividad === 'e'"
+            class="icon icon-shape bg-success text-white rounded-circle"
+            placement="bottom" ngbTooltip="Evaluación Editar">
+            <i class="ni ni-hat-3"></i>
+          </div>
+          <div *ngIf="newActividad.tipoActividad === 'd'"
+            class="icon icon-shape bg-danger text-white rounded-circle"
+            placement="bottom" ngbTooltip="Diagnostico Editar">
+            <i class="ni ni-collection"></i>
+          </div>
+        </div>
+        <!--Diagnostico-->
+        <div *ngIf="newActividad.tipoActividad === 'd'" class="col-lg-3">
+
+        </div>
+        <!--duracion-->
+        <div class="col-lg-3">
+          <div class="icon icon-shape bg-info text-white rounded-circle"
+            placement="bottom" ngbTooltip="Minutos">
+            <span>{{newActividad.duracionMinutos}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body pt-0">
+      <div class="col-12">
+        <div class="row">
+          <!--situacionDidactica-->
+          <div class="col-lg-12">
+            <label class="form-control-label">
+              Situación Didactica
+            </label>
+            <div class="form-group">
+              <div class="form-group">
+                <div class="input-group">
+                  <label class="form-control text-dark" type="text">
+                    <span class="btn-inner--text">
+                      {{newActividad.nombre}}
+                    </span>
+                  </label>
+                  <div class="input-group-append">
+                    <span class="input-group-text" placement="bottom"
+                      ngbTooltip="Editar">
+                      <i class="ni ni-ruler-pencil text-dark"></i>
+                    </span>
+                  </div>
+                </div>
               </div>
-              <h4></h4>
-              <div class="text-left ml--4">
-                <span class="font-weight-light"> CURP: </span>
-              </div>
-              <h4></h4>
-              <div class="text-left ml--4">
-                <span class="font-weight-light"> Grupo - Grado - Turno: </span>
-              </div>
-              <h4></h4>
             </div>
-            <!--tutor-->
-            <div class="card mt-3 align-items-center border border-dark">
-              <img class="card-img-top rounded-circle col-4 mt-4" src="assets/img/theme/team-4-800x800.jpg"
-                alt="Card image cap" />
-              <div class="card-body text-left">
-                <h3 class="card-title text-center"></h3>
-                <h4>
-                  <span class="font-weight-light mr-2">
-                    <li class="ni ni-map-big mr-2"></li>
-                    Dirección:
+          </div>
+        </div>
+        <hr class="my-4" />
+        <div class="col-lg-12">
+          <!--Area de Formacion-->
+          <div class="row justify-content-between aling-items-center mb-2">
+            <label class="h3 col-lg-9">
+              Area de Formación
+            </label>
+            <ul class="pagination col-lg-1">
+              <li class="page-item" [class.active]="listaArea">
+                <button class="page-link" (click)="listaArea=!listaArea">
+                  <span class="btn-inner--icon">
+                    <i *ngIf="!listaArea" class="ni ni-bold-down"></i>
+                    <i *ngIf="listaArea" class="ni ni-bold-up"></i>
                   </span>
-                </h4>
-                <h4>
-                  <span class="font-weight-light mr-2">
-                    <li class="ni ni-map-big mr-2"></li>
-                    Telefono:
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="listaArea" class="form-group">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <p>Item Numero #1 de Prueba</p>
+              </li>
+              <li class="list-group-item">
+                <p>Item Numero #1 de Prueba</p>
+              </li>
+            </ul>
+          </div>
+          <hr class="my-4" />
+          <!--Aprendizaje Esperado / rubro diafnostico-->
+          <div class="row justify-content-between aling-items-center mb-2">
+            <label class="h3 col-lg-9">
+              Aprendizajes Esperados
+            </label>
+            <ul class="pagination col-lg-1">
+              <li class="page-item" [class.active]="listaAprendizaje">
+                <button class="page-link"
+                  (click)="listaAprendizaje=!listaAprendizaje">
+                  <span class="btn-inner--icon">
+                    <i *ngIf="!listaAprendizaje" class="ni ni-bold-down"></i>
+                    <i *ngIf="listaAprendizaje" class="ni ni-bold-up"></i>
                   </span>
-                </h4>
-                <h4>
-                  <span class="font-weight-light mr-2">
-                    <li class="ni ni-map-big mr-2"></li>
-                    Correo Electronico:
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="listaAprendizaje" class="form-group">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <p>Item Numero #1 de Prueba</p>
+              </li>
+              <li class="list-group-item">
+                <p>Item Numero #1 de Prueba</p>
+              </li>
+            </ul>
+          </div>
+          <hr class="my-4" />
+          <!--Evidencia-->
+          <div class="row justify-content-between aling-items-center mb-2">
+            <label class="h3 col-lg-9">
+              Evidencias
+            </label>
+            <ul class="pagination col-lg-1">
+              <li class="page-item" [class.active]="listaEvidencia">
+                <button class="page-link"
+                  (click)="listaEvidencia=!listaEvidencia">
+                  <span class="btn-inner--icon">
+                    <i *ngIf="!listaEvidencia" class="ni ni-bold-down"></i>
+                    <i *ngIf="listaEvidencia" class="ni ni-bold-up"></i>
                   </span>
-                </h4>
-                <h4>
-                  <span class="font-weight-light mr-2">
-                    <li class="ni ni-map-big mr-2"></li>
-                    Dirección:
-                  </span>
-                </h4>
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="listaEvidencia" class="form-group">
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-ligth">
+                  <tr>
+                    <th scope="col" class="h1">No.</th>
+                    <th scope="col" class="h1">Nombre</th>
+                    <th scope="col" class="h1">Formato</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <!--NO.-->
+                    <th>
+                      <div class="align-items-center">
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">
+                            #1
+                          </span>
+                        </div>
+                      </div>
+                    </th>
+                    <!--Nombre-->
+                    <th>
+                      <div class="align-items-center">
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">
+                            Nombre
+                          </span>
+                        </div>
+                      </div>
+                    </th>
+                    <!--formato-->
+                    <th>
+                      <div class="align-items-center">
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">
+                            Formato
+                          </span>
+                        </div>
+                      </div>
+                    </th>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr class="pt-3">
+                    <nav class="m-auto mr-auto" aria-label="...">
+                      <ul class="pagination col-lg-1">
+                        <li *ngFor="let page of controls" class="page-item"
+                          [class.active]="page == SelectedPage"
+                          (click)="changePage(page)">
+                          <button class="page-link">
+                            {{ page }}
+                          </button>
+                        </li>
+                      </ul>
+                    </nav>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4" />
+      </div>
+    </div>
+  </div>
+</form>
+
+<!--
+<form [formGroup]="form" (ngSubmit)="agregarActividad(perfil);"
+  method="post">
+  <div class="row">
+    <div class="col-xl-6 order-xl-1">
+      <div class="pl-lg-4 pr-lg-4">
+        <h6 class="heading-small text-muted mb-2">Datos Princiaples de la
+          Actividad</h6>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row-lg justify-content-center">
+              <div class="card m-auto mb-0" style="width: 8rem;">
+                <img [src]="imgPerfil" class="card-image">
               </div>
+            </div>
+            <input type="file" style="visibility: hidden;"
+              (change)="load($event)" #perfil formControlName="perfil" />
+            <div class="row-lg justify-content-center form-group">
+              <button type="button"
+                class="btn btn-icon btn-outline-primary form-control"
+                (click)="perfil.click()">
+                <span class="btn-inner--icon"><i
+                    class="ni ni-image"></i></span>
+                <span class="btn-inner--text">Buscar Imagen</span>
+              </button>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <div class="row">
+              <div class="col-lg-12">
+                <label class="form-control-label">Situación
+                  Didactica</label>
+                <div class="form-group">
+                  <input class="form-control text-dark" type="text"
+                    formControlName="nombre"
+                    [ngClass]="isValidInput('nombre', form)"
+                    placeholder="Situación Didactica">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-8">
+                <label class="form-control-label">Duración(Minutos)</label>
+                <div class="form-group">
+                  <input class="form-control text-dark" type="text"
+                    formControlName="duracionMinutos"
+                    [ngClass]="isValidInput('duracionMinutos', form)"
+                    placeholder="Duración (minutos)">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <label class="form-control-label">Diagnostico</label>
+                <span class="clearfix"></span>
+                <label class="custom-toggle mt-2 ml-3">
+                  <input type="checkbox" formControlName="tipoActividad"
+                    [ngClass]="isValidInput('tipoActividad', form)">
+                  <span class="custom-toggle-slider rounded-circle"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Área de formación</label>
+              <select type="text" class="form-control text-dark"
+                formControlName="areaFormacion"
+                [ngClass]="isValidInput('areaFormacion', form)"
+                (change)="changeAreaFormacion();">
+                <option value="0">Seleccione un area de formación</option>
+                <option *ngFor="let area of areasFormacion"
+                  [ngValue]="area.idAreaFormacion">
+                  {{area.descripcion}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>Aprendizaje Esperado</label>
+              <select class="form-control text-dark"
+                formControlName="idAprendizajeEsperado"
+                [ngClass]="isValidInput('idAprendizajeEsperado', form)">
+                <option value="0" selected>Seleccione un aprendizaje
+                  esperado</option>
+                <option *ngFor="let aprendizaje of aprendizajesEsperados"
+                  [ngValue]="aprendizaje.idAprendizajeEsperado">
+                  {{aprendizaje.descripcion}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4" />
+        <h6 class="heading-small text-muted mb-2">Evidencia Esperada</h6>
+        <div class="row">
+          <div class="col-lg-6">
+            <label class="form-control-label">Nombre de la Evidencia</label>
+            <div class="form-group">
+              <input class="form-control text-dark" type="text"
+                formControlName="nombreEvidencia"
+                [ngClass]="isValidInput('nombreEvidencia', form)"
+                placeholder="Nombre de la Evidencia">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="areaFormacion">Formato Esperado</label>
+              <select class="form-control text-dark"
+                formControlName="formatoEsperado"
+                [ngClass]="isValidInput('formatoEsperado', form)">
+                <option value="0">Seleccione el formato de la evidencia
+                </option>
+                <option value="PDF">*.PDF</option>
+                <option value="PNG">*.PNG</option>
+                <option value="JPG">*.JPG</option>
+                <option value="DOC">*.DOC</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-control-label">Descripción</label>
+              <textarea class="form-control text-dark"
+                formControlName="descripcion" rows="3"
+                [ngClass]="isValidInput('descripcion', form)"
+                style="resize: none;"
+                placeholder="Escriba la descripción de la evidencia"></textarea>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!--Tabla de alumnos-->
-    <div class="col-xl-8 order-xl-1">
-      <router-outlet></router-outlet>
+    <div class="col-xl-6 order-xl-2 mb-5 mb-xl-0 mycontent-left"
+      style="border-left: 1px solid #cccccc;">
+      <div class="pl-lg-4 pr-lg-4">
+        <h6 class="heading-small text-muted mb-2">Desarrollo de la Actividad
+        </h6>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-control-label">Inicio</label>
+              <textarea class="form-control text-dark"
+                formControlName="inicio" rows="3" style="resize: none;"
+                [ngClass]="isValidInput('inicio', form)"
+                placeholder="Escriba las instrucciones de inicio..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-control-label">Desarrollo</label>
+              <textarea class="form-control text-dark"
+                formControlName="desarrollo" rows="3"
+                [ngClass]="isValidInput('desarrollo', form)"
+                style="resize: none;"
+                placeholder="Escriba las instrucciones de desarrollo..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-control-label">Cierre</label>
+              <textarea class="form-control text-dark"
+                formControlName="cierre" rows="3" style="resize: none;"
+                [ngClass]="isValidInput('cierre', form)"
+                placeholder="Escriba las instrucciones de cierre..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label class="form-control-label">Recursos</label>
+              <textarea class="form-control text-dark"
+                formControlName="recursos" rows="3"
+                [ngClass]="isValidInput('recursos', form)"
+                style="resize: none;"
+                placeholder="Recursos requeridos por la actividad..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+  <div id="id_mensaje" class="col-lg-12">
+    <div class="alert" [ngClass]="tipoMensaje">
+      {{ mensaje }}
+    </div>
+  </div>
+  <div class="pl-lg-4 pr-lg-4 btn-group float-left col-lg-12">
+    <div class="col-lg-9"></div>
+    <button type="submit" class="btn btn-primary col-lg-3 rounded"
+      [disabled]="!form.valid">
+      Guardar Cambios
+    </button>
+  </div>
+</form>
+-->

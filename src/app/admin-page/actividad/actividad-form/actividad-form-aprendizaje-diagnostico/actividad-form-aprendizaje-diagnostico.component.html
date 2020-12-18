@@ -1,0 +1,126 @@
+<div class="col-xl-12 order-xl-1 pl-lg-4 pr-lg-4">
+  <div class="row justify-content-center">
+  </div>
+</div>
+<div class="row mt-4 mb-4 pl-lg-4 pr-lg-4 ">
+  <div class="col-xl-12 order-xl-2 m-auto">
+    <form [formGroup]="form">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0 shadow ">
+          <div
+            class="row pl-lg-4 pr-lg-4 justify-content-between aling-items-center text-center">
+
+            <button type="button" class="btn btn-icon btn-outline-primary"
+              routerLinkActive="active"
+              [routerLink]="['/actividad/form/nombreactividad']">
+              <span class="btn-inner--icon">
+                <i class="ni ni-bold-left"></i>
+              </span>
+            </button>
+
+            <div
+              class="navbar-search navbar-search-white form-inline d-none d-md-flex">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i
+                      class="fas fa-search"></i></span>
+                </div>
+                <!--Barra de busqueda-->
+                <input class="form-control text-dark" [(ngModel)]="filtro"
+                  [ngModelOptions]="{standalone: true}" placeholder="Search"
+                  type="text" />
+              </div>
+            </div>
+
+            <!--Area Formacion-->
+            <select type="text" class="form-control col-4 text-dark"
+              formControlName="areaFormacion" (change)="changeAreaFormacion();">
+              <option value="0">Seleccione un area de formación</option>
+              <option *ngFor="let area of areasFormacion"
+                [ngValue]="area.idAreaFormacion">
+                {{area.descripcion}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="card-body">
+          <!--Tabla-->
+          <div class="form-group">
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-ligth">
+                  <tr>
+                    <th scope="col" class="h1">No.</th>
+                    <th scope="col" class="h1">Nombre</th>
+                    <th scope="col" class="h1">Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let a of aprendizajeEsperado">
+                    <!--NO.-->
+                    <th>
+                      <div class="align-items-center">
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">
+                            #{{a.idAprendizajeEsperado}}
+                          </span>
+                        </div>
+                      </div>
+                    </th>
+                    <!--Nombre-->
+                    <th>
+                      <div class="align-items-center">
+                        <div class="media-body" style="text-align: justify;">
+                          <span class="mb-0 text-sm">
+                            {{a.descripcion.slice(0,90)}}
+                          </span>
+                          <br>
+                          <span class="mb-0 text-sm">
+                            {{a.descripcion.slice(90,180)}}
+                          </span>
+                        </div>
+                      </div>
+                    </th>
+                    <!--formato-->
+                    <th>
+                      <button class="btn btn-icon btn-outline-primary"
+                        type="button"
+                        (click)="agregarActividad(a.idAprendizajeEsperado)">
+                        <span class="btn-inner--icon"><i
+                            class="ni ni-fat-add"></i></span>
+                      </button>
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row">
+              <nav class="m-auto mr-auto" aria-label="...">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <button class="page-link" (click)="changePrimerControl(-1)">
+                      <i class="fa fa-angle-left"></i>
+                    </button>
+                  </li>
+
+                  <li *ngFor="let page of controls" class="page-item"
+                    [class.active]="page == SelectedPage"
+                    (click)="changePage(page)">
+                    <button class="page-link">
+                      {{ page }}
+                    </button>
+                  </li>
+
+                  <li class="page-item">
+                    <button class="page-link" (click)="changePrimerControl(1)">
+                      <i class="fa fa-angle-right"></i>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

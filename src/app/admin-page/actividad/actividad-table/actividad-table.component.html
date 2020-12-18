@@ -4,18 +4,21 @@
       <!-- Form Quitar y poner otra cosa-->
       <h1>Lista de Actividades</h1>
 
-      <div class="navbar-search navbar-search-white form-inline d-none d-md-flex">
+      <div
+        class="navbar-search navbar-search-white form-inline d-none d-md-flex">
         <div class="input-group input-group-alternative">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-search"></i></span>
           </div>
           <!--Barra de busqueda-->
-          <input class="form-control text-dark" [(ngModel)]="filtro" placeholder="Search" type="text" />
+          <input class="form-control text-dark" [(ngModel)]="filtro"
+            placeholder="Search" type="text" />
         </div>
       </div>
 
-      <button class="btn btn-icon btn-2 btn-outline-primary" type="button" routerLinkActive="active"
-        [routerLink]="['/actividad/form']">
+      <button class="btn btn-icon btn-2 btn-outline-primary" type="button"
+        routerLinkActive="active"
+        [routerLink]="['/actividad/form/tipoactividad']">
         <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
         <span class="btn-inner--text">Nueva Actividad</span>
       </button>
@@ -66,10 +69,12 @@
             </th>
             <td>
               <div ngbDropdown placement="left">
-                <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                <a class="btn btn-sm btn-icon-only text-light"
+                  ngbDropdownToggle>
                   <i class="fas fa-ellipsis-v"></i>
                 </a>
-                <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+                <div ngbDropdownMenu
+                  class="dropdown-menu-right dropdown-menu-arrow">
                   <button class="dropdown-item">Ver información</button>
                   <button class="dropdown-item">Editar información</button>
                   <button class="dropdown-item">Otra acción</button>
@@ -78,21 +83,31 @@
             </td>
           </tr>
         </tbody>
-        <tfoot>
-          <tr class="pt-3">
-            <nav class="m-auto mr-auto" aria-label="...">
-              <ul class="pagination">
-                <li *ngFor="let page of controls" class="page-item" [class.active]="page == SelectedPage"
-                  (click)="changePage(page)">
-                  <button class="page-link">
-                    {{ page }}
-                  </button>
-                </li>
-              </ul>
-            </nav>
-          </tr>
-        </tfoot>
       </table>
+    </div>
+    <div class="row">
+      <nav class="m-auto mr-auto" aria-label="...">
+        <ul class="pagination">
+          <li class="page-item">
+            <button class="page-link" (click)="changePrimerControl(-1)">
+              <i class="fa fa-angle-left"></i>
+            </button>
+          </li>
+
+          <li *ngFor="let page of controls" class="page-item"
+            [class.active]="page == SelectedPage" (click)="changePage(page)">
+            <button class="page-link">
+              {{ page }}
+            </button>
+          </li>
+
+          <li class="page-item">
+            <button class="page-link" (click)="changePrimerControl(1)">
+              <i class="fa fa-angle-right"></i>
+            </button>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </div>
