@@ -55,6 +55,11 @@ export class DataSourceService {
     return this.http.get<Actividad[]>(this.baseURL + 'actividades', this.getOptions());
   }
 
+  getActividadById(id: number): Observable<Actividad> {
+    return this.http.get<Actividad>(this.baseURL + 'actividad/' + id, this.getOptions());
+  }
+
+
   getOptions() {
     return {
       headers: new HttpHeaders({

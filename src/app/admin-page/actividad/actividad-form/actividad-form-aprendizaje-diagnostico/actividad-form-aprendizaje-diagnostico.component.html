@@ -9,15 +9,6 @@
         <div class="card-header bg-white border-0 shadow ">
           <div
             class="row pl-lg-4 pr-lg-4 justify-content-between aling-items-center text-center">
-
-            <button type="button" class="btn btn-icon btn-outline-primary"
-              routerLinkActive="active"
-              [routerLink]="['/actividad/form/nombreactividad']">
-              <span class="btn-inner--icon">
-                <i class="ni ni-bold-left"></i>
-              </span>
-            </button>
-
             <div
               class="navbar-search navbar-search-white form-inline d-none d-md-flex">
               <div class="input-group input-group-alternative">
@@ -31,93 +22,90 @@
                   type="text" />
               </div>
             </div>
-
             <!--Area Formacion-->
             <select type="text" class="form-control col-4 text-dark"
               formControlName="areaFormacion" (change)="changeAreaFormacion();">
               <option value="0">Seleccione un area de formación</option>
               <option *ngFor="let area of areasFormacion"
                 [ngValue]="area.idAreaFormacion">
-                {{area.descripcion}}</option>
+                {{area.descripcion}}
+              </option>
             </select>
           </div>
         </div>
-        <div class="card-body">
+        <div class="card-body p-3">
           <!--Tabla-->
-          <div class="form-group">
-            <div class="table-responsive">
-              <table class="table align-items-center table-flush">
-                <thead class="thead-ligth">
-                  <tr>
-                    <th scope="col" class="h1">No.</th>
-                    <th scope="col" class="h1">Nombre</th>
-                    <th scope="col" class="h1">Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let a of aprendizajeEsperado">
-                    <!--NO.-->
-                    <th>
-                      <div class="align-items-center">
-                        <div class="media-body">
-                          <span class="mb-0 text-sm">
-                            #{{a.idAprendizajeEsperado}}
-                          </span>
-                        </div>
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-ligth">
+                <tr>
+                  <th scope="col" class="h1">No.</th>
+                  <th scope="col" class="h1">Nombre</th>
+                  <th scope="col" class="h1">Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let a of aprendizajeEsperado">
+                  <!--NO.-->
+                  <th>
+                    <div class="align-items-center">
+                      <div class="media-body">
+                        <span class="mb-0 text-sm">
+                          #{{a.idAprendizajeEsperado}}
+                        </span>
                       </div>
-                    </th>
-                    <!--Nombre-->
-                    <th>
-                      <div class="align-items-center">
-                        <div class="media-body" style="text-align: justify;">
-                          <span class="mb-0 text-sm">
-                            {{a.descripcion.slice(0,90)}}
-                          </span>
-                          <br>
-                          <span class="mb-0 text-sm">
-                            {{a.descripcion.slice(90,180)}}
-                          </span>
-                        </div>
+                    </div>
+                  </th>
+                  <!--Nombre-->
+                  <th>
+                    <div class="align-items-center">
+                      <div class="media-body" style="text-align: justify;">
+                        <span class="mb-0 text-sm">
+                          {{a.descripcion.slice(0,80)}}
+                        </span>
+                        <br>
+                        <span class="mb-0 text-sm">
+                          {{a.descripcion.slice(80,160)}}
+                        </span>
                       </div>
-                    </th>
-                    <!--formato-->
-                    <th>
-                      <button class="btn btn-icon btn-outline-primary"
-                        type="button"
-                        (click)="agregarActividad(a.idAprendizajeEsperado)">
-                        <span class="btn-inner--icon"><i
-                            class="ni ni-fat-add"></i></span>
-                      </button>
-                    </th>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="row">
-              <nav class="m-auto mr-auto" aria-label="...">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <button class="page-link" (click)="changePrimerControl(-1)">
-                      <i class="fa fa-angle-left"></i>
+                    </div>
+                  </th>
+                  <!--formato-->
+                  <th>
+                    <button class="btn btn-icon btn-outline-primary"
+                      type="button" (click)="setValues(a)">
+                      <span class="btn-inner--icon"><i
+                          class="ni ni-fat-add"></i></span>
                     </button>
-                  </li>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row ">
+            <nav class="m-auto" aria-label="...">
+              <ul class="pagination">
+                <li class="page-item">
+                  <button class="page-link" (click)="changePrimerControl(-1)">
+                    <i class="fa fa-angle-left"></i>
+                  </button>
+                </li>
 
-                  <li *ngFor="let page of controls" class="page-item"
-                    [class.active]="page == SelectedPage"
-                    (click)="changePage(page)">
-                    <button class="page-link">
-                      {{ page }}
-                    </button>
-                  </li>
+                <li *ngFor="let page of controls" class="page-item"
+                  [class.active]="page == SelectedPage"
+                  (click)="changePage(page)">
+                  <button class="page-link">
+                    {{ page }}
+                  </button>
+                </li>
 
-                  <li class="page-item">
-                    <button class="page-link" (click)="changePrimerControl(1)">
-                      <i class="fa fa-angle-right"></i>
-                    </button>
-                  </li>
-                </ul>
-              </nav>
-            </div>
+                <li class="page-item">
+                  <button class="page-link" (click)="changePrimerControl(1)">
+                    <i class="fa fa-angle-right"></i>
+                  </button>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>

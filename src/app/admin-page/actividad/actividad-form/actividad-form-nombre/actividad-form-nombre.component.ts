@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NewActividadRepository } from 'src/app/model/actividad/newActividad.repository';
+import { ActividadFormComponent } from '../actividad-form.component';
 
 @Component({
   selector: 'app-actividad-form-nombre',
@@ -11,7 +12,11 @@ import { NewActividadRepository } from 'src/app/model/actividad/newActividad.rep
 export class ActividadFormNombreComponent implements OnInit {
   private form: FormGroup;
   public imgPerfil: string;
-  constructor(private fb: FormBuilder, private newActividadRepository: NewActividadRepository, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private newActividadRepository: NewActividadRepository,
+    private padre: ActividadFormComponent,
+  ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -46,6 +51,6 @@ export class ActividadFormNombreComponent implements OnInit {
     this.newActividadRepository.nombre = _form.controls['nombre'].value;
     this.newActividadRepository.duracionMinutos = _form.controls['duracion'].value;
     this.newActividadRepository.perfil = this.imgPerfil;
-    this.router.navigateByUrl('/actividad/form/aprendizajediagnostico');
+    this.padre.next();
   }
 }

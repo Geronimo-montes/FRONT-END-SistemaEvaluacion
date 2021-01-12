@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { ActividadRepository } from "src/app/model/actividad/actividad.repository";
 import { Actividad } from "src/app/model/actividad/aformacion.model";
+import { NewActividadRepository } from "src/app/model/actividad/newActividad.repository";
 
 @Component({
   selector: "app-actividad-table",
@@ -12,9 +14,19 @@ export class ActividadTableComponent implements OnInit {
   public SelectedPage: number = 1;
   public primerControl: number = 1;
   public filtro: string = "";
-  constructor(private repository: ActividadRepository) { }
+  constructor(
+    private repository: ActividadRepository,
+    private newAcividad: NewActividadRepository,
+    private router: Router,
+  ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.newAcividad._newActividad = this.actividad;
+  }
+
+  get actividad(): Actividad {
+    return this.repository.getActiviad();
+  }
 
   get actividades(): Actividad[] {
     let pageIndex = (this.SelectedPage - 1) * this.NumRowPage;
@@ -61,6 +73,7 @@ export class ActividadTableComponent implements OnInit {
         numeros.push(index + 1);
     return numeros;
   }
+
   changePage(page) {
     this.SelectedPage = page;
     this.primerControl = page;
@@ -75,5 +88,14 @@ export class ActividadTableComponent implements OnInit {
       this.primerControl = (this.primerControl < this.NumberPage - 1) ?
         this.primerControl + control :
         this.primerControl;
+  }
+
+  cambiarActividadSeleccionada(actividad: Actividad) {
+    this.newAcividad.getActividadById(actividad.idPlanTrabajo);
+  }
+
+  nuevaActividad() {
+    this.newAcividad.getActividadById(1);
+    this.router.navigateByUrl("actividad/form");
   }
 }

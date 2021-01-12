@@ -17,8 +17,7 @@
       </div>
 
       <button class="btn btn-icon btn-2 btn-outline-primary" type="button"
-        routerLinkActive="active"
-        [routerLink]="['/actividad/form/tipoactividad']">
+        (click)="nuevaActividad();">
         <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
         <span class="btn-inner--text">Nueva Actividad</span>
       </button>
@@ -36,10 +35,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let actividad of actividades">
+          <tr *ngFor="let actividad of actividades"
+            (click)="cambiarActividadSeleccionada(actividad)">
             <!--No. Actividad-->
             <th>
-              <div class="align-items-center">
+              <div class=" align-items-center">
                 <div class="media-body">
                   <span class="mb-0 text-sm">
                     {{ actividad.idPlanTrabajo }}

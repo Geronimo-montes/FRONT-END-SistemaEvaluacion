@@ -13,6 +13,7 @@ import { ActividadBaseComponent } from './actividad-base/actividad-base.componen
 import { ActividadFormTipoComponent } from './actividad-form/actividad-form-tipo/actividad-form-tipo.component';
 import { ActividadFormNombreComponent } from './actividad-form/actividad-form-nombre/actividad-form-nombre.component';
 import { ActividadFormAprendizajeDiagnosticoComponent } from './actividad-form/actividad-form-aprendizaje-diagnostico/actividad-form-aprendizaje-diagnostico.component';
+import { ActividadFormEvidenciaComponent } from './actividad-form/actividad-form-evidencia/actividad-form-evidencia.component';
 @NgModule({
   declarations: [
     ActividadFichaComponent,
@@ -22,6 +23,7 @@ import { ActividadFormAprendizajeDiagnosticoComponent } from './actividad-form/a
     ActividadFormTipoComponent,
     ActividadFormNombreComponent,
     ActividadFormAprendizajeDiagnosticoComponent,
+    ActividadFormEvidenciaComponent,
   ],
   imports: [
     ModelModule,

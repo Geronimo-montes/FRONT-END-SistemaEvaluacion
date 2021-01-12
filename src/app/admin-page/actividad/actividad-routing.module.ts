@@ -24,21 +24,23 @@ const routes: Routes = [
       }, {
         path: 'form',
         component: ActividadFormComponent,
-        children: [
-          {
-            path: 'tipoactividad',
-            component: ActividadFormTipoComponent,
-            canActivate: [AdminGuard],
-          }, {
-            path: 'nombreactividad',
-            component: ActividadFormNombreComponent,
-            canActivate: [AdminGuard],
-          }, {
-            path: 'aprendizajediagnostico',
-            component: ActividadFormAprendizajeDiagnosticoComponent,
-            canActivate: [AdminGuard],
-          }
-        ]
+        canActivate: [AdminGuard],
+        /*children: [
+      {
+        path: 'tipoactividad',
+        component: ActividadFormTipoComponent,
+        canActivate: [AdminGuard],
+      }, {
+        path: 'nombreactividad',
+        component: ActividadFormNombreComponent,
+        canActivate: [AdminGuard],
+      }, {
+        path: 'aprendizajediagnostico',
+        component: ActividadFormAprendizajeDiagnosticoComponent,
+        canActivate: [AdminGuard],
+      }
+    ]
+    */
       }
     ]
   }

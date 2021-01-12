@@ -1,16 +1,19 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy, OnInit } from "@angular/core";
 import { DataSourceService } from "../dataSource.service";
 import { Actividad, AprendizajeEsperado, AreaFormacion } from "./aformacion.model";
 
 @Injectable()
-export class ActividadRepository {
+export class ActividadRepository implements OnInit, OnDestroy {
   private actividades: Actividad[];
+  private actividad: Actividad;
   private areasFormacion: AreaFormacion[];
   private aprendizajeEsperado: AprendizajeEsperado[];
   private mensaje: string;
   private tipoMensaje: string;
 
-  constructor(private datasource: DataSourceService) {
+  constructor(
+    private datasource: DataSourceService,
+  ) {
     this.datasource.getActividades().subscribe(data => {
       this.actividades = data;
     });
@@ -21,13 +24,23 @@ export class ActividadRepository {
 
     this.datasource.getAprendizajeEsperado(1).subscribe((data) => {
       this.aprendizajeEsperado = data;
-    })
+    });
   }
+
+  ngOnInit() {
+
+  }
+
+  ngOnDestroy() { }
 
   getAprendizajeEsperadoByAreaFormacion(idAreaFormacion) {
     this.datasource.getAprendizajeEsperado(idAreaFormacion).subscribe((data) => {
       this.aprendizajeEsperado = data;
     })
+  }
+
+  getActiviad(): Actividad {
+    return this.actividad;
   }
 
   getActiviades(): Actividad[] {

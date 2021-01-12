@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Actividad } from 'src/app/model/actividad/aformacion.model';
 import { NewActividadRepository } from 'src/app/model/actividad/newActividad.repository';
+import { ActividadFormComponent } from '../actividad-form.component';
 
 @Component({
   selector: 'app-actividad-form-tipo',
@@ -9,13 +10,19 @@ import { NewActividadRepository } from 'src/app/model/actividad/newActividad.rep
 })
 export class ActividadFormTipoComponent implements OnInit {
 
-  constructor(private newActividadRepository: NewActividadRepository, private router: Router) { }
+  constructor(
+    private newActividadRepository: NewActividadRepository,
+    private padre: ActividadFormComponent,
+  ) { }
 
   ngOnInit(): void { }
 
-  setTipoActividad(tipo: string) {
-    this.newActividadRepository.tipoActividad = tipo;
-    this.router.navigateByUrl('/actividad/form/nombreactividad');
+  get newActividad(): Actividad {
+    return this.newActividadRepository.getNewActividad();
   }
 
+  setTipoActividad(tipo: string) {
+    this.newActividadRepository.tipoActividad = tipo;
+    this.padre.next();
+  }
 }

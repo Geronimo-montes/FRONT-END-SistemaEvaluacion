@@ -1,19 +1,30 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy, OnInit } from "@angular/core";
 import { Docente } from "./docente.model";
 import { UsersService } from "../users/users.service";
 import { DataSourceService } from "../dataSource.service";
 
 @Injectable()
-export class DocenteRepository {
+export class DocenteRepository implements OnInit, OnDestroy {
   private docente: Docente;
   private mensaje: string;
   private tipoMensaje: string;
   private formDestino: string; /*d: docente | u: credenciales | p: perfil*/
 
-  constructor(private datasource: DataSourceService, private userService: UsersService) {
+  constructor(
+    private datasource: DataSourceService,
+    private userService: UsersService,
+  ) {
     this.datasource.getDocenteById().subscribe((data) => {
       this.docente = <Docente>data[0];
     });
+  }
+
+  ngOnInit() { }
+  ngOnDestroy() {
+    this.docente = null;
+    this.mensaje = null;
+    this.tipoMensaje = null;
+    this.formDestino = null;
   }
 
   getDocente(): Docente {

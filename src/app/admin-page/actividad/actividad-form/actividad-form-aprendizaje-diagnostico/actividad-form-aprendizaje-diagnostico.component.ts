@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActividadRepository } from 'src/app/model/actividad/actividad.repository';
 import { AprendizajeEsperado, AreaFormacion } from 'src/app/model/actividad/aformacion.model';
 import { NewActividadRepository } from 'src/app/model/actividad/newActividad.repository';
+import { ActividadFormComponent } from '../actividad-form.component';
 
 @Component({
   selector: 'app-actividad-form-aprendizaje-diagnostico',
@@ -19,6 +20,7 @@ export class ActividadFormAprendizajeDiagnosticoComponent implements OnInit {
   constructor(
     private newActividadRepository: NewActividadRepository,
     private repository: ActividadRepository,
+    private padre: ActividadFormComponent,
     private fb: FormBuilder,
   ) { }
 
@@ -101,6 +103,11 @@ export class ActividadFormAprendizajeDiagnosticoComponent implements OnInit {
     if (idAreaFormacion != 0) {
       this.repository.getAprendizajeEsperadoByAreaFormacion(idAreaFormacion);
     }
+  }
+
+  setValues(value: AprendizajeEsperado) {
+    this.newActividadRepository.idAprendizajeEsperado = value;
+    this.newActividadRepository._areas = value.idAreaFormacion[0].descripcion;
   }
 
   agregarActividad(valor) {

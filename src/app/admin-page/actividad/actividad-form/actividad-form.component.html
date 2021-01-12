@@ -1,16 +1,67 @@
 <div class="card bg-secondary shadow">
   <div class="card-header bg-white border-0 shadow">
     <div class="row align-items-center justify-content-between pl-lg-4 pr-lg-4">
-      <h1>Actividad</h1>
-
+      <h1>Registrar Nueva Actividad</h1>
       <button class="btn btn-icon btn-2 btn-outline-primary" type="button"
-        routerLinkActive="active" [routerLink]="['/actividad/table']">
+        (click)="regresarTabla();">
         <span class="btn-inner--icon"><i class="ni ni-bold-left"></i></span>
         <span class="btn-inner--text">Regresar</span>
       </button>
     </div>
   </div>
   <div class="card-body">
-    <router-outlet></router-outlet>
+    <div class="bs-stepper" id="stepper1">
+      <div class="bs-stepper-header" role="tablist">
+        <!-- your steps here -->
+        <div class="step" data-target="#tipo-part">
+          <button type="button" class="step-trigger" role="tab">
+            <span class="bs-stepper-circle">1</span>
+            <span class="bs-stepper-label">Tipo</span>
+          </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#nombre-part">
+          <button type="button" class="step-trigger" role="tab">
+            <span class="bs-stepper-circle">2</span>
+            <span class="bs-stepper-label">Nombre</span>
+          </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#areaFormacion-part">
+          <button type="button" class="step-trigger" role="tab">
+            <span class="bs-stepper-circle">3</span>
+            <span class="bs-stepper-label">Aprendizajes</span>
+          </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#Evidencias-part">
+          <button type="button" class="step-trigger" role="tab">
+            <span class="bs-stepper-circle">4</span>
+            <span class="bs-stepper-label">Evidencias</span>
+          </button>
+        </div>
+      </div>
+      <div class="bs-stepper-content">
+        <!-- your steps content here -->
+        <div id="tipo-part" class="content" role="tabpanel"
+          aria-labelledby="tipo-part-trigger">
+          <app-actividad-form-tipo></app-actividad-form-tipo>
+        </div>
+        <div id="nombre-part" class="content" role="tabpanel"
+          aria-labelledby="nombre-part-trigger">
+          <app-actividad-form-nombre></app-actividad-form-nombre>
+        </div>
+        <div id="areaFormacion-part" class="content" role="tabpanel"
+          aria-labelledby="areaFormacion-part-trigger">
+          <app-actividad-form-aprendizaje-diagnostico>
+          </app-actividad-form-aprendizaje-diagnostico>
+        </div>
+        <div id="Evidencias-part" class="content" role="tabpanel"
+          aria-labelledby="Evidencias-part-trigger">
+          <app-actividad-form-evidencia>
+          </app-actividad-form-evidencia>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
