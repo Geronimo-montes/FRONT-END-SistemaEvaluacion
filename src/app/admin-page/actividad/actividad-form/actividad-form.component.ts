@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActividadRepository } from 'src/app/model/actividad/actividad.repository';
-import { Actividad, AprendizajeEsperado, AreaFormacion, } from 'src/app/model/actividad/aformacion.model';
+import { Actividad, AprendizajeEsperado, AreaFormacion, } from 'src/app/model/actividad/actividad.model';
 import Stepper from 'bs-stepper';
 import { NewActividadRepository } from 'src/app/model/actividad/newActividad.repository';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ export class ActividadFormComponent implements OnInit {
   private stepper: Stepper;
   constructor(
     private repository: ActividadRepository,
-    private newActividad: NewActividadRepository,
+    private newActividadRepository: NewActividadRepository,
     private router: Router,
   ) { }
 
@@ -24,6 +24,8 @@ export class ActividadFormComponent implements OnInit {
       linear: false,
       animation: true
     });
+
+    this.newActividadRepository._newActividad = new Actividad();
   }
 
   next() {
@@ -43,7 +45,6 @@ export class ActividadFormComponent implements OnInit {
   }
 
   regresarTabla() {
-    this.newActividad.getActividadById(1);
     this.router.navigateByUrl("actividad/table");
   }
 }

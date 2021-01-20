@@ -31,7 +31,7 @@
         <div class="col-lg-3">
           <div class="icon icon-shape bg-info text-white rounded-circle"
             placement="bottom" ngbTooltip="Minutos">
-            <span>{{newActividad.duracionMinutos}}</span>
+            <span *ngIf="!!newActividad">{{newActividad.duracionMinutos}}</span>
           </div>
         </div>
       </div>
@@ -45,7 +45,7 @@
               <div class="form-group">
                 <div class="input-group">
                   <label class="form-control text-dark" type="text">
-                    <span class="btn-inner--text">
+                    <span *ngIf="!!newActividad.nombre" class="btn-inner--text">
                       {{newActividad.nombre.slice(0,50)}}
                     </span>
                   </label>
@@ -108,7 +108,7 @@
               </li>
             </ul>
           </div>
-          <div *ngIf="listaAprendizaje" class="form-group">
+          <div *ngIf="listaAprendizaje && !!newActividad" class="form-group">
             <ul class="list-group list-group-flush">
               <li *ngFor="let a of newActividad.idAprendizajeEsperado"
                 class="page-item row align-items-center">

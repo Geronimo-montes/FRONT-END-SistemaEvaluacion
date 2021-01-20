@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ActividadRepository } from "src/app/model/actividad/actividad.repository";
-import { Actividad } from "src/app/model/actividad/aformacion.model";
-import { NewActividadRepository } from "src/app/model/actividad/newActividad.repository";
+import { Actividad, TipoActividad } from "src/app/model/actividad/actividad.model";
 
 @Component({
   selector: "app-actividad-table",
@@ -10,18 +9,20 @@ import { NewActividadRepository } from "src/app/model/actividad/newActividad.rep
   styleUrls: ["./actividad-table.component.scss"],
 })
 export class ActividadTableComponent implements OnInit {
-  public NumRowPage: number = 5;
+  public NumRowPage: number = 6;
   public SelectedPage: number = 1;
   public primerControl: number = 1;
   public filtro: string = "";
+  public tiposActividad: any[];
+
   constructor(
     private repository: ActividadRepository,
-    private newAcividad: NewActividadRepository,
     private router: Router,
-  ) { }
+  ) {
+    this.tiposActividad = TipoActividad;
+  }
 
   ngOnInit(): void {
-    this.newAcividad._newActividad = this.actividad;
   }
 
   get actividad(): Actividad {
@@ -90,12 +91,7 @@ export class ActividadTableComponent implements OnInit {
         this.primerControl;
   }
 
-  cambiarActividadSeleccionada(actividad: Actividad) {
-    this.newAcividad.getActividadById(actividad.idPlanTrabajo);
-  }
-
   nuevaActividad() {
-    this.newAcividad.getActividadById(1);
     this.router.navigateByUrl("actividad/form");
   }
 }

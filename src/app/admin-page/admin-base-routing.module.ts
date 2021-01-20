@@ -6,19 +6,22 @@ const routes: Routes = [
   {
     path: '',
     component: AdminBaseComponent,
-    children: 
-    [
-      {
-        path: '',
-        loadChildren: './user-profile/user-profile.module#UserProfileModule',
-      }, {
-        path: '',
-        loadChildren: './alumno/crud-alumnos.module#CrudAlumnosModule',
-      }, {
-        path: '',
-        loadChildren: './actividad/actividad.module#ActividadModule',
-      } 
-    ]
+    children:
+      [
+        {
+          path: '',
+          loadChildren: './user-profile/user-profile.module#UserProfileModule',
+        }, {
+          path: '',
+          loadChildren: './alumno/crud-alumnos.module#CrudAlumnosModule',
+        }, {
+          path: '',
+          loadChildren: './actividad/actividad.module#ActividadModule',
+        }, {
+          path: '',
+          loadChildren: './calendario-actividad/calendario-actividad.module#CalendarioActividadModule',
+        }
+      ]
   }
 ];
 

@@ -47,10 +47,35 @@ export class AreaFormacion {
   ) { }
 }
 
+export class ActividadProgramada {
+  constructor(
+    public idActividadProgramada?: number,
+    public idPlanTrabajo?: number,
+    public nombrePlanTrabajo?: string,
+    public duracionMinutos?: number,
+    public idNivelDesempeno?: number,
+    public nombreNivelDesempeno?: string,
+    public idPeriodoEvaluacion?: number,
+    public nombrePeriodoEvaluacion?: string,
+    public idCicloEscolar?: number,
+    public nombreCicloEscolar?: string,
+    public nivelDesempenoPonderado?: string,
+    public observacion?: string,
+    public fecha?: string,
+    public hora?: string,
+    public estatus?: string,
+  ) { }
+}
+
 export const FORMATOS = [
   //Para el menu lateral: se crea un arreglo con las rutas, agregando nombre e icono luego se recorre en el html
   { id: 0, descripcion: 'Seleccione un area de formación' },
   { id: 1, descripcion: '*.PDF', icon: 'ni-2x ni-book-bookmark text-red' },
   { id: 2, descripcion: '*.PNG', icon: 'ni-2x ni-image text-blue' },
   { id: 3, descripcion: '*.*', icon: 'ni-2x ni-collection text-green' },
+];
+
+export const TipoActividad = [
+  { descripcion: 'Actividad Diagnostico', icon: '', class: '' },
+  { descripcion: 'Actividad Evaluación', icon: '', class: '' },
 ];

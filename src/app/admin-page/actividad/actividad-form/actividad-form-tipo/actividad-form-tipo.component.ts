@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Actividad } from 'src/app/model/actividad/aformacion.model';
+import { Actividad } from 'src/app/model/actividad/actividad.model';
 import { NewActividadRepository } from 'src/app/model/actividad/newActividad.repository';
 import { ActividadFormComponent } from '../actividad-form.component';
 

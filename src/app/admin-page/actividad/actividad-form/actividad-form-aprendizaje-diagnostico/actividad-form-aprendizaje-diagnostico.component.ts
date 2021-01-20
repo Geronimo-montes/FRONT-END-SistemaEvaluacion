@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActividadRepository } from 'src/app/model/actividad/actividad.repository';
-import { AprendizajeEsperado, AreaFormacion } from 'src/app/model/actividad/aformacion.model';
+import { AprendizajeEsperado, AreaFormacion } from 'src/app/model/actividad/actividad.model';
 import { NewActividadRepository } from 'src/app/model/actividad/newActividad.repository';
 import { ActividadFormComponent } from '../actividad-form.component';
 

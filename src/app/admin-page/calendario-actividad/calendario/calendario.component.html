@@ -1,0 +1,182 @@
+<div class="card card-profile shadow p-4">
+  <div class="row text-center">
+    <div class="col-md-12">
+      <h2>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h2>
+    </div>
+  </div>
+
+  <div class="row text-center m-2 mr-5 justify-content-between">
+    <div class="col-md-4">
+      <div class="btn-group">
+        <button class="btn btn-primary" mwlCalendarPreviousView [view]="view"
+          [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+          Anterior
+        </button>
+        <button class="btn btn-secondary" mwlCalendarToday
+          [(viewDate)]="viewDate">
+          Hoy
+        </button>
+        <button class="btn btn-primary" mwlCalendarNextView [view]="view"
+          [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+          Siguiente
+        </button>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="btn-group">
+        <button class="btn btn-primary" (click)="setView(CalendarView.Month)"
+          [class.active]="view === CalendarView.Month">
+          Mes
+        </button>
+        <button class="btn btn-primary" (click)="setView(CalendarView.Week)"
+          [class.active]="view === CalendarView.Week">
+          Semana
+        </button>
+        <button class="btn btn-primary" (click)="setView(CalendarView.Day)"
+          [class.active]="view === CalendarView.Day">
+          Día
+        </button>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <!--Calendario de actividades programadas-->
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month"
+      [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+      [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
+      (eventClicked)="handleEvent('Clicked', $event.event)">
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week"
+      [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+      (eventClicked)="handleEvent('Clicked', $event.event)" [hourSegments]="1"
+      [hourSegmentHeight]="70" [dayStartHour]="8" [dayStartMinute]="0"
+      [dayEndHour]="16" [dayEndMinute]="30">
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day"
+      [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+      (eventClicked)="handleEvent('Clicked', $event.event)" [hourSegments]="1"
+      [hourSegmentHeight]="75" [dayStartHour]="8" [dayStartMinute]="0"
+      [dayEndHour]="16" [dayEndMinute]="30">
+    </mwl-calendar-day-view>
+  </div>
+</div>
+
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h2 class="modal-title">Informacion de la Actividad</h2>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div>
+      <h3 class="text-dark">
+        Nombre de la Actividad:
+      </h3>
+      <p><strong>{{ modalData.event.title }}</strong></p>
+    </div>
+
+    <div class="row">
+      <!--Inicio-->
+      <div class="form-group col-6">
+        <h3 class="text-dark"> Inicio de la Actividad: </h3>
+        <div
+          class="input-group input-group-alternative justify-content-center p-3">
+          <!--Input calendar-->
+          <div class="form-inline">
+            <div class="form-group">
+              <div class="input-group border">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="d"
+                  [(ngModel)]="model_inicio" ngbDatepicker #dp="ngbDatepicker">
+
+                <div class="input-group-append">
+                  <button class="btn btn-icon btn-2  btn-outline-primary"
+                    (click)="dp.toggle()" type="button">
+                    <i class="ni ni-calendar-grid-58"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--input reloj-->
+          <ngb-timepicker [(ngModel)]="time_inicio"
+            [ngModelOptions]="{standalone: true}" [readonlyInputs]="true"
+            [minuteStep]="30">
+          </ngb-timepicker>
+        </div>
+      </div>
+      <!--Final-->
+      <div class="form-group col-6">
+        <h3 class="text-dark"> Fin de la Actividad: </h3>
+        <div
+          class="input-group input-group-alternative  justify-content-center p-3">
+          <!--Input calendar-->
+          <div class="form-inline">
+            <div class="form-group">
+              <div class="input-group border">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="d"
+                  [(ngModel)]="model_fin" ngbDatepicker #de="ngbDatepicker"
+                  [disabled]="true">
+
+                <div class="input-group-append">
+                  <button class="btn btn-icon btn-2  btn-outline-primary"
+                    (click)="de.toggle()" type="button">
+                    <i class="ni ni-calendar-grid-58"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--input reloj-->
+          <ngb-timepicker [(ngModel)]="time_fin"
+            [ngModelOptions]="{standalone: true}" [readonlyInputs]="true"
+            [minuteStep]="30" [disabled]="true">
+          </ngb-timepicker>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="text-dark">Acciones:</h3>
+    <div class="row">
+      <div class="col-3">
+        <button type="button" class="btn btn-success"
+          (click)="updateFecha(modalData.event);"
+          [disabled]="events.length == 0">
+          Guardar Cambios
+        </button>
+      </div>
+
+      <div class="col-3">
+        <button type="button" class="btn btn-danger"
+          (click)="deleteActividad(modalData.event);"
+          [disabled]="events.length == 0">
+          Eliminar Evento
+        </button>
+      </div>
+
+      <div *ngIf="!!mensaje && ubicacion == 'c'; then thenBlock else elseBlock">
+      </div>
+      <ng-template #thenBlock>
+        <div class="alert text-white col-5" [ngClass]="tipoMensaje">
+          {{mensaje}}
+        </div>
+      </ng-template>
+      <ng-template #elseBlock>
+        <div *ngIf="!!mensajeLocal && mensajeLocal !=''"
+          class=" alert bg-danger text-white col-5">
+          {{mensajeLocal}}
+        </div>
+      </ng-template>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">
+      OK
+    </button>
+  </div>
+</ng-template>

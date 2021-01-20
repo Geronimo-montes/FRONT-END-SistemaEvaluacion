@@ -5,16 +5,17 @@ import { DocenteRepository } from 'src/app/model/docente/docente.repository';
 import { UsersService } from 'src/app/model/users/users.service';
 
 declare interface RouteInfo {
-    path: string;
-    title: string;
-    icon: string;
-    class: string;
+  path: string;
+  title: string;
+  icon: string;
+  class: string;
 }
 export const ROUTES: RouteInfo[] = [
   //Para el menu lateral: se crea un arreglo con las rutas, agregando nombre e icono luego se recorre en el html
   { path: '/profile', title: 'Mi Perfil', icon: 'ni-circle-08 text-yellow', class: '' },
   { path: '/alumno', title: 'Alumnos', icon: 'ni-hat-3 text-blue', class: 'ni-4x' },
   { path: '/actividad', title: 'Actividades', icon: 'ni-collection text-green', class: '' },
+  { path: '/plantrabajo', title: 'Plan Trabajo', icon: 'ni-calendar-grid-58 text-orange', class: '' },
 ];
 
 @Component({
@@ -32,16 +33,16 @@ export class SidebarComponent implements OnInit {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
-   });
+    });
   }
 
-  get docente(): Docente{
+  get docente(): Docente {
     return this.repository.getDocente();
   }
 
   logOut() {
     this.userService.logOut().subscribe((data) => {
-      if(data){
+      if (data) {
         this.router.navigateByUrl('login');
       }
     })

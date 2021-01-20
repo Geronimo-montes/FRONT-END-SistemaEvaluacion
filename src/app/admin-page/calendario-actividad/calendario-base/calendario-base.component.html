@@ -1,0 +1,12 @@
+<div *ngIf="!!actividades" class="container-fluid mt--8 bg-secondary">
+  <div class="row">
+    <!--Programar actividad-->
+    <div class="col-xl-6 order-xl-1">
+      <router-outlet></router-outlet>
+    </div>
+    <!--Calendarion de actividades-->
+    <div class="col-xl-6 order-xl-2 mb-5 mb-xl-0">
+      <app-calendario-programar-actividad></app-calendario-programar-actividad>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { UsersService } from "./users/users.service";
 import { AlumnoRepository } from "./alumno/alumno.repository";
 import { ActividadRepository } from "./actividad/actividad.repository";
 import { NewActividadRepository } from "./actividad/newActividad.repository";
+import { ActividadProgramadaRepository } from "./actividad/actividad-programada.repository";
 
 @NgModule({
     imports: [
@@ -18,6 +19,7 @@ import { NewActividadRepository } from "./actividad/newActividad.repository";
         AlumnoRepository,
         ActividadRepository,
         NewActividadRepository,
+        ActividadProgramadaRepository,
     ]
 })
 export class ModelModule { }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Evidencia } from 'src/app/model/actividad/aformacion.model';
+import { Evidencia } from 'src/app/model/actividad/actividad.model';
 import { NewActividadRepository } from 'src/app/model/actividad/newActividad.repository';
 import { ActividadFormComponent } from '../actividad-form.component';
-import { FORMATOS } from '../../../../model/actividad/aformacion.model';
+import { FORMATOS } from '../../../../model/actividad/actividad.model';
 @Component({
   selector: 'app-actividad-form-evidencia',
   templateUrl: './actividad-form-evidencia.component.html',

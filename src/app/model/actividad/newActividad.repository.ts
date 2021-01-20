@@ -1,11 +1,10 @@
 import { Injectable, OnDestroy, OnInit } from "@angular/core";
-import { numeric } from "@rxweb/reactive-form-validators";
 import { DataSourceService } from "../dataSource.service";
-import { Actividad, AprendizajeEsperado, Evidencia } from "./aformacion.model";
+import { Actividad, AprendizajeEsperado, Evidencia } from "./actividad.model";
 
 @Injectable()
 export class NewActividadRepository implements OnInit, OnDestroy {
-  private newActividad: Actividad;
+  private newActividad: Actividad = new Actividad();
   private _perfil: string = 'assets/img/theme/team-4-800x800.jpg';
   public areas: string[];
 
@@ -15,12 +14,6 @@ export class NewActividadRepository implements OnInit, OnDestroy {
 
   ngOnInit() { }
   ngOnDestroy() { }
-
-  getActividadById(id: number) {
-    this.datasource.getActividadById(id).subscribe(data => {
-      this.newActividad = data;
-    });
-  }
 
   getNewActividad(): Actividad {
     return this.newActividad;

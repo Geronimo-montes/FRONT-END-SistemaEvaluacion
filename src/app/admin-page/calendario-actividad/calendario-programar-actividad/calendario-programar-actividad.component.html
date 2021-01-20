@@ -1,0 +1,165 @@
+<div class="card card-profile shadow">
+  <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h2>Programar Actividad</h2>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row justify-content-center">
+      <div class="col-8">
+
+        <!--nombre Actividad-->
+        <div class="row-lg">
+          <div class="form-group">
+            <input class="form-control text-dark" type="text"
+              [(ngModel)]="actividadSelected.nombre" name="actividadnombre"
+              placeholder="Actividad Seleccionada">
+          </div>
+        </div>
+
+        <!--Fecha dia + hora-->
+        <div class="form-group">
+          <div
+            class="input-group input-group-alternative  justify-content-center">
+            <!--Input calendar-->
+            <div class="form-inline mr-4">
+              <div class="form-group">
+                <div class="input-group border">
+                  <input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                    [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+
+                  <div class="input-group-append">
+                    <button class="btn btn-icon btn-2  btn-outline-primary"
+                      (click)="d.toggle()" type="button">
+                      <i class="ni ni-calendar-grid-58"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--input reloj-->
+            <ngb-timepicker [(ngModel)]="time"
+              [ngModelOptions]="{standalone: true}" [readonlyInputs]="true"
+              [minuteStep]="30">
+            </ngb-timepicker>
+          </div>
+        </div>
+
+        <div class="row ml-2">
+          <div class="col-4">
+            <button class="btn btn-primary" type="button"
+              (click)="programarNuevaActividad();">Programar</button>
+          </div>
+
+          <div
+            *ngIf="!!mensaje && ubicacion == 'p'; then thenBlock else elseBlock">
+          </div>
+
+          <ng-template #thenBlock>
+            <div class="alert text-white col-7" [ngClass]="tipoMensaje">
+              {{mensaje}}
+            </div>
+          </ng-template>
+          <ng-template #elseBlock>
+            <div *ngIf="!!mensajeLocal && mensajeLocal !=''"
+              class=" alert bg-danger text-white col-7">
+              {{mensajeLocal}}
+            </div>
+          </ng-template>
+
+        </div>
+      </div>
+
+      <!--Items de la tabla-->
+      <div class="card-body align-items-center">
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-ligth">
+              <tr>
+                <th scope="col" class="h1">No.</th>
+                <th scope="col" class="h1"></th>
+                <th scope="col" class="h1">Nombre</th>
+                <th scope="col" class="h1">Duración</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let actividad of actividades"
+                (click)="setActividadSelected(actividad);">
+                <!--No. Actividad-->
+                <th>
+                  <div class=" align-items-center">
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">
+                        {{ actividad.idPlanTrabajo}}
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <!--img-->
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <div class="avatar rounded-circle mr-3">
+                      <img alt="Image placeholder"
+                        src="assets/img/theme/bootstrap.jpg">
+                    </div>
+                  </div>
+                </th>
+                <!--Nombre-->
+                <th>
+                  <div class="align-items-center">
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">
+                        {{ actividad.nombre.slice(0,38) }}-
+                        <br>
+                        {{ actividad.nombre.slice(38,76) }}-
+                        <br>
+                        {{ actividad.nombre.slice(76,114) }}
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <!--Duracion-->
+                <th>
+                  <div class="align-items-center">
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">
+                        {{actividad.duracionMinutos}} minutos
+                      </span>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <nav class="m-auto mr-auto" aria-label="...">
+            <ul class="pagination">
+              <li class="page-item">
+                <button class="page-link" (click)="changePrimerControl(-1)">
+                  <i class="fa fa-angle-left"></i>
+                </button>
+              </li>
+
+              <li *ngFor="let page of controls" class="page-item"
+                [class.active]="page == SelectedPage"
+                (click)="changePage(page)">
+                <button class="page-link">
+                  {{ page }}
+                </button>
+              </li>
+
+              <li class="page-item">
+                <button class="page-link" (click)="changePrimerControl(1)">
+                  <i class="fa fa-angle-right"></i>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

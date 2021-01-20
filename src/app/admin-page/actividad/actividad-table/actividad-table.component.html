@@ -1,113 +1,141 @@
-<div class="card bg-secondary shadow">
-  <div class="card-header bg-white border-0 shadow">
-    <div class="row align-items-center justify-content-between pl-lg-4 pr-lg-4">
-      <!-- Form Quitar y poner otra cosa-->
-      <h1>Lista de Actividades</h1>
+<div class="row mt--8">
+  <div class="col-xl-12">
+    <div class="card bg-secondary shadow">
+      <!--Header de la tabla-->
+      <div class="card-header bg-white border-0 shadow">
+        <div
+          class="row align-items-center justify-content-between pl-lg-4 pr-lg-4">
+          <h1>Lista de Actividades</h1>
 
-      <div
-        class="navbar-search navbar-search-white form-inline d-none d-md-flex">
-        <div class="input-group input-group-alternative">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-search"></i></span>
+          <div
+            class="navbar-search navbar-search-white form-inline d-none d-md-flex">
+            <div class="input-group input-group-alternative">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i
+                    class="fas fa-search"></i></span>
+              </div>
+              <!--Barra de busqueda-->
+              <input class="form-control text-dark" [(ngModel)]="filtro"
+                placeholder="Search" type="text" />
+            </div>
           </div>
-          <!--Barra de busqueda-->
-          <input class="form-control text-dark" [(ngModel)]="filtro"
-            placeholder="Search" type="text" />
+
+          <button class="btn btn-icon btn-2 btn-outline-primary" type="button"
+            (click)="nuevaActividad();">
+            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+            <span class="btn-inner--text">Nueva Actividad</span>
+          </button>
         </div>
       </div>
+      <!--Items de la tabla-->
+      <div class="card-body align-items-center">
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-ligth">
+              <tr>
+                <th scope="col" class="h1"></th>
+                <th scope="col" class="h1">No. Actividad</th>
+                <th scope="col" class="h1">Nombre</th>
+                <th scope="col" class="h1">Duración</th>
+                <th scope="col" class="h1">Tipo de Actividad</th>
+                <th scope="col" class="h1">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let actividad of actividades">
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <div class="avatar rounded-circle mr-3">
+                      <img alt="Image placeholder"
+                        src="assets/img/theme/bootstrap.jpg">
+                    </div>
+                  </div>
+                </th>
+                <!--No. Actividad-->
+                <th>
+                  <div class=" align-items-center">
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">
+                        {{ actividad.idPlanTrabajo }}
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <!--Nombre-->
+                <th>
+                  <div class="align-items-center">
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">
+                        {{ actividad.nombre }}
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <!--Duracion-->
+                <th>
+                  <div class="align-items-center">
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">
+                        {{actividad.duracionMinutos}} minutos
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <!--tipoActividad-->
+                <th>
+                  <div class="align-items-center">
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">
+                        {{ tiposActividad[actividad.tipoActividad].descripcion
+                        }}
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <td>
+                  <div ngbDropdown placement="left">
+                    <a class="btn btn-sm btn-icon-only text-light"
+                      ngbDropdownToggle>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu
+                      class="dropdown-menu-right dropdown-menu-arrow">
+                      <button class="dropdown-item">Ver información</button>
+                      <button class="dropdown-item">Editar información</button>
+                      <button class="dropdown-item">Otra acción</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <nav class="m-auto mr-auto" aria-label="...">
+            <ul class="pagination">
+              <li class="page-item">
+                <button class="page-link" (click)="changePrimerControl(-1)">
+                  <i class="fa fa-angle-left"></i>
+                </button>
+              </li>
 
-      <button class="btn btn-icon btn-2 btn-outline-primary" type="button"
-        (click)="nuevaActividad();">
-        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
-        <span class="btn-inner--text">Nueva Actividad</span>
-      </button>
-    </div>
-  </div>
-  <div class="card-body align-items-center">
-    <div class="table-responsive">
-      <table class="table align-items-center table-flush">
-        <thead class="thead-ligth">
-          <tr>
-            <th scope="col" class="h1">No. Actividad</th>
-            <th scope="col" class="h1">Nombre</th>
-            <th scope="col" class="h1">Duración</th>
-            <th scope="col" class="h1">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let actividad of actividades"
-            (click)="cambiarActividadSeleccionada(actividad)">
-            <!--No. Actividad-->
-            <th>
-              <div class=" align-items-center">
-                <div class="media-body">
-                  <span class="mb-0 text-sm">
-                    {{ actividad.idPlanTrabajo }}
-                  </span>
-                </div>
-              </div>
-            </th>
-            <!--Nombre-->
-            <th>
-              <div class="align-items-center">
-                <div class="media-body">
-                  <span class="mb-0 text-sm">
-                    {{ actividad.nombre }}
-                  </span>
-                </div>
-              </div>
-            </th>
-            <!--Duracion-->
-            <th>
-              <div class="align-items-center">
-                <div class="media-body">
-                  <span class="mb-0 text-sm">
-                    {{actividad.duracionMinutos}} minutos
-                  </span>
-                </div>
-              </div>
-            </th>
-            <td>
-              <div ngbDropdown placement="left">
-                <a class="btn btn-sm btn-icon-only text-light"
-                  ngbDropdownToggle>
-                  <i class="fas fa-ellipsis-v"></i>
-                </a>
-                <div ngbDropdownMenu
-                  class="dropdown-menu-right dropdown-menu-arrow">
-                  <button class="dropdown-item">Ver información</button>
-                  <button class="dropdown-item">Editar información</button>
-                  <button class="dropdown-item">Otra acción</button>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="row">
-      <nav class="m-auto mr-auto" aria-label="...">
-        <ul class="pagination">
-          <li class="page-item">
-            <button class="page-link" (click)="changePrimerControl(-1)">
-              <i class="fa fa-angle-left"></i>
-            </button>
-          </li>
+              <li *ngFor="let page of controls" class="page-item"
+                [class.active]="page == SelectedPage"
+                (click)="changePage(page)">
+                <button class="page-link">
+                  {{ page }}
+                </button>
+              </li>
 
-          <li *ngFor="let page of controls" class="page-item"
-            [class.active]="page == SelectedPage" (click)="changePage(page)">
-            <button class="page-link">
-              {{ page }}
-            </button>
-          </li>
-
-          <li class="page-item">
-            <button class="page-link" (click)="changePrimerControl(1)">
-              <i class="fa fa-angle-right"></i>
-            </button>
-          </li>
-        </ul>
-      </nav>
+              <li class="page-item">
+                <button class="page-link" (click)="changePrimerControl(1)">
+                  <i class="fa fa-angle-right"></i>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
     </div>
   </div>
 </div>

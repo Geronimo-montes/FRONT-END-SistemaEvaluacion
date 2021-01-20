@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { Actividad, AprendizajeEsperado, AreaFormacion } from './actividad/aformacion.model';
+import { Actividad, ActividadProgramada, AprendizajeEsperado, AreaFormacion } from './actividad/actividad.model';
 import { Alumno } from './alumno/alumno.model';
 import { Docente } from './docente/docente.model';
 
@@ -59,6 +59,21 @@ export class DataSourceService {
     return this.http.get<Actividad>(this.baseURL + 'actividad/' + id, this.getOptions());
   }
 
+  getActividadesProgramadas(): Observable<ActividadProgramada[]> {
+    return this.http.get<ActividadProgramada[]>(this.baseURL + 'planTrabajo', this.getOptions());
+  }
+
+  programrActividad(actividad: any): Observable<any> {
+    return this.http.post(this.baseURL + 'planTrabajo/insert', actividad, this.getOptions());
+  }
+
+  modificarActividad(actividad: any): Observable<any> {
+    return this.http.put(this.baseURL + 'planTrabajo/update', actividad, this.getOptions());
+  }
+
+  deleteActividad(id: number): Observable<any> {
+    return this.http.delete(this.baseURL + 'planTrabajo/delete/' + id, this.getOptions());
+  }
 
   getOptions() {
     return {

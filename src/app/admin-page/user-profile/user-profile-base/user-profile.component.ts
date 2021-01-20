@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { DocenteRepository } from '../../../model/docente/docente.repository';
 import { Docente } from '../../../model/docente/docente.model';
 
@@ -8,12 +7,12 @@ import { Docente } from '../../../model/docente/docente.model';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit{
-  constructor(private repository: DocenteRepository, private fb: FormBuilder) { } 
+export class UserProfileComponent implements OnInit {
+  constructor(private repository: DocenteRepository) { }
 
   ngOnInit(): void { }
 
-  get docente(): Docente{ 
+  get docente(): Docente {
     return this.repository.getDocente();
   }
 }

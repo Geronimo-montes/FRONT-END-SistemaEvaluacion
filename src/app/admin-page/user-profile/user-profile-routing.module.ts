@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AdminGuard } from "../admin.guard";
-import { ProfileGuard } from "./user-profile-base/profile.guard";
 import { UserProfileComponent } from "./user-profile-base/user-profile.component";
 
 const routes: Routes = [

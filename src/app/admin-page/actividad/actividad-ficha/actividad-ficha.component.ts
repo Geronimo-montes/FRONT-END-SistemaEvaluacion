@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActividadRepository } from 'src/app/model/actividad/actividad.repository';
-import { Actividad, FORMATOS } from 'src/app/model/actividad/aformacion.model';
+import { Actividad, FORMATOS } from 'src/app/model/actividad/actividad.model';
 import { NewActividadRepository } from 'src/app/model/actividad/newActividad.repository';
 
 @Component({
