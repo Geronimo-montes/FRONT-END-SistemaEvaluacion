@@ -1,6 +1,5 @@
 import { Injectable, OnDestroy, OnInit } from "@angular/core";
 import { Docente } from "./docente.model";
-import { UsersService } from "../users/users.service";
 import { DataSourceService } from "../dataSource.service";
 
 @Injectable()
@@ -12,7 +11,6 @@ export class DocenteRepository implements OnInit, OnDestroy {
 
   constructor(
     private datasource: DataSourceService,
-    private userService: UsersService,
   ) {
     this.datasource.getDocenteById().subscribe((data) => {
       this.docente = <Docente>data[0];
@@ -43,7 +41,7 @@ export class DocenteRepository implements OnInit, OnDestroy {
     return this.formDestino;
   }
 
-  updateDocnete(docente: any): void {
+  updateDocnete(docente: any) {
     this.datasource.updateDocenteById(docente).subscribe((data) => {
       if (data['success']) {
         this.docente = <Docente>data['data'][0];
@@ -62,11 +60,11 @@ export class DocenteRepository implements OnInit, OnDestroy {
       this.tipoMensaje = (data['success']) ? 'alert-success' : 'alert-danger';
       this.mensaje = data['mensaje'];
       this.formDestino = data['destino'];
-    })
+    });
   }
 
   updateUser(user: any): void {
-    this.userService.updateUser(user).subscribe((data) => {
+    this.datasource.updateUser(user).subscribe((data) => {
       if (data['success']) {
         this.mensaje = data['mensaje'];
         this.tipoMensaje = 'alert-success';

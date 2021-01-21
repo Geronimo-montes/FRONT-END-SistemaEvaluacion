@@ -1,28 +1,30 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UsersService } from "../../model/users/users.service";
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserRepository } from 'src/app/model/users/user.repository';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loginValidate = true;
-  mensajeError: string;
-  email: string;
-  password: string;
+  animacion: boolean;
 
-  constructor(public userService: UsersService, public router: Router, private fb: FormBuilder) { }
-   
+  constructor(
+    private repository: UserRepository,
+    private fb: FormBuilder,
+  ) { }
+
   ngOnInit(): void {
     this.initForm();
   }
-  ngOnDestroy() { }
 
-  initForm(): void{
+  get mensajeError(): string {
+    return this.repository.getMensajeError();
+  }
+
+  initForm(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')]],
       password: ['', Validators.required]
@@ -35,19 +37,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    this.email = this.loginForm.value['email'];
-    this.password = this.loginForm.value['password'];
+    this.animacion = true;
+    const user = {
+      email: this.loginForm.value['email'],
+      password: this.loginForm.value['password'],
+    };
 
-    const user = {email: this.email, password: this.password };
-    this.userService.login(user).subscribe(data => {
-      if(data[0]['token'] !== undefined) {
-        this.userService.setToken(data[0]['token']);
-        this.loginValidate = true;
-        this.router.navigateByUrl('/profile');
-      } else {
-        this.loginValidate = false;
-        this.mensajeError = data[0]['error'];
-      }
-    });
+    this.repository.login(user);
+    setTimeout(() => {
+      this.animacion = !this.animacion;
+    }, 10000);
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Docente } from 'src/app/model/docente/docente.model';
 import { DocenteRepository } from 'src/app/model/docente/docente.repository';
-import { UsersService } from 'src/app/model/users/users.service';
+import { UserRepository } from 'src/app/model/users/user.repository';
 
 declare interface RouteInfo {
   path: string;
@@ -27,7 +27,11 @@ export class SidebarComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
 
-  constructor(private router: Router, private userService: UsersService, private repository: DocenteRepository) { }
+  constructor(
+    private router: Router,
+    private userRepository: UserRepository,
+    private repository: DocenteRepository,
+  ) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
@@ -41,10 +45,6 @@ export class SidebarComponent implements OnInit {
   }
 
   logOut() {
-    this.userService.logOut().subscribe((data) => {
-      if (data) {
-        this.router.navigateByUrl('login');
-      }
-    })
+    this.userRepository.logOut();
   }
 }

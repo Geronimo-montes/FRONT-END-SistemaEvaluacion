@@ -36,16 +36,17 @@ export class ActividadFormEvidenciaComponent implements OnInit {
           || form.controls[fieldName].touched)) ? 'is-invalid' : 'is-valid';
   }
 
-  setValues(form: FormGroup) {
+  setValues() {
     let evidencia = new Evidencia(
       null,
       null,
-      form.controls['nombre'].value,
-      form.controls['descripcion'].value,
-      form.controls['formato'].value,
+      this.form.controls['nombre'].value,
+      this.form.controls['descripcion'].value,
+      this.form.controls['formato'].value,
     );
 
     this.newActividadRepository.evidencia = evidencia;
+    this.form.setValue({ nombre: '', formato: '', descripcion: '' });
   }
 
 }

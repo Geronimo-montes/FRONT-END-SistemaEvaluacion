@@ -33,8 +33,8 @@
                   <label class="form-control-label">Situación
                     Didactica</label>
                   <div class="form-group">
-                    <input class="form-control text-dark" type="text"
-                      placeholder="Situación Didactica"
+                    <input [(ngModel)]="_nombre" class="form-control text-dark"
+                      type="text" placeholder="Situación Didactica"
                       [ngClass]="isValidInput('nombre', form)"
                       formControlName="nombre">
                   </div>
@@ -45,7 +45,8 @@
                 <div class="col-lg-6">
                   <label class="form-control-label">Duración(Minutos)</label>
                   <div class="form-group">
-                    <input class="form-control text-dark" type="text"
+                    <input [(ngModel)]="_duracion"
+                      class="form-control text-dark" type="text"
                       placeholder="Duración (minutos)"
                       [ngClass]="isValidInput('duracion', form)"
                       formControlName="duracion">

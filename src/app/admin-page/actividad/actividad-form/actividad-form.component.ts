@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ActividadFormComponent implements OnInit {
   /**Datos del stepper */
-  private stepper: Stepper;
+  public stepper: Stepper;
   constructor(
     private repository: ActividadRepository,
     private newActividadRepository: NewActividadRepository,
@@ -21,11 +21,16 @@ export class ActividadFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.stepper = new Stepper(document.querySelector('#stepper1'), {
-      linear: false,
-      animation: true
+      linear: true,
+      animation: true,
     });
+  }
 
-    this.newActividadRepository._newActividad = new Actividad();
+  get areasFormacion(): AreaFormacion[] {
+    return this.repository.getAreaFormacion();
+  }
+  get aprendizajesEsperados(): AprendizajeEsperado[] {
+    return this.repository.getAprendizajeEsperado();
   }
 
   next() {
@@ -36,15 +41,11 @@ export class ActividadFormComponent implements OnInit {
     this.stepper.previous();
   }
 
-  get areasFormacion(): AreaFormacion[] {
-    return this.repository.getAreaFormacion();
-  }
-
-  get aprendizajesEsperados(): AprendizajeEsperado[] {
-    return this.repository.getAprendizajeEsperado();
-  }
-
   regresarTabla() {
     this.router.navigateByUrl("actividad/table");
+  }
+
+  insertActividad() {
+    this.newActividadRepository.insertNewActividad();
   }
 }

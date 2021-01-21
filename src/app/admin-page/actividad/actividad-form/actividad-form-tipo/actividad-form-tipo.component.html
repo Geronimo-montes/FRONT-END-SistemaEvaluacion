@@ -6,7 +6,7 @@
 <div class="row mt-4 mb-4 justify-content-center">
   <div class="col-xl-5 order-xl-1 mb-4">
     <div class="card bg-secondary"
-      [ngClass]="{'seleccionado' : newActividad.tipoActividad === '1'}">
+      [ngClass]="{'seleccionado' : newActividad.tipoActividad === '1' && !!newActividad}">
       <div class="card-header bg-white border-0 shadow ">
         <div class="row align-items-center  pl-lg-4 pr-lg-4">
           <h2>

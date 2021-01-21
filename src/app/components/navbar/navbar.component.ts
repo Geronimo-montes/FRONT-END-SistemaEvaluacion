@@ -1,10 +1,10 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { UsersService } from 'src/app/model/users/users.service';
 import { DocenteRepository } from 'src/app/model/docente/docente.repository';
 import { Docente } from 'src/app/model/docente/docente.model';
+import { UserRepository } from 'src/app/model/users/user.repository';
 
 @Component({
   selector: 'app-navbar',
@@ -16,13 +16,21 @@ export class NavbarComponent implements OnInit {
   public listTitles: any[];
   public location: Location;
   public location_Link = '/profile';
-  constructor(location: Location, private element: ElementRef, private router: Router,
-    private userService: UsersService, private repository: DocenteRepository) {
+  constructor(
+    location: Location,
+    private element: ElementRef,
+    private userRepository: UserRepository,
+    private repository: DocenteRepository,
+  ) {
     this.location = location;
   }
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
+  }
+
+  get docente(): Docente {
+    return this.repository.getDocente();
   }
 
   getTitle() {
@@ -41,15 +49,7 @@ export class NavbarComponent implements OnInit {
     return titlee;
   }
 
-  get docente(): Docente {
-    return this.repository.getDocente();
-  }
-
   logOut() {
-    this.userService.logOut().subscribe((data) => {
-      if (data) {
-        this.router.navigateByUrl('login');
-      }
-    })
+    this.userRepository.logOut();
   }
 }

@@ -1,0 +1,80 @@
+<div class="col-xl-12 order-xl-1 pl-lg-4 pr-lg-4">
+  <div class="row justify-content-center">
+  </div>
+</div>
+<div class="row mt-4 mb-4 pl-lg-4 pr-lg-4 ">
+  <div class="col-xl-12 order-xl-2 m-auto">
+    <div class="card bg-secondary shadow">
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="setValues(form)" method="post">
+          <div class="row justify-content-center">
+            <div class="col-lg-12">
+              <div class="row">
+                <!--Inicio-->
+                <div class="col-lg-6">
+                  <label class="form-control-label">
+                    Inicio
+                  </label>
+                  <div class="form-group">
+                    <textarea class="form-control text-dark" type="text"
+                      placeholder="Inicio de la actividad"
+                      [ngClass]="isValidInput('inicio', form)"
+                      formControlName="inicio" style="resize: none;"></textarea>
+                  </div>
+                </div>
+                <!--desarrollo-->
+                <div class="col-lg-6">
+                  <label class="form-control-label">
+                    Desarollo
+                  </label>
+                  <div class="form-group">
+                    <textarea class="form-control text-dark" type="text"
+                      placeholder="Desarrollo de la actividad"
+                      [ngClass]="isValidInput('desarrollo', form)"
+                      formControlName="desarrollo"
+                      style="resize: none;"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <!--Cierre-->
+                <div class="col-lg-6">
+                  <label class="form-control-label">
+                    Cierre
+                  </label>
+                  <div class="form-group">
+                    <textarea class="form-control text-dark" type="text"
+                      placeholder="Cierre de la actividad"
+                      [ngClass]="isValidInput('cierre', form)"
+                      formControlName="cierre" style="resize: none;"></textarea>
+                  </div>
+                </div>
+                <!--recursos-->
+                <div class="col-lg-6">
+                  <label class="form-control-label">
+                    Recursos
+                  </label>
+                  <div class="form-group">
+                    <textarea class="form-control text-dark" type="text"
+                      placeholder="Recursos de la actividad"
+                      [ngClass]="isValidInput('recursos', form)"
+                      formControlName="recursos"
+                      style="resize: none;"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row justify-content-end">
+                <button class="btn btn-primary btn-2 m-4" type="submit">
+                  Guardar
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

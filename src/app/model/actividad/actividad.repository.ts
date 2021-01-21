@@ -96,17 +96,17 @@ export class ActividadRepository {
     return this.ubicacion;
   }
 
-  insterActividad(actividad: FormData) {
-    this.datasource.insertActividad(actividad).subscribe((data) => {
-      if (data['success']) {
-        this.mensaje = data['mensaje'];
-        this.tipoMensaje = 'alert-success';
-      } else {
-        this.mensaje = data['mensaje'];
-        this.tipoMensaje = 'alert-danger';
-      }
-    });
-  }
+  /*  insterActividad(actividad: FormData) {
+      this.datasource.insertActividad(actividad).subscribe((data) => {
+        if (data['success']) {
+          this.mensaje = data['mensaje'];
+          this.tipoMensaje = 'alert-success';
+        } else {
+          this.mensaje = data['mensaje'];
+          this.tipoMensaje = 'alert-danger';
+        }
+      });
+    }*/
 
   programarActividad(valor: any): void {
     this.datasource.programrActividad(valor).subscribe(data => {

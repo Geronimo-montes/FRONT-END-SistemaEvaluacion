@@ -9,6 +9,7 @@ import { AuthBaseRoutingModule } from "./auth-base-routing.module";
 import { AuthBaseComponent } from "./auth-base/auth-base.component";
 import { ComponentsModule } from "../components/components.module";
 import { ToastyModule } from "ng2-toasty";
+import { UserRepository } from "../model/users/user.repository";
 
 @NgModule({
     imports: [
@@ -27,6 +28,7 @@ import { ToastyModule } from "ng2-toasty";
     ],
     providers: [
         AuthGuard,
+        UserRepository,
     ]
 })
 export class AuthBaseModule { }

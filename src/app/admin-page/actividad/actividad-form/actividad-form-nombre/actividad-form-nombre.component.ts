@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { NewActividadRepository } from 'src/app/model/actividad/newActividad.repository';
 import { ActividadFormComponent } from '../actividad-form.component';
 
@@ -21,8 +20,8 @@ export class ActividadFormNombreComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       perfil: new FormControl('', { validators: [Validators.required] }),
-      nombre: new FormControl(this.newActividadRepository['nombre'], { validators: [Validators.required, Validators.minLength(4), Validators.pattern('[A-Za-z ][A-Za-z ]*')] }),
-      duracion: new FormControl(this.newActividadRepository['duracionMinutos'], { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(3), Validators.pattern('[0-9]*')] }),
+      nombre: new FormControl(this.newActividadRepository.nombre, { validators: [Validators.required, Validators.minLength(4), Validators.pattern('[A-Za-z ][A-Za-z ]*')] }),
+      duracion: new FormControl(this.newActividadRepository.duracionMinutos, { validators: [Validators.required, Validators.minLength(2), Validators.maxLength(3), Validators.pattern('[0-9]*')] }),
     });
     this.imgPerfil = this.newActividadRepository['rutaPerfil'];
   }

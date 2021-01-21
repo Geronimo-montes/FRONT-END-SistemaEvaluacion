@@ -109,8 +109,4 @@ export class ActividadFormAprendizajeDiagnosticoComponent implements OnInit {
     this.newActividadRepository.idAprendizajeEsperado = value;
     this.newActividadRepository._areas = value.idAreaFormacion[0].descripcion;
   }
-
-  agregarActividad(valor) {
-    console.log("valor: " + valor);
-  }
 }

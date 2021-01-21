@@ -37,6 +37,4 @@ export class ActividadFichaComponent implements OnInit {
   deleteEvidencia(id) {
     this.newActividadRepository.deleteEvidencia(id);
   }
-
-  registrarNuevaActividad() { }
 }

@@ -5,7 +5,11 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
-  constructor(private cookies: CookieService, private router: Router) { }
+  constructor(
+    private cookies: CookieService,
+    private router: Router,
+  ) { }
+
   canActivate(): boolean {
     if (this.cookies.get('token').length == 0) {
       this.router.navigateByUrl('login');

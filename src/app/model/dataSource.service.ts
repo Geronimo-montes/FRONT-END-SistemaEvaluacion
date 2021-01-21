@@ -15,6 +15,29 @@ export class DataSourceService {
     this.baseURL = `${PROTOCOL}://sistemaevaluacion:${PORT}/`;
   }
 
+  /**Autenticacion de usuaios */
+  login(user: any): Observable<any> {
+    return this.http.post(this.baseURL + 'login', user);
+  }
+
+  logOut(): Observable<boolean> {
+    return this.http.put<boolean>(this.baseURL + 'logout', 0, this.getOptions());
+  }
+
+  updateUser(user: any): Observable<any> {
+    return this.http.put(this.baseURL + 'user/update', user, this.getOptions());
+  }
+
+  getToken() {
+    return this.cookies.get("token");
+  }
+
+  register(user: any): Observable<any> {
+    //sin implementar
+    return this.http.get("http://sistemaevaluacion/alumno/1");
+  }
+
+  /**Usuario Docente Metodos CRUD */
   getDocenteById(): Observable<Docente> {
     return this.http.get<Docente>(this.baseURL + 'docente',
       this.getOptions());
@@ -24,6 +47,7 @@ export class DataSourceService {
     return this.http.put(this.baseURL + 'docente/update', docente, this.getOptions());
   }
 
+  /**Alumnos get */
   getAlumnos(grupo: string, grado: string, turno: string): Observable<Alumno[]> {
     return this.http.get<Alumno[]>(this.baseURL + 'alumno/' + grupo + '/' + grado + '/' + turno,
       this.getOptions());
@@ -47,7 +71,7 @@ export class DataSourceService {
     return this.http.get<AprendizajeEsperado[]>(this.baseURL + 'aprendizajeEsperado/' + id);
   }
 
-  insertActividad(actividad: FormData): Observable<any> {
+  insertActividad(actividad: any): Observable<any> {
     return this.http.post(this.baseURL + 'actividadInsert', actividad, this.getOptions());
   }
 

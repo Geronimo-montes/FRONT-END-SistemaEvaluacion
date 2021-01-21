@@ -1,46 +1,47 @@
 <div class="card card-profile shadow p-4">
   <div class="row text-center">
-    <div class="col-md-12">
-      <h2>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h2>
+    <div class="col-lg-12">
+      <h2>{{ (viewDate | calendarDate:(view + 'ViewTitle'):'es-MX') | titlecase
+        }}</h2>
     </div>
   </div>
 
-  <div class="row text-center m-2 mr-5 justify-content-between">
-    <div class="col-md-4">
-      <div class="btn-group">
-        <button class="btn btn-primary" mwlCalendarPreviousView [view]="view"
-          [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
-          Anterior
-        </button>
-        <button class="btn btn-secondary" mwlCalendarToday
-          [(viewDate)]="viewDate">
-          Hoy
-        </button>
-        <button class="btn btn-primary" mwlCalendarNextView [view]="view"
-          [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
-          Siguiente
-        </button>
-      </div>
+  <div class="row">
+    <div class="btn-group col-4">
+      <button class="btn btn-icon btn-primary col-lg-2" mwlCalendarPreviousView
+        [view]="view" [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()">
+        <i class="ni ni-bold-left"></i>
+      </button>
+      <button class="btn col-lg-auto btn-secondary" mwlCalendarToday
+        [(viewDate)]="viewDate">
+        Hoy
+      </button>
+      <button class="btn btn-icon btn-primary col-lg-2" mwlCalendarNextView
+        [view]="view" [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()">
+        <i class="ni ni-bold-right"></i>
+      </button>
     </div>
 
-    <div class="col-md-4">
-      <div class="btn-group">
-        <button class="btn btn-primary" (click)="setView(CalendarView.Month)"
-          [class.active]="view === CalendarView.Month">
-          Mes
-        </button>
-        <button class="btn btn-primary" (click)="setView(CalendarView.Week)"
-          [class.active]="view === CalendarView.Week">
-          Semana
-        </button>
-        <button class="btn btn-primary" (click)="setView(CalendarView.Day)"
-          [class.active]="view === CalendarView.Day">
-          Día
-        </button>
-      </div>
+    <div class="btn-group col-8">
+      <button class="btn col-lg-auto btn-primary"
+        (click)="setView(CalendarView.Month)"
+        [class.active]="view === CalendarView.Month">
+        Mes
+      </button>
+      <button class="btn col-lg-auto btn-primary"
+        (click)="setView(CalendarView.Week)"
+        [class.active]="view === CalendarView.Week">
+        Semana
+      </button>
+      <button class="btn col-lg-auto btn-primary"
+        (click)="setView(CalendarView.Day)"
+        [class.active]="view === CalendarView.Day">
+        Día
+      </button>
     </div>
   </div>
-  <br />
 
   <!--Calendario de actividades programadas-->
   <div [ngSwitch]="view">

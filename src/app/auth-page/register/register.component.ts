@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../model/users/users.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastData, ToastOptions, ToastyConfig, ToastyService } from 'ng2-toasty';
 import { Observable, Subscription, timer } from 'rxjs';
+import { UserRepository } from 'src/app/model/users/user.repository';
 
 @Component({
   selector: 'app-register',
@@ -12,21 +12,18 @@ import { Observable, Subscription, timer } from 'rxjs';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
-  email: string;
-  password: string;
-  confirmPassword: string;
-  passwordError: boolean;
-
-  constructor(public userService: UsersService, private fb: FormBuilder,
-    private toastyService: ToastyService, private toastyConfig: ToastyConfig) { 
-      //this.toastyConfig.theme = 'bootstrap';
+  constructor(
+    public repositiry: UserRepository,
+    private fb: FormBuilder,
+    private toastyService: ToastyService, private toastyConfig: ToastyConfig) {
+    //this.toastyConfig.theme = 'bootstrap';
   }
-  
+
   ngOnInit(): void {
     this.initForm();
   }
 
-  initForm(){
+  initForm() {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')]],
       password: ['', Validators.required],
@@ -39,10 +36,6 @@ export class RegisterComponent implements OnInit {
       (this.registerForm.controls[fieldName].dirty || this.registerForm.controls[fieldName].touched);
   }
 
-  sirve(){
-    console.log("sirve;");
-  }
-
   register() {
     let toastOptions: ToastOptions = {
       title: 'Prueba Toasty',
@@ -51,10 +44,10 @@ export class RegisterComponent implements OnInit {
       timeout: 50000,
       theme: 'bootstrap',
       onAdd: (toast: ToastData) => {
-          console.log('Toast ' + toast.id + ' has been added!');
+        console.log('Toast ' + toast.id + ' has been added!');
       },
-      onRemove: function(toast: ToastData) {
-          console.log('Toast ' + toast.id + ' has been removed!');
+      onRemove: function (toast: ToastData) {
+        console.log('Toast ' + toast.id + ' has been removed!');
       }
     };
 

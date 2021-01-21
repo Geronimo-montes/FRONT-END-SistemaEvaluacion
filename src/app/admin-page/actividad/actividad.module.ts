@@ -15,6 +15,7 @@ import { ActividadFormTipoComponent } from './actividad-form/actividad-form-tipo
 import { ActividadFormNombreComponent } from './actividad-form/actividad-form-nombre/actividad-form-nombre.component';
 import { ActividadFormAprendizajeDiagnosticoComponent } from './actividad-form/actividad-form-aprendizaje-diagnostico/actividad-form-aprendizaje-diagnostico.component';
 import { ActividadFormEvidenciaComponent } from './actividad-form/actividad-form-evidencia/actividad-form-evidencia.component';
+import { ActividadFormInstrucionesComponent } from './actividad-form/actividad-form-instruciones/actividad-form-instruciones.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { ActividadFormEvidenciaComponent } from './actividad-form/actividad-form
     ActividadFormNombreComponent,
     ActividadFormAprendizajeDiagnosticoComponent,
     ActividadFormEvidenciaComponent,
+    ActividadFormInstrucionesComponent,
   ],
   providers: [
     AdminGuard,

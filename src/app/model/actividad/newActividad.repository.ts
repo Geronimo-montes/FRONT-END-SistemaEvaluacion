@@ -1,28 +1,37 @@
-import { Injectable, OnDestroy, OnInit } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { DataSourceService } from "../dataSource.service";
 import { Actividad, AprendizajeEsperado, Evidencia } from "./actividad.model";
 
 @Injectable()
-export class NewActividadRepository implements OnInit, OnDestroy {
+export class NewActividadRepository {
   private newActividad: Actividad = new Actividad();
   private _perfil: string = 'assets/img/theme/team-4-800x800.jpg';
   public areas: string[];
+
+  private mensaje: string;
+  private tipoMensaje: string;
+  private ubicacion: string;
 
   constructor(
     private datasource: DataSourceService,
   ) { }
 
-  ngOnInit() { }
-  ngOnDestroy() { }
+  getMensaje(): string {
+    return this.mensaje;
+  }
+  getTipoMensaje(): string {
+    return this.tipoMensaje;
+  }
+  getUbicacion(): string {
+    return this.ubicacion;
+  }
 
   getNewActividad(): Actividad {
     return this.newActividad;
   }
-
   getPerfil(): string {
     return this._perfil;
   }
-
   getAreas(): string[] {
     return this.areas;
   }
@@ -42,17 +51,9 @@ export class NewActividadRepository implements OnInit, OnDestroy {
     }
   }
 
-  set _newActividad(value: Actividad) {
-    this.newActividad = value;
-    this.areas = new Array(0);
-  }
-
   set nombre(nombre: string) { this.newActividad.nombre = nombre }
-
   set duracionMinutos(duracionMinutos: number) { this.newActividad.duracionMinutos = duracionMinutos }
-
   set tipoActividad(tipoActividad: string) { this.newActividad.tipoActividad = tipoActividad }
-
   set idAprendizajeEsperado(aprendizajeEsperado: AprendizajeEsperado) {
     if (this.newActividad.idAprendizajeEsperado === undefined) {
       this.newActividad.idAprendizajeEsperado = new Array(1);
@@ -69,7 +70,6 @@ export class NewActividadRepository implements OnInit, OnDestroy {
       }
     }
   }
-
   deleteidAprendizajeEsperado(id: number) {
     if (this.newActividad.idAprendizajeEsperado != undefined) {
       this.newActividad.idAprendizajeEsperado =
@@ -78,19 +78,12 @@ export class NewActividadRepository implements OnInit, OnDestroy {
             item => item.idAprendizajeEsperado != id);
     }
   }
-
   set idDiagnostico(idDiagnostico: number) { this.newActividad.idDiagnostico = idDiagnostico }
-
   set inicio(inicio: string) { this.newActividad.inicio = inicio }
-
   set desarrollo(desarrollo: string) { this.newActividad.desarrollo = desarrollo }
-
   set cierre(cierre: string) { this.newActividad.cierre = cierre }
-
   set recursos(recursos: string) { this.newActividad.recursos = recursos }
-
   set evaluacion(evaluacion: string) { this.newActividad.evaluacion = evaluacion }
-
   set evidencia(evidencia: Evidencia) {
     if (this.newActividad.evidencia === undefined) {
       this.newActividad.evidencia = new Array(1);
@@ -110,7 +103,6 @@ export class NewActividadRepository implements OnInit, OnDestroy {
       }
     }
   }
-
   deleteEvidencia(id: number) {
     if (this.newActividad.evidencia != undefined) {
       this.newActividad.evidencia =
@@ -119,11 +111,34 @@ export class NewActividadRepository implements OnInit, OnDestroy {
             item => item.idEvidencia != id);
     }
   }
-
-  set fechaModificacion(fechaModificacion: string) { this.newActividad.fechaModificacion = fechaModificacion }
-
-  set estatus(estatus: string) { this.newActividad.estatus = estatus }
-
   set perfil(ruta: string) { this._perfil = ruta; }
 
+  insertNewActividad() {
+    if (this.newActividad.nombre != undefined &&
+      this.newActividad.duracionMinutos != undefined &&
+      this.newActividad.tipoActividad != undefined &&
+      this.newActividad.idAprendizajeEsperado != undefined &&
+      this.newActividad.inicio != undefined &&
+      this.newActividad.desarrollo != undefined &&
+      this.newActividad.cierre != undefined &&
+      this.newActividad.recursos != undefined &&
+      this.newActividad.evidencia != undefined) {
+
+      this.datasource.insertActividad(JSON.stringify(this.newActividad)).subscribe(data => {
+        console.log(data);
+        if (data['success']) {
+          this.mensaje = data['mensaje'];
+          this.tipoMensaje = 'alert-success';
+        } else {
+          this.mensaje = data['mensaje'];
+          this.tipoMensaje = 'alert-danger';
+        }
+      });
+
+      this.newActividad = new Actividad();
+    } else {
+      this.mensaje = 'Existen valores requeridos.';
+      this.tipoMensaje = 'alert-danger';
+    }
+  }
 }
