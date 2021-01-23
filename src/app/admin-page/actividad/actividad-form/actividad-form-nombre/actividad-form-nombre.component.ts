@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Actividad } from 'src/app/model/actividad/actividad.model';
 import { NewActividadRepository } from 'src/app/model/actividad/newActividad.repository';
 import { ActividadFormComponent } from '../actividad-form.component';
 
@@ -26,6 +27,10 @@ export class ActividadFormNombreComponent implements OnInit {
     this.imgPerfil = this.newActividadRepository['rutaPerfil'];
   }
 
+  get newActividad(): Actividad {
+    return this.newActividadRepository.getNewActividad();
+  }
+
   isValidInput(fieldName, form): string {
     if (form.controls[fieldName].value == '' || form.controls[fieldName].value == null)
       return '';
@@ -46,10 +51,11 @@ export class ActividadFormNombreComponent implements OnInit {
     }
   }
 
-  setValues(_form: FormGroup) {
-    this.newActividadRepository.nombre = _form.controls['nombre'].value;
-    this.newActividadRepository.duracionMinutos = _form.controls['duracion'].value;
+  setValues() {
+    this.newActividadRepository.nombre = this.form.controls['nombre'].value;
+    this.newActividadRepository.duracionMinutos = this.form.controls['duracion'].value;
     this.newActividadRepository.perfil = this.imgPerfil;
+
     this.padre.next();
   }
 }

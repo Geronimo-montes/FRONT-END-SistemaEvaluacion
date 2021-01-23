@@ -25,13 +25,12 @@ export class ActividadRepository {
   /**Valores para el calendario de actividades**/
   private events: CalendarEvent[] = [];
   refresh: Subject<any> = new Subject();
-
   /**Valores para el crud de actividades**/
   private actividades: Actividad[];
-  private actividad: Actividad;
+  private _actividadSelected: Actividad;
   private areasFormacion: AreaFormacion[];
   private aprendizajeEsperado: AprendizajeEsperado[];
-
+  /**Mensaje de error*/
   private mensaje: string;
   private tipoMensaje: string;
   private ubicacion: string;
@@ -45,6 +44,7 @@ export class ActividadRepository {
 
     this.datasource.getActividades().subscribe(data => {
       this.actividades = data;
+      this._actividadSelected = data[0];
     });
 
     this.datasource.getAreaFormacion().subscribe((data) => {
@@ -56,36 +56,37 @@ export class ActividadRepository {
     });
   }
 
+  /**Valores para el calendario */
   getEventsCalendario(): CalendarEvent[] {
     return this.events;
   }
-
   getRefresh(): Subject<any> {
     return this.refresh;
   }
 
+  /**VAlores para el crud de actividades */
+  getActiviades(): Actividad[] {
+    return this.actividades;
+  }
+  get actividadSelected(): Actividad {
+    return this._actividadSelected;
+  }
+
+  set actividadSelected(valor: Actividad) {
+    this._actividadSelected = valor;
+  }
+  getAreaFormacion(): AreaFormacion[] {
+    return this.areasFormacion;
+  }
+  getAprendizajeEsperado(): AprendizajeEsperado[] {
+    return this.aprendizajeEsperado;
+  }
   getAprendizajeEsperadoByAreaFormacion(idAreaFormacion) {
     this.datasource.getAprendizajeEsperado(idAreaFormacion).subscribe((data) => {
       this.aprendizajeEsperado = data;
     })
   }
-
-  getActiviad(): Actividad {
-    return this.actividad;
-  }
-
-  getActiviades(): Actividad[] {
-    return this.actividades;
-  }
-
-  getAreaFormacion(): AreaFormacion[] {
-    return this.areasFormacion;
-  }
-
-  getAprendizajeEsperado(): AprendizajeEsperado[] {
-    return this.aprendizajeEsperado;
-  }
-
+  /**Mensaje de error/success */
   getMensaje(): string {
     return this.mensaje;
   }
@@ -96,17 +97,17 @@ export class ActividadRepository {
     return this.ubicacion;
   }
 
-  /*  insterActividad(actividad: FormData) {
-      this.datasource.insertActividad(actividad).subscribe((data) => {
-        if (data['success']) {
-          this.mensaje = data['mensaje'];
-          this.tipoMensaje = 'alert-success';
-        } else {
-          this.mensaje = data['mensaje'];
-          this.tipoMensaje = 'alert-danger';
-        }
-      });
-    }*/
+  insterActividad(actividad: FormData) {
+    this.datasource.insertActividad(actividad).subscribe((data) => {
+      if (data['success']) {
+        this.mensaje = data['mensaje'];
+        this.tipoMensaje = 'alert-success';
+      } else {
+        this.mensaje = data['mensaje'];
+        this.tipoMensaje = 'alert-danger';
+      }
+    });
+  }
 
   programarActividad(valor: any): void {
     this.datasource.programrActividad(valor).subscribe(data => {
@@ -173,6 +174,13 @@ export class ActividadRepository {
           start: new Date(a.fecha + ' ' + a.hora),
           end: addMinutes(new Date(a.fecha + ' ' + a.hora), a.duracionMinutos),
           color: colors[Math.floor(Math.random() * 3) + 1],
+          actions: [
+            {
+              label: `<span class="ml-2">${a.hora} a ${addMinutes(new Date(a.fecha + ' ' + a.hora), a.duracionMinutos).toTimeString().slice(0, 8)}</span>`,
+              a11yLabel: 'Horario',
+              onClick: ({ event }: { event: CalendarEvent; }): void => void 0,
+            }
+          ],
           draggable: false,
           resizable: {
             beforeStart: false,

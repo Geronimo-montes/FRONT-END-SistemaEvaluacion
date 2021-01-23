@@ -9,13 +9,12 @@
   <div class="card-body">
     <div class="row justify-content-center">
       <div class="col-8">
-
         <!--nombre Actividad-->
         <div class="row-lg">
           <div class="form-group">
             <input class="form-control text-dark" type="text"
               [(ngModel)]="actividadSelected.nombre" name="actividadnombre"
-              placeholder="Actividad Seleccionada">
+              placeholder="Actividad Seleccionada" readonly>
           </div>
         </div>
 
@@ -86,7 +85,8 @@
             </thead>
             <tbody>
               <tr *ngFor="let actividad of actividades"
-                (click)="setActividadSelected(actividad);">
+                (click)="setActividadSelected(actividad);"
+                [ngClass]="{'table-success': actividadSelected === actividad}">
                 <!--No. Actividad-->
                 <th>
                   <div class=" align-items-center">

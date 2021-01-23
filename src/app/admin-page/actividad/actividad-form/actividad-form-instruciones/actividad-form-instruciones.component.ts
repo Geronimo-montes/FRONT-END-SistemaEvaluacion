@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Actividad } from 'src/app/model/actividad/actividad.model';
 import { NewActividadRepository } from 'src/app/model/actividad/newActividad.repository';
 import { ActividadFormComponent } from '../actividad-form.component';
 
@@ -30,6 +31,13 @@ export class ActividadFormInstrucionesComponent implements OnInit {
     });
   }
 
+  get newActividad(): Actividad {
+    return this.newActividadRepository.getNewActividad();
+  }
+  get validData(): boolean {
+    return this.newActividadRepository.getValidaData();
+  }
+
   isValidInput(fieldName, form): string {
     if (form.controls[fieldName].value == '' || form.controls[fieldName].value == null)
       return '';
@@ -39,22 +47,14 @@ export class ActividadFormInstrucionesComponent implements OnInit {
           || form.controls[fieldName].touched)) ? 'is-invalid' : 'is-valid';
   }
 
-  load(event) {
-    const reader = new FileReader();
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-      };
-    }
-  }
-
   setValues() {
     this.newActividadRepository.inicio = this.form.controls['inicio'].value;
     this.newActividadRepository.desarrollo = this.form.controls['desarrollo'].value;
     this.newActividadRepository.cierre = this.form.controls['cierre'].value;
     this.newActividadRepository.recursos = this.form.controls['recursos'].value;
+
     this.padre.insertActividad();
+    this.form.reset();
   }
 
 }

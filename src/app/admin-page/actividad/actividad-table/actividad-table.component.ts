@@ -25,8 +25,13 @@ export class ActividadTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get actividad(): Actividad {
-    return this.repository.getActiviad();
+  setActividadSelected(valor: Actividad) {
+    this.repository.actividadSelected = valor;
+    this.router.navigateByUrl("plantrabajo/calendario");
+  }
+
+  nuevaActividad() {
+    this.router.navigateByUrl("actividad/form");
   }
 
   get actividades(): Actividad[] {
@@ -89,9 +94,5 @@ export class ActividadTableComponent implements OnInit {
       this.primerControl = (this.primerControl < this.NumberPage - 1) ?
         this.primerControl + control :
         this.primerControl;
-  }
-
-  nuevaActividad() {
-    this.router.navigateByUrl("actividad/form");
   }
 }

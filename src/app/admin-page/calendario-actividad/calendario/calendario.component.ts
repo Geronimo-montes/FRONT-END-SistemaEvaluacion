@@ -4,7 +4,6 @@ import { Subject } from 'rxjs';
 import { NgbDateStruct, NgbModal, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { ActividadRepository } from 'src/app/model/actividad/actividad.repository';
-import { date, even, model } from '@rxweb/reactive-form-validators';
 
 @Component({
   selector: 'app-calendario',

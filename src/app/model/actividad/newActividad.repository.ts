@@ -113,32 +113,31 @@ export class NewActividadRepository {
   }
   set perfil(ruta: string) { this._perfil = ruta; }
 
-  insertNewActividad() {
+  getValidaData(): boolean {
     if (this.newActividad.nombre != undefined &&
       this.newActividad.duracionMinutos != undefined &&
       this.newActividad.tipoActividad != undefined &&
       this.newActividad.idAprendizajeEsperado != undefined &&
-      this.newActividad.inicio != undefined &&
+      /*this.newActividad.inicio != undefined &&
       this.newActividad.desarrollo != undefined &&
       this.newActividad.cierre != undefined &&
-      this.newActividad.recursos != undefined &&
-      this.newActividad.evidencia != undefined) {
+      this.newActividad.recursos != undefined &&*/
+      this.newActividad.evidencia != undefined)
+      return true;
+    else
+      return false;
+  }
 
-      this.datasource.insertActividad(JSON.stringify(this.newActividad)).subscribe(data => {
-        console.log(data);
-        if (data['success']) {
-          this.mensaje = data['mensaje'];
-          this.tipoMensaje = 'alert-success';
-        } else {
-          this.mensaje = data['mensaje'];
-          this.tipoMensaje = 'alert-danger';
-        }
-      });
-
-      this.newActividad = new Actividad();
-    } else {
-      this.mensaje = 'Existen valores requeridos.';
-      this.tipoMensaje = 'alert-danger';
-    }
+  insertNewActividad() {
+    this.datasource.insertActividad(JSON.stringify(this.newActividad)).subscribe(data => {
+      if (data['success']) {
+        this.mensaje = data['mensaje'];
+        this.tipoMensaje = 'alert-success';
+      } else {
+        this.mensaje = data['mensaje'];
+        this.tipoMensaje = 'alert-danger';
+      }
+    });
+    this.newActividad = new Actividad();
   }
 }

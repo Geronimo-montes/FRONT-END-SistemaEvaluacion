@@ -76,6 +76,6 @@ export const FORMATOS = [
 ];
 
 export const TipoActividad = [
-  { descripcion: 'Actividad Diagnostico', icon: '', class: '' },
-  { descripcion: 'Actividad Evaluación', icon: '', class: '' },
+  { descripcion: 'Actividad Evaluación', icon: 'ni-hat-3 text-white', class: 'bg-success' },
+  { descripcion: 'Actividad Diagnostico', icon: 'ni-collection text-white', class: 'bg-danger' },
 ];

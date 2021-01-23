@@ -3,7 +3,6 @@ import { NgbCalendar, NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-boot
 import { ActividadRepository } from 'src/app/model/actividad/actividad.repository';
 import { Actividad } from 'src/app/model/actividad/actividad.model';
 import { CalendarEvent } from 'angular-calendar';
-import { even } from '@rxweb/reactive-form-validators';
 
 @Component({
   selector: 'app-calendario-programar-actividad',
@@ -11,13 +10,10 @@ import { even } from '@rxweb/reactive-form-validators';
   styleUrls: ['./calendario-programar-actividad.component.css']
 })
 export class CalendarioProgramarActividadComponent {
-
   public NumRowPage: number = 4;
   public SelectedPage: number = 1;
   public primerControl: number = 1;
   public filtro: string = "";
-
-  private actividadSelected: Actividad;
 
   private time: NgbTimeStruct;
   private model: NgbDateStruct;
@@ -29,26 +25,27 @@ export class CalendarioProgramarActividadComponent {
   ) {
     this.model = calendar.getToday();
     this.time = { hour: new Date().getHours() + 1, minute: 0, second: 0 };
-    this.actividadSelected = this.actividades[0];
   }
 
-  get mensaje(): string {
-    return this.repository.getMensaje();
-  }
-
-  get tipoMensaje(): string {
-    return this.repository.getTipoMensaje();
-  }
-
-  get ubicacion(): string {
-    return this.repository.getUbicacion();
-  }
-
+  /**Actividades programadas */
   get events(): CalendarEvent[] {
     return this.repository.getEventsCalendario();
   }
-  get actividad(): Actividad {
-    return this.repository.getActiviad();
+  get actividadSelected(): Actividad {
+    return this.repository.actividadSelected;
+  }
+  setActividadSelected(valor: Actividad) {
+    this.repository.actividadSelected = valor;
+  }
+  /**Datos del mensaje */
+  get mensaje(): string {
+    return this.repository.getMensaje();
+  }
+  get tipoMensaje(): string {
+    return this.repository.getTipoMensaje();
+  }
+  get ubicacion(): string {
+    return this.repository.getUbicacion();
   }
 
   get actividades(): Actividad[] {
@@ -111,10 +108,6 @@ export class CalendarioProgramarActividadComponent {
       this.primerControl = (this.primerControl < this.NumberPage - 1) ?
         this.primerControl + control :
         this.primerControl;
-  }
-
-  setActividadSelected(valor: Actividad) {
-    this.actividadSelected = valor;
   }
 
   programarNuevaActividad() {

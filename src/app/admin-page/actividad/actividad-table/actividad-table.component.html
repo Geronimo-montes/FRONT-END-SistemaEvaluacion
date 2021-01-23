@@ -34,18 +34,19 @@
             <thead class="thead-ligth">
               <tr>
                 <th scope="col" class="h1"></th>
-                <th scope="col" class="h1">No. Actividad</th>
+                <th scope="col" class="h1">No.</th>
+                <th scope="col" class="h1">Tipo</th>
                 <th scope="col" class="h1">Nombre</th>
                 <th scope="col" class="h1">Duración</th>
-                <th scope="col" class="h1">Tipo de Actividad</th>
-                <th scope="col" class="h1">Acciones</th>
+                <th scope="col" class="h1">Ultima Actualización</th>
+                <th scope="col" class="h1"></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let actividad of actividades">
-                <th scope="row">
+                <th>
                   <div class="media align-items-center">
-                    <div class="avatar rounded-circle mr-3">
+                    <div class="avatar rounded-circle">
                       <img alt="Image placeholder"
                         src="assets/img/theme/bootstrap.jpg">
                     </div>
@@ -53,48 +54,52 @@
                 </th>
                 <!--No. Actividad-->
                 <th>
-                  <div class=" align-items-center">
-                    <div class="media-body">
-                      <span class="mb-0 text-sm">
-                        {{ actividad.idPlanTrabajo }}
-                      </span>
+                  <div class="media-body align-items-center">
+                    <span class="text-sm">
+                      {{ actividad.idPlanTrabajo }}
+                    </span>
+                  </div>
+                </th>
+                <!--tipoActividad-->
+                <th>
+                  <div class="media-body align-items-center">
+                    <div
+                      class="icon icon-shape rounded-circle {{tiposActividad[actividad.tipoActividad].class}}"
+                      placement="bottom"
+                      ngbTooltip="{{tiposActividad[actividad.tipoActividad].descripcion}}">
+                      <i
+                        class="ni {{tiposActividad[actividad.tipoActividad].icon}}"></i>
                     </div>
                   </div>
                 </th>
                 <!--Nombre-->
                 <th>
-                  <div class="align-items-center">
-                    <div class="media-body">
-                      <span class="mb-0 text-sm">
-                        {{ actividad.nombre }}
-                      </span>
-                    </div>
+                  <div class="media-body align-items-center">
+                    <span class="text-sm">
+                      {{ actividad.nombre }}
+                    </span>
                   </div>
                 </th>
                 <!--Duracion-->
                 <th>
-                  <div class="align-items-center">
-                    <div class="media-body">
-                      <span class="mb-0 text-sm">
-                        {{actividad.duracionMinutos}} minutos
-                      </span>
-                    </div>
+                  <div class="media-body align-items-center">
+                    <span class="text-sm">
+                      {{actividad.duracionMinutos}} minutos
+                    </span>
                   </div>
                 </th>
-                <!--tipoActividad-->
+                <!--Fecha modificacion-->
                 <th>
-                  <div class="align-items-center">
-                    <div class="media-body">
-                      <span class="mb-0 text-sm">
-                        {{ tiposActividad[actividad.tipoActividad].descripcion
-                        }}
-                      </span>
-                    </div>
+                  <div class="media-body align-items-center">
+                    <span class="text-sm">
+                      {{actividad.fechaModificacion | date:'longDate'}}
+                    </span>
                   </div>
                 </th>
-                <td>
+                <!--Menu de acciones-->
+                <th>
                   <div ngbDropdown placement="left">
-                    <a class="btn btn-sm btn-icon-only text-light"
+                    <a class="btn  btn-icon-only text-dark border rounded-circle"
                       ngbDropdownToggle>
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
@@ -102,10 +107,13 @@
                       class="dropdown-menu-right dropdown-menu-arrow">
                       <button class="dropdown-item">Ver información</button>
                       <button class="dropdown-item">Editar información</button>
-                      <button class="dropdown-item">Otra acción</button>
+                      <button class="dropdown-item" type="button"
+                        (click)="setActividadSelected(actividad);">Programar
+                        Actividad</button>
                     </div>
                   </div>
-                </td>
+                </th>
+
               </tr>
             </tbody>
           </table>
