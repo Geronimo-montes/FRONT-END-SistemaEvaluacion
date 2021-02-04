@@ -118,10 +118,6 @@ export class NewActividadRepository {
       this.newActividad.duracionMinutos != undefined &&
       this.newActividad.tipoActividad != undefined &&
       this.newActividad.idAprendizajeEsperado != undefined &&
-      /*this.newActividad.inicio != undefined &&
-      this.newActividad.desarrollo != undefined &&
-      this.newActividad.cierre != undefined &&
-      this.newActividad.recursos != undefined &&*/
       this.newActividad.evidencia != undefined)
       return true;
     else

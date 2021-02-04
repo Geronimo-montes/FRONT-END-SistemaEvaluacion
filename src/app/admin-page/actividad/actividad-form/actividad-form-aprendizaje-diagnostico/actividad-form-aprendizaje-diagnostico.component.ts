@@ -11,7 +11,7 @@ import { ActividadFormComponent } from '../actividad-form.component';
   styleUrls: ['./actividad-form-aprendizaje-diagnostico.component.css']
 })
 export class ActividadFormAprendizajeDiagnosticoComponent implements OnInit {
-  private form: FormGroup;
+  form: FormGroup;
   public NumRowPage: number = 5;
   public SelectedPage: number = 1;
   public primerControl: number = 1;

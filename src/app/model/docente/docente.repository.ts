@@ -62,17 +62,4 @@ export class DocenteRepository implements OnInit, OnDestroy {
       this.formDestino = data['destino'];
     });
   }
-
-  updateUser(user: any): void {
-    this.datasource.updateUser(user).subscribe((data) => {
-      if (data['success']) {
-        this.mensaje = data['mensaje'];
-        this.tipoMensaje = 'alert-success';
-      } else {
-        this.mensaje = data['mensaje'];
-        this.tipoMensaje = 'alert-danger';
-      }
-      this.formDestino = data['destino'];
-    });
-  }
 }

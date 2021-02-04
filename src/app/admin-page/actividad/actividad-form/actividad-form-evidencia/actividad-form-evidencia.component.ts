@@ -10,7 +10,7 @@ import { FORMATOS } from '../../../../model/actividad/actividad.model';
   styleUrls: ['./actividad-form-evidencia.component.css']
 })
 export class ActividadFormEvidenciaComponent implements OnInit {
-  private form: FormGroup;
+  form: FormGroup;
   public formatos: any[];
   constructor(
     private fb: FormBuilder,
@@ -28,12 +28,12 @@ export class ActividadFormEvidenciaComponent implements OnInit {
   }
 
   isValidInput(fieldName, form): string {
-    if (form.controls[fieldName].value == '' || form.controls[fieldName].value == null)
+    if (this.form.controls[fieldName].value == '' || this.form.controls[fieldName].value == null)
       return '';
     else
-      return (form.controls[fieldName].invalid
-        && (form.controls[fieldName].dirty
-          || form.controls[fieldName].touched)) ? 'is-invalid' : 'is-valid';
+      return (this.form.controls[fieldName].invalid
+        && (this.form.controls[fieldName].dirty
+          || this.form.controls[fieldName].touched)) ? 'is-invalid' : 'is-valid';
   }
 
   setValues() {

@@ -15,8 +15,8 @@ export class CalendarioProgramarActividadComponent {
   public primerControl: number = 1;
   public filtro: string = "";
 
-  private time: NgbTimeStruct;
-  private model: NgbDateStruct;
+  public time: NgbTimeStruct;
+  public model: NgbDateStruct;
   public mensajeLocal: string;
 
   constructor(

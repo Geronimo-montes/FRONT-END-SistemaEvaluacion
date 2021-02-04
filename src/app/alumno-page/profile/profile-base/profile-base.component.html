@@ -1,0 +1,18 @@
+<div *ngIf="!!alumno && !!usuario && !!actividades"
+  class="container-fluid mt--5 bg-secondary">
+  <div class="row">
+    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+      <app-form-ficha></app-form-ficha>
+    </div>
+    <div class="col-xl-8 order-xl-1">
+      <!--Informacion del usuario-->
+      <div class="card bg-secondary shadow">
+        <app-form-alumno></app-form-alumno>
+      </div>
+      <!--Informacion de la cuenta-->
+      <div class="card bg-secondary shadow mt-3">
+        <app-form-user></app-form-user>
+      </div>
+    </div>
+  </div>
+</div>

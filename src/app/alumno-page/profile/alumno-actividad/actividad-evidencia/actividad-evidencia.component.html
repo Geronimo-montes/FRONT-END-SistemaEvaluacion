@@ -1,0 +1,32 @@
+<div *ngIf="!!actividadSelected" class="card card-profile shadow">
+  <div class="row justify-content-center">
+    <div class="col-lg-3 order-lg-2 mt--5">
+      <div class="card-profile-image">
+        <img [src]="imgPerfil" class="rounded-circle">
+      </div>
+    </div>
+  </div>
+  <div class="card-body pt-0 pt-md-4">
+    <h1 class="text-center">Comentarios</h1>
+    <!--Area de evidencias (presentacion)-->
+    <div class="overflow-auto" style="max-height: 25rem;">
+      <div *ngFor="let a of comentarios" class="card border-0 mb-lg-0">
+        <p><strong class="card-title h4 font-weight-bold">{{a.nombre |
+            titlecase}} [{{a.fecha | date:'short'}}]:</strong>
+          {{a.comentario}}</p>
+      </div>
+    </div>
+
+    <hr class="my-4" />
+
+    <div class="">
+      <div class="form-group">
+        <textarea class="form-control text-dark" type="text"
+          [(ngModel)]="comentario" placeholder="Agrega un comentario"
+          style="resize: none;"></textarea>
+      </div>
+      <button class="btn btn-2 btn-primary"
+        (click)="comentarActividad();">Comentar</button>
+    </div>
+  </div>
+</div>

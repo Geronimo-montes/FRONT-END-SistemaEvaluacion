@@ -1,0 +1,49 @@
+<div class="card card-profile shadow">
+  <div class="row justify-content-center">
+    <div class="col-lg-3 order-lg-2 mt--5">
+      <div class="card-profile-image">
+        <img [src]="imgPerfil" class="rounded-circle">
+      </div>
+    </div>
+  </div>
+  <div class="card-body pt-0 pt-md-4 mt--2">
+    <div class="mt-6">
+      <h1 class="text-center">Actividades</h1>
+      <!--repeticion por cada actividad del alumno-->
+      <div *ngIf="actividades.length === 0"
+        class="card card-stats m-4 mb-4 mb-lg-0 border">
+        <h1 class="text-center text-dark">Sin Actividades Pendientes...</h1>
+      </div>
+      <div *ngFor="let actividad of actividades"
+        class="card card-stats m-4 mb-4 mb-lg-0 border">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+
+              <span class="h5 font-weight-bold mb-0">
+                {{actividad['fechatermino'] | date:'fullDate'| titlecase}}
+                {{actividad['fechatermino'] | date:'shortTime'| titlecase}}
+              </span>
+
+              <h5 class="card-title text-uppercase text-muted mb-0">
+                {{actividad['nombre']}}
+              </h5>
+              <span class="h5  mb-0">
+                {{actividad['fechatermino'] | date:'shortTime'| titlecase}}
+              </span>
+            </div>
+
+            <div class="col-2">
+              <button
+                class="btn btn-icon icon-shape bg-info text-white rounded-circle shadow"
+                placement="left" ngbTooltip="Agregar tarea" type="button"
+                (click)="setActividad(actividad['idActividadProgramada']);">
+                <i class="ni ni-fat-add"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

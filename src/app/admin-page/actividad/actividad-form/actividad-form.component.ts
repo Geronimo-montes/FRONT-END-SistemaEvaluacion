@@ -47,5 +47,8 @@ export class ActividadFormComponent implements OnInit {
 
   insertActividad() {
     this.newActividadRepository.insertNewActividad();
+    setTimeout(() => {
+      this.repository.cargarActividades();
+    }, 2000);
   }
 }

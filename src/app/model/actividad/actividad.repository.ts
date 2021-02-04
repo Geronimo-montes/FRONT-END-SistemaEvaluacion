@@ -65,6 +65,12 @@ export class ActividadRepository {
   }
 
   /**VAlores para el crud de actividades */
+  cargarActividades() {
+    this.datasource.getActividades().subscribe(data => {
+      this.actividades = data;
+      this._actividadSelected = data[0];
+    });
+  }
   getActiviades(): Actividad[] {
     return this.actividades;
   }

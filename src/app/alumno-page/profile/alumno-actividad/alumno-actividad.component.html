@@ -1,0 +1,13 @@
+<div *ngIf="!!alumno && !!usuario && !!actividadSelected"
+  class="container-fluid mt--8 bg-secondary">
+  <div class="row">
+    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+      <app-actividad-evidencia></app-actividad-evidencia>
+    </div>
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <app-actividad-detalle></app-actividad-detalle>
+      </div>
+    </div>
+  </div>
+</div>

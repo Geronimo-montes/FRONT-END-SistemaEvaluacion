@@ -9,19 +9,19 @@ import { DocenteRepository } from 'src/app/model/docente/docente.repository';
   styleUrls: ['./ficha-informacion.component.css']
 })
 export class FichaInformacionComponent implements OnInit {
-  private form: FormGroup;
+  form: FormGroup;
   public imgPerfil: string;
 
   constructor(private repository: DocenteRepository, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      perfil: new FormControl(null, {validators: [Validators.required]})
+      perfil: new FormControl(null, { validators: [Validators.required] })
     });
     this.imgPerfil = this.docente['rutaPerfil'];
   }
 
-  get docente(): Docente{ 
+  get docente(): Docente {
     return this.repository.getDocente();
   }
   get mensaje(): string {
@@ -34,12 +34,12 @@ export class FichaInformacionComponent implements OnInit {
     return this.repository.getFormDestino();
   }
 
-  load(event){
-    const reader = new FileReader();    
-    if(event.target.files && event.target.files.length) {
+  load(event) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
-      
+
       reader.onload = () => {
         this.imgPerfil = reader.result as string;
         this.form.patchValue({

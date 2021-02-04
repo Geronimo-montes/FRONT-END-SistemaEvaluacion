@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { ROUTES } from '../sidebar/sidebar.component';
+import { ROUTES_DOCENTE } from '../sidebar/sidebar.component';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { DocenteRepository } from 'src/app/model/docente/docente.repository';
@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   public listTitles: any[];
   public location: Location;
   public location_Link = '/profile';
+
   constructor(
     location: Location,
     private element: ElementRef,
@@ -26,7 +27,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.listTitles = ROUTES.filter(listTitle => listTitle);
+    this.listTitles = ROUTES_DOCENTE.filter(listTitle => listTitle);
   }
 
   get docente(): Docente {

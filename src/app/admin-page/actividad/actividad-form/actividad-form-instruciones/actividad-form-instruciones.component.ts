@@ -10,7 +10,7 @@ import { ActividadFormComponent } from '../actividad-form.component';
   styleUrls: ['./actividad-form-instruciones.component.css']
 })
 export class ActividadFormInstrucionesComponent implements OnInit {
-  private form: FormGroup;
+  form: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -31,6 +31,16 @@ export class ActividadFormInstrucionesComponent implements OnInit {
     });
   }
 
+  get mensaje(): string {
+    return this.newActividadRepository.getMensaje();
+  }
+  get tipoMensaje(): string {
+    return this.newActividadRepository.getTipoMensaje();
+  }
+  get ubicacion(): string {
+    return this.newActividadRepository.getUbicacion();
+  }
+
   get newActividad(): Actividad {
     return this.newActividadRepository.getNewActividad();
   }
@@ -39,12 +49,12 @@ export class ActividadFormInstrucionesComponent implements OnInit {
   }
 
   isValidInput(fieldName, form): string {
-    if (form.controls[fieldName].value == '' || form.controls[fieldName].value == null)
+    if (this.form.controls[fieldName].value == '' || this.form.controls[fieldName].value == null)
       return '';
     else
-      return (form.controls[fieldName].invalid
-        && (form.controls[fieldName].dirty
-          || form.controls[fieldName].touched)) ? 'is-invalid' : 'is-valid';
+      return (this.form.controls[fieldName].invalid
+        && (this.form.controls[fieldName].dirty
+          || this.form.controls[fieldName].touched)) ? 'is-invalid' : 'is-valid';
   }
 
   setValues() {

@@ -9,7 +9,7 @@ import { DocenteRepository } from 'src/app/model/docente/docente.repository';
   styleUrls: ['./form-docente.component.css']
 })
 export class FormDocenteComponent implements OnInit {
-  private form: FormGroup;
+  form: FormGroup;
   public inputDisable: boolean = true;
 
   constructor(private repository: DocenteRepository, private fb: FormBuilder) { }
@@ -28,7 +28,6 @@ export class FormDocenteComponent implements OnInit {
       grupo: new FormControl(this.docente['grupo'], { validators: [Validators.required] }),
       grado: new FormControl(this.docente['grado'], { validators: [Validators.required] }),
       turno: new FormControl(this.docente['turno'], { validators: [Validators.required] }),
-      rol: new FormControl(this.docente['rol'], { validators: [Validators.required] }),
       estatus: new FormControl(this.docente['estatus'], { validators: [Validators.required] }),
     });
   }
@@ -69,7 +68,6 @@ export class FormDocenteComponent implements OnInit {
       grupo: this.form.controls['grupo'].value,
       grado: this.form.controls['grado'].value,
       turno: this.form.controls['turno'].value,
-      rol: this.form.controls['rol'].value,
       estatus: this.form.controls['estatus'].value,
     };
     this.repository.updateDocnete(docente);

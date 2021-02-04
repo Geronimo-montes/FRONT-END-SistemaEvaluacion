@@ -9,10 +9,11 @@ import { AlumnoRepository } from 'src/app/model/alumno/alumno.repository';
   styleUrls: ['./profilealumno.component.css']
 })
 export class ProfilealumnoComponent implements OnInit {
-  private perfil;
+  public perfil;
   public inputDisable = false;
-  private form: FormGroup;
+  public form: FormGroup;
   public imgPerfil: string;
+
   constructor(private repository: AlumnoRepository, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -52,12 +53,12 @@ export class ProfilealumnoComponent implements OnInit {
   }
 
   isValidInput(fieldName, form): string {
-    if (form.controls[fieldName].value == '' || form.controls[fieldName].value == null)
+    if (this.form.controls[fieldName].value == '' || this.form.controls[fieldName].value == null)
       return '';
     else
-      return (form.controls[fieldName].invalid
-        && (form.controls[fieldName].dirty
-          || form.controls[fieldName].touched)) ? 'is-invalid' : 'is-valid';
+      return (this.form.controls[fieldName].invalid
+        && (this.form.controls[fieldName].dirty
+          || this.form.controls[fieldName].touched)) ? 'is-invalid' : 'is-valid';
   }
 
   load(event) {
@@ -76,7 +77,7 @@ export class ProfilealumnoComponent implements OnInit {
     this.perfil = event.target.files[0];
   }
 
-  updateAlumno(form: FormGroup): void {
+  updateAlumno(): void {
     let data = new FormData();
     data.append('file', this.perfil);
     data.append('idAlumno', this.form.controls['idAlumno'].value);

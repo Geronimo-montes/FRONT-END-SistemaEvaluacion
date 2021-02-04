@@ -10,7 +10,7 @@ declare interface RouteInfo {
   icon: string;
   class: string;
 }
-export const ROUTES: RouteInfo[] = [
+export const ROUTES_DOCENTE: RouteInfo[] = [
   //Para el menu lateral: se crea un arreglo con las rutas, agregando nombre e icono luego se recorre en el html
   { path: '/profile', title: 'Mi Perfil', icon: 'ni-circle-08 text-yellow', class: '' },
   { path: '/alumno', title: 'Alumnos', icon: 'ni-hat-3 text-blue', class: 'ni-4x' },
@@ -34,7 +34,7 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.menuItems = ROUTES_DOCENTE.filter(menuItem => menuItem);
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
     });

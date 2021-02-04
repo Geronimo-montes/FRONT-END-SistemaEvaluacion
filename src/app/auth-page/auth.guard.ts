@@ -11,8 +11,13 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.cookies.get('token').length > 0) {
-      this.router.navigateByUrl('profile');
-      return false;
+      if (this.cookies.get('rol') != 'docente') {
+        this.router.navigateByUrl('userprofile');
+        return false;
+      } else {
+        this.router.navigateByUrl('profile');
+        return false;
+      }
     }
     return true;
   }

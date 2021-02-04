@@ -1,10 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { resolve } from '@angular/compiler-cli/src/ngtsc/file_system';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Actividad, ActividadProgramada, AprendizajeEsperado, AreaFormacion } from './actividad/actividad.model';
-import { Alumno } from './alumno/alumno.model';
+import { Alumno, Comentario } from './alumno/alumno.model';
 import { Docente } from './docente/docente.model';
+import { Usuario } from './users/user.model';
 
 const PROTOCOL = "http";
 const PORT = "80";
@@ -12,7 +15,9 @@ const PORT = "80";
 export class DataSourceService {
   baseURL: string;
   constructor(private http: HttpClient, private cookies: CookieService) {
-    this.baseURL = `${PROTOCOL}://sistemaevaluacion:${PORT}/`;
+    //this.baseURL = `https://sistemaevaluacionkinder.000webhostapp.com/`;
+    this.baseURL = environment.baseURL;
+    //this.baseURL = `${PROTOCOL}://sistemaevaluacion:${PORT}/`;
   }
 
   /**Autenticacion de usuaios */
@@ -20,12 +25,20 @@ export class DataSourceService {
     return this.http.post(this.baseURL + 'login', user);
   }
 
+  getUsuario(): Observable<Usuario> {
+    return this.http.get<Usuario>(this.baseURL + 'usuario', this.getOptions());
+  }
+
+  validarRol(): Observable<any> {
+    return this.http.get(this.baseURL + 'docentevalidacion', this.getOptions());
+  }
+
   logOut(): Observable<boolean> {
-    return this.http.put<boolean>(this.baseURL + 'logout', 0, this.getOptions());
+    return this.http.post<boolean>(this.baseURL + 'logout', 0, this.getOptions());
   }
 
   updateUser(user: any): Observable<any> {
-    return this.http.put(this.baseURL + 'user/update', user, this.getOptions());
+    return this.http.post(this.baseURL + 'user/update', user, this.getOptions());
   }
 
   getToken() {
@@ -44,7 +57,7 @@ export class DataSourceService {
   }
 
   updateDocenteById(docente: any): Observable<any> {
-    return this.http.put(this.baseURL + 'docente/update', docente, this.getOptions());
+    return this.http.post(this.baseURL + 'docente/update', docente, this.getOptions());
   }
 
   /**Alumnos get */
@@ -58,9 +71,9 @@ export class DataSourceService {
   }
 
   updatePerfil(perfil: any): any {
-    let input = new FormData();
-    input.append("file", perfil);
-    return this.http.post(this.baseURL + 'updateperfil', input, this.getOptions());
+    let inpost = new FormData();
+    inpost.append("file", perfil);
+    return this.http.post(this.baseURL + 'updateperfil', inpost, this.getOptions());
   }
 
   getAreaFormacion(): Observable<AreaFormacion[]> {
@@ -92,11 +105,36 @@ export class DataSourceService {
   }
 
   modificarActividad(actividad: any): Observable<any> {
-    return this.http.put(this.baseURL + 'planTrabajo/update', actividad, this.getOptions());
+    return this.http.post(this.baseURL + 'planTrabajo/update', actividad, this.getOptions());
   }
 
   deleteActividad(id: number): Observable<any> {
     return this.http.delete(this.baseURL + 'planTrabajo/delete/' + id, this.getOptions());
+  }
+
+  /**Usuario alumnos Metodos CRUD */
+  getAlumnoById(): Observable<Alumno> {
+    return this.http.get<Alumno>(this.baseURL + 'alumnouser', this.getOptions());
+  }
+  getActividadesAlumno(): Observable<any> {
+    return this.http.get<any>(this.baseURL + 'actividadesalumno', this.getOptions());
+  }
+  getActividadesAlumnoById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}actividadalumno/${id}`, this.getOptions());
+  }
+
+  /**comentarios */
+  insertComentarios(comentario: any): Observable<Comentario[]> {
+    return this.http.post<Comentario[]>(`${this.baseURL}comentarioinsert`, comentario, this.getOptions());
+  }
+
+  subirEvidencia(files: any, id: any): any {
+    let inpost = new FormData();
+    for (let index = 0; index < files.length; index++) {
+      inpost.append(index.toString(), files[index]);
+    }
+
+    return this.http.post(`${this.baseURL}subirevidencia/${files.length}/${id}`, inpost, this.getOptions());
   }
 
   getOptions() {

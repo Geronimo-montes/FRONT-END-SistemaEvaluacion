@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from '../admin.guard';
+import { AlumnoActividadComponent } from './alumno-actividad/alumno-actividad.component';
 import { CalendarioBaseComponent } from './calendario-base/calendario-base.component';
-import { CalendarioComponent } from './calendario/calendario.component';
+import { CalendarioComponent } from './calendario-base/calendario/calendario.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
         canActivate: [AdminGuard],
       }
     ]
+  }, {
+    path: 'actividadalumno',
+    component: AlumnoActividadComponent,
+    canActivate: [AdminGuard],
   }
 ];
 

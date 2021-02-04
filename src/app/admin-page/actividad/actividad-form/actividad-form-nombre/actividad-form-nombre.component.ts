@@ -10,7 +10,7 @@ import { ActividadFormComponent } from '../actividad-form.component';
   styleUrls: ['./actividad-form-nombre.component.css']
 })
 export class ActividadFormNombreComponent implements OnInit {
-  private form: FormGroup;
+  form: FormGroup;
   public imgPerfil: string;
   constructor(
     private fb: FormBuilder,

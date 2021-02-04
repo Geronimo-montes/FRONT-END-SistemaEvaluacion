@@ -1,0 +1,111 @@
+<div class="card-header bg-white border-0 shadow">
+  <div class="row">
+    <div class="col-9">
+      <h2 class="mb-0">
+        #{{actividadSelected['idActividadProgramada']}}
+        {{actividadSelected['nombre']}}
+      </h2>
+    </div>
+  </div>
+</div>
+<div class="card-body m-4">
+  <!--Fecha de inicio y termino-->
+  <div class="row justify-content-between">
+    <div class="col-lg-1">
+      <i class="ni ni-3x text-blue ni-calendar-grid-58"></i>
+    </div>
+
+    <div class="col-lg-5">
+      <h3 class="text-muted">
+        Inicio de la Actividad
+      </h3>
+      <span class="h4 font-weight-bold">
+        {{actividadSelected['fechainicio'] | date:'fullDate'| titlecase}}
+        {{actividadSelected['fechainicio'] | date:'shortTime'| titlecase}}
+      </span>
+    </div>
+
+    <div class="col-lg-1">
+      <i class="ni ni-3x text-green ni-calendar-grid-58"></i>
+    </div>
+
+    <div class="col-lg-5">
+      <h3 class="text-muted">
+        Fin de la Actividad
+      </h3>
+      <span class="h4 font-weight-bold">
+        {{actividadSelected['fechatermino'] | date:'fullDate'| titlecase}}
+        {{actividadSelected['fechatermino'] | date:'shortTime'| titlecase}}
+      </span>
+    </div>
+  </div>
+
+  <hr class="my-4" />
+
+  <div class="row">
+    <div class="col-lg-6">
+
+      <div class="row justify-content-between aling-items-center mb-2">
+        <label class="h3 col-lg-9">
+          Aprendizajes Esperados
+        </label>
+      </div>
+      <div class="form-group">
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let a of actividadSelected['aprendizaje']"
+            class="page-item row align-items-center">
+            <p class="col-auto">
+              #{{a['idAprendizajeEsperado']}}
+            </p>
+            <p class="col-11">
+              {{a['descripcion']}}
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+
+      <div class="row justify-content-between aling-items-center mb-2">
+        <label class="h3 col-lg-9">
+          Evidencias
+        </label>
+      </div>
+      <div *ngFor="let evidencia of actividadSelected['evidencia']"
+        class="card card-stats m-4 mb-4 mb-lg-0 border">
+        <div class="card-body">
+          <span class="h2 font-weight-bold mb-0">
+            {{evidencia['nombreEvidencia']}}
+          </span>
+
+          <div class="col">
+            <div class="row justify-content-between">
+              <h4 class="card-title text-uppercase text-muted mb-0">
+                {{evidencia['descripcion']}}
+              </h4>
+              <span>
+                <i class="ni {{formatos[evidencia['idFormato']].icon}}"></i>
+                {{formatos[evidencia['idFormato']].descripcion}}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row m-4 justify-content-between">
+    <div class="custom-file col-lg-10">
+      <input type="file" multiple class="custom-file-input"
+        (change)="load($event)">
+      <label class="custom-file-label" for="customFile">Choose
+        file</label>
+    </div>
+
+    <button class="btn btn-primary" type="button" (click)="subirEvidencia()">
+      Subir
+    </button>
+  </div>
+</div>

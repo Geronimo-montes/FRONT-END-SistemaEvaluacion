@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   get mensajeError(): string {
-    return this.repository.getMensajeError();
+    return this.repository.getMensaje();
   }
 
   initForm(): void {

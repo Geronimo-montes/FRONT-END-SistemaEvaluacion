@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Usuario } from 'src/app/model/users/user.model';
+import { UserRepository } from 'src/app/model/users/user.repository';
 
 @Component({
   selector: 'app-auth-base',
@@ -7,9 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./auth-base.component.css']
 })
 export class AuthBaseComponent implements OnInit {
+  isCollapsed: boolean = false;
+  constructor(
+    private repository: UserRepository,
+  ) { }
 
-  constructor() { }
-
+  get usuario(): Usuario {
+    return this.repository.getUsuario();
+  }
   ngOnInit(): void { }
 
 }

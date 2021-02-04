@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Docente } from 'src/app/model/docente/docente.model';
-import { DocenteRepository } from 'src/app/model/docente/docente.repository';
+import { Usuario } from 'src/app/model/users/user.model';
+import { UserRepository } from 'src/app/model/users/user.repository';
 import { validarQueSeanIguales } from './user-profile.validator';
 
 @Component({
@@ -10,21 +10,24 @@ import { validarQueSeanIguales } from './user-profile.validator';
   styleUrls: ['./form-user.component.css']
 })
 export class FormUserComponent implements OnInit {
-  private formUser: FormGroup;
-  constructor(private repository: DocenteRepository, private fb: FormBuilder) { }
+  formUser: FormGroup;
+  constructor(
+    private repository: UserRepository,
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
     this.formUser = this.fb.group({
-      email           : new FormControl(this.docente['email'] , { validators: [Validators.required, Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')]}),
-      password        : new FormControl('' , { validators: [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,20}$')]}),
-      passwordConfirm : new FormControl('' , { validators: [Validators.required] }),
-    },{
+      email: new FormControl(this.usuario.email, { validators: [Validators.required, Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')] }),
+      password: new FormControl('', { validators: [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,20}$')] }),
+      passwordConfirm: new FormControl('', { validators: [Validators.required] }),
+    }, {
       validators: validarQueSeanIguales
     });
   }
 
-  get docente(): Docente{ 
-    return this.repository.getDocente();
+  get usuario(): Usuario {
+    return this.repository.getUsuario();
   }
   get mensaje(): string {
     return this.repository.getMensaje();
@@ -35,32 +38,32 @@ export class FormUserComponent implements OnInit {
   get formDestino(): string {
     return this.repository.getFormDestino();
   }
-  
-  isValidPasswordConfirm(): string{
-    if(this.formUser.controls['passwordConfirm'].value == '')
+
+  isValidPasswordConfirm(): string {
+    if (this.formUser.controls['passwordConfirm'].value == '')
       return '';
-    else if(this.formUser.controls['passwordConfirm'].value.length > 0)
-      if(this.formUser.controls['password'].value === this.formUser.controls['passwordConfirm'].value){
+    else if (this.formUser.controls['passwordConfirm'].value.length > 0)
+      if (this.formUser.controls['password'].value === this.formUser.controls['passwordConfirm'].value) {
         return 'is-valid';
-      }else{
+      } else {
         return 'is-invalid';
       }
   }
 
   isValidInput(fieldName, form): string {
-    if(form.controls[fieldName].value == '')
+    if (form.controls[fieldName].value == '')
       return '';
-    else 
-      return (form.controls[fieldName].invalid 
-        && (form.controls[fieldName].dirty 
+    else
+      return (form.controls[fieldName].invalid
+        && (form.controls[fieldName].dirty
           || form.controls[fieldName].touched)) ? 'is-invalid' : 'is-valid';
   }
 
   updateUser(): void {
-    const user= { 
-      email: this.formUser.controls['email'].value, 
+    const user = {
+      email: this.formUser.controls['email'].value,
       password: this.formUser.controls['password'].value,
-      id: this.docente['idDocente'],
+      id: this.usuario.idUsuario,
     };
 
     this.repository.updateUser(user);
