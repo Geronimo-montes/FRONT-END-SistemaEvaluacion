@@ -1,104 +1,105 @@
-  <!-- Page content -->
-  <div class="container pb-5 mt--9 zindex-1">
-    <div class="row justify-content-center">
-      <div class="col-lg-5 col-md-7">
-        <div class="card bg-secondary border border-dark shadow">
-          <div class="card-body px-lg-5 py-lg-5">
-            <div class="text-center text-muted mb-4">
-              <h1 class="font-blod font-weight-800">REGISTER</h1>
+<!-- Page content -->
+<div class="container pb-5 mt--9 zindex-1">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7">
+      <div class="card bg-secondary border border-dark shadow">
+        <div class="card-body px-lg-5 py-lg-5">
+          <div class="text-center text-muted mb-4">
+            <h1 class="font-blod font-weight-800">REGISTER</h1>
+          </div>
+          <!--FORM-->
+          <form [formGroup]="registerForm" (ngSubmit)="register()"
+            method="post">
+
+            <div class="form-group mb-3 border border-dark rounded shadow">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i
+                      class="ni ni-email-83"></i></span>
+                </div>
+                <!--EMAIL-->
+                <input class="form-control text-dark" type="email"
+                  formControlName="email" placeholder="Email">
+              </div>
             </div>
-            <!--FORM-->
-            <form [formGroup]="registerForm" (ngSubmit)="register()" method="post">
-  
-              <div class="form-group mb-3 border border-dark rounded shadow">
-                <div class="input-group input-group-alternative">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                  </div>
-                  <!--EMAIL-->
-                  <input class="form-control text-dark" 
-                    type="email" 
-                    formControlName ="email"
-                    placeholder="Email"
-                  >
+
+            <div *ngIf="isValidInput('email')" class="alert alert-danger">
+              <div *ngIf="registerForm.controls['email'].errors.required">
+                Email is required.
+              </div>
+              <div *ngIf="registerForm.controls['email'].errors.pattern">
+                Must be a valid email format.
+              </div>
+            </div>
+
+            <div class="form-group mb-3 border border-dark rounded shadow">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i
+                      class="ni ni-lock-circle-open"></i></span>
+                </div>
+                <!--PASSWORD-->
+                <input class="form-control text-dark" type="password"
+                  formControlName="password" placeholder="Password">
+              </div>
+            </div>
+
+            <div *ngIf="isValidInput('password')" class="alert alert-danger">
+              <div *ngIf="registerForm.controls['password'].errors.required">
+                Password is required.
+              </div>
+            </div>
+
+            <div class="form-group mb-3 border border-dark rounded shadow">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i
+                      class="ni ni-lock-circle-open"></i></span>
+                </div>
+                <!--PASSWORD-->
+                <input class="form-control text-dark" type="password"
+                  formControlName="confirmPassword"
+                  placeholder="Repeat the password">
+              </div>
+            </div>
+
+            <div *ngIf="isValidInput('confirmPassword')"
+              class="alert alert-danger">
+              <div *ngIf="registerForm.controls['password'].errors.required">
+                Passwords do not match.
+              </div>
+            </div>
+
+            <div class="text-muted font-italic"><small>password strength: <span
+                  class="text-success font-weight-700">strong</span></small>
+            </div>
+            <div class="row my-4">
+              <div class="col-12">
+                <div
+                  class="custom-control custom-control-alternative custom-checkbox">
+                  <input class="custom-control-input" id="customCheckRegister"
+                    type="checkbox">
+                  <label class="custom-control-label" for="customCheckRegister">
+                    <span class="text-muted">I agree with the <a
+                        href="#!">Privacy Policy</a></span>
+                  </label>
                 </div>
               </div>
-  
-              <div *ngIf="isValidInput('email')"
-                class="alert alert-danger">
-                <div *ngIf="registerForm.controls['email'].errors.required">
-                  Email is required.
-                </div>
-                <div *ngIf="registerForm.controls['email'].errors.pattern">
-                  Must be a valid email format.
-                </div>
-              </div>
-  
-              <div class="form-group mb-3 border border-dark rounded shadow">
-                <div class="input-group input-group-alternative">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                  </div>
-                  <!--PASSWORD-->
-                  <input class="form-control text-dark" 
-                    type="password"
-                    formControlName ="password"
-                    placeholder="Password"
-                  >
-                </div>
-              </div>
-  
-              <div *ngIf="isValidInput('password')"
-                class="alert alert-danger">
-                <div *ngIf="registerForm.controls['password'].errors.required">
-                  Password is required.
-                </div>
-              </div>
-  
-              <div class="form-group mb-3 border border-dark rounded shadow">
-                <div class="input-group input-group-alternative">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                  </div>
-                  <!--PASSWORD-->
-                  <input class="form-control text-dark"
-                    type="password"
-                    formControlName="confirmPassword"
-                    placeholder="Repeat the password" 
-                  >
-                </div>
-              </div>
-  
-              <div *ngIf="isValidInput('confirmPassword')"
-                class="alert alert-danger">
-                <div *ngIf="registerForm.controls['password'].errors.required">
-                  Passwords do not match.
-                </div>
-              </div>
-  
-              <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>
-              <div class="row my-4">
-                <div class="col-12">
-                  <div class="custom-control custom-control-alternative custom-checkbox">
-                    <input class="custom-control-input" id="customCheckRegister" type="checkbox">
-                    <label class="custom-control-label" for="customCheckRegister">
-                      <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary mt-4">Create account</button>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary mt-4">Create
+                account</button>
+            </div>
+          </form>
         </div>
-        <div class="row mt-3">
-          <div class="col-12 text-right">
-            <p><small>You already registered?</small>&nbsp;&nbsp;<a routerLink="/login" class="text-muted"><small> Log In</small></a>&nbsp;&nbsp;</p>
-          </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 text-right">
+          <p><small>You already registered?</small>&nbsp;&nbsp;<a
+              routerLink="/login" class="text-muted"><small> Log
+                In</small></a>&nbsp;&nbsp;</p>
         </div>
       </div>
     </div>
-    <ng2-toasty [position]="'bottom-right'"></ng2-toasty>
   </div>
+</div>

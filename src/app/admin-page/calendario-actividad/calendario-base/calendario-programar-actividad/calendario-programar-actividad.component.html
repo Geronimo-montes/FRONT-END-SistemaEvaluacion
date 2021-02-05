@@ -46,119 +46,114 @@
           </div>
         </div>
 
-        <div class="row ml-2">
-          <div class="col-4">
-            <button class="btn btn-primary" type="button"
-              (click)="programarNuevaActividad();">Programar</button>
-          </div>
-
+        <div class="row m-2">
           <div
             *ngIf="!!mensaje && ubicacion == 'p'; then thenBlock else elseBlock">
           </div>
-
           <ng-template #thenBlock>
-            <div class="alert text-white col-7" [ngClass]="tipoMensaje">
+            <div class="alert text-white col-auto" [ngClass]="tipoMensaje">
               {{mensaje}}
             </div>
           </ng-template>
           <ng-template #elseBlock>
             <div *ngIf="!!mensajeLocal && mensajeLocal !=''"
-              class=" alert bg-danger text-white col-7">
+              class=" alert bg-danger text-white col-auto">
               {{mensajeLocal}}
             </div>
           </ng-template>
 
+          <div class="col-4">
+            <button class="btn btn-primary" type="button"
+              (click)="programarNuevaActividad();">Programar</button>
+          </div>
         </div>
       </div>
 
       <!--Items de la tabla-->
-      <div class="card-body align-items-center">
-        <div class="table-responsive">
-          <table class="table align-items-center table-flush">
-            <thead class="thead-ligth">
-              <tr>
-                <th scope="col" class="h1">No.</th>
-                <th scope="col" class="h1"></th>
-                <th scope="col" class="h1">Nombre</th>
-                <th scope="col" class="h1">Duración</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let actividad of actividades"
-                (click)="setActividadSelected(actividad);"
-                [ngClass]="{'table-success': actividadSelected === actividad}">
-                <!--No. Actividad-->
-                <th>
-                  <div class=" align-items-center">
-                    <div class="media-body">
-                      <span class="mb-0 text-sm">
-                        {{ actividad.idPlanTrabajo}}
-                      </span>
-                    </div>
+      <div class="table-responsive mt-2">
+        <table class="table align-items-center table-flush">
+          <thead class="thead-ligth">
+            <tr>
+              <th scope="col" class="h1">No.</th>
+              <th scope="col" class="h1"></th>
+              <th scope="col" class="h1">Nombre</th>
+              <th scope="col" class="h1">Duración</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let actividad of actividades"
+              (click)="setActividadSelected(actividad);"
+              [ngClass]="{'table-success': actividadSelected === actividad}">
+              <!--No. Actividad-->
+              <th>
+                <div class=" align-items-center">
+                  <div class="media-body">
+                    <span class="mb-0 text-sm">
+                      {{ actividad.idPlanTrabajo}}
+                    </span>
                   </div>
-                </th>
-                <!--img-->
-                <th scope="row">
-                  <div class="media align-items-center">
-                    <div class="avatar rounded-circle mr-3">
-                      <img alt="Image placeholder"
-                        src="assets/img/theme/bootstrap.jpg">
-                    </div>
+                </div>
+              </th>
+              <!--img-->
+              <th scope="row">
+                <div class="media align-items-center">
+                  <div class="avatar rounded-circle mr-3">
+                    <img alt="Image placeholder"
+                      src="assets/img/theme/bootstrap.jpg">
                   </div>
-                </th>
-                <!--Nombre-->
-                <th>
-                  <div class="align-items-center">
-                    <div class="media-body">
-                      <span class="mb-0 text-sm">
-                        {{ actividad.nombre.slice(0,38) }}-
-                        <br>
-                        {{ actividad.nombre.slice(38,76) }}-
-                        <br>
-                        {{ actividad.nombre.slice(76,114) }}
-                      </span>
-                    </div>
+                </div>
+              </th>
+              <!--Nombre-->
+              <th>
+                <div class="align-items-center">
+                  <div class="media-body">
+                    <span class="mb-0 text-sm">
+                      {{ actividad.nombre.slice(0,38) }}-
+                      <br>
+                      {{ actividad.nombre.slice(38,76) }}-
+                      <br>
+                      {{ actividad.nombre.slice(76,114) }}
+                    </span>
                   </div>
-                </th>
-                <!--Duracion-->
-                <th>
-                  <div class="align-items-center">
-                    <div class="media-body">
-                      <span class="mb-0 text-sm">
-                        {{actividad.duracionMinutos}} minutos
-                      </span>
-                    </div>
+                </div>
+              </th>
+              <!--Duracion-->
+              <th>
+                <div class="align-items-center">
+                  <div class="media-body">
+                    <span class="mb-0 text-sm">
+                      {{actividad.duracionMinutos}} minutos
+                    </span>
                   </div>
-                </th>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="row">
-          <nav class="m-auto mr-auto" aria-label="...">
-            <ul class="pagination">
-              <li class="page-item">
-                <button class="page-link" (click)="changePrimerControl(-1)">
-                  <i class="fa fa-angle-left"></i>
-                </button>
-              </li>
+                </div>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <nav class="m-auto mr-auto" aria-label="...">
+          <ul class="pagination">
+            <li class="page-item">
+              <button class="page-link" (click)="changePrimerControl(-1)">
+                <i class="fa fa-angle-left"></i>
+              </button>
+            </li>
 
-              <li *ngFor="let page of controls" class="page-item"
-                [class.active]="page == SelectedPage"
-                (click)="changePage(page)">
-                <button class="page-link">
-                  {{ page }}
-                </button>
-              </li>
+            <li *ngFor="let page of controls" class="page-item"
+              [class.active]="page == SelectedPage" (click)="changePage(page)">
+              <button class="page-link">
+                {{ page }}
+              </button>
+            </li>
 
-              <li class="page-item">
-                <button class="page-link" (click)="changePrimerControl(1)">
-                  <i class="fa fa-angle-right"></i>
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
+            <li class="page-item">
+              <button class="page-link" (click)="changePrimerControl(1)">
+                <i class="fa fa-angle-right"></i>
+              </button>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>

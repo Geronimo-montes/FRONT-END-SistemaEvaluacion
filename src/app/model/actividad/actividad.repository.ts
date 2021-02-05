@@ -3,6 +3,7 @@ import { CalendarEvent } from "angular-calendar";
 import { addMinutes } from "date-fns";
 import { Subject } from "rxjs";
 import { DataSourceService } from "../dataSource.service";
+import { NotificacionService } from "../notificacion.service";
 import { Actividad, AprendizajeEsperado, AreaFormacion } from "./actividad.model";
 
 const colors: any = {
@@ -37,6 +38,7 @@ export class ActividadRepository {
 
   constructor(
     private datasource: DataSourceService,
+    private notificacion: NotificacionService,
   ) {
     this.datasource.getActividadesProgramadas().subscribe(data => {
       this.setEvents(data);
@@ -71,46 +73,38 @@ export class ActividadRepository {
       this._actividadSelected = data[0];
     });
   }
-  getActiviades(): Actividad[] {
-    return this.actividades;
-  }
-  get actividadSelected(): Actividad {
-    return this._actividadSelected;
-  }
 
-  set actividadSelected(valor: Actividad) {
-    this._actividadSelected = valor;
-  }
-  getAreaFormacion(): AreaFormacion[] {
-    return this.areasFormacion;
-  }
-  getAprendizajeEsperado(): AprendizajeEsperado[] {
-    return this.aprendizajeEsperado;
-  }
+  getActiviades(): Actividad[] { return this.actividades; }
+  get actividadSelected(): Actividad { return this._actividadSelected; }
+  set actividadSelected(valor: Actividad) { this._actividadSelected = valor; }
+  getAreaFormacion(): AreaFormacion[] { return this.areasFormacion; }
+  getAprendizajeEsperado(): AprendizajeEsperado[] { return this.aprendizajeEsperado; }
   getAprendizajeEsperadoByAreaFormacion(idAreaFormacion) {
     this.datasource.getAprendizajeEsperado(idAreaFormacion).subscribe((data) => {
       this.aprendizajeEsperado = data;
     })
   }
   /**Mensaje de error/success */
-  getMensaje(): string {
-    return this.mensaje;
-  }
-  getTipoMensaje(): string {
-    return this.tipoMensaje;
-  }
-  getUbicacion(): string {
-    return this.ubicacion;
-  }
+  getMensaje(): string { return this.mensaje; }
+  getTipoMensaje(): string { return this.tipoMensaje; }
+  getUbicacion(): string { return this.ubicacion; }
 
   insterActividad(actividad: FormData) {
     this.datasource.insertActividad(actividad).subscribe((data) => {
       if (data['success']) {
-        this.mensaje = data['mensaje'];
-        this.tipoMensaje = 'alert-success';
+        //this.mensaje = data['mensaje'];
+        //this.tipoMensaje = 'alert-success';
+        this.notificacion.titulo = data['titulo'];
+        this.notificacion.mensaje = data['mensaje'];
+        this.notificacion.tipo = 'success';
+        this.notificacion.showMensaje();
       } else {
-        this.mensaje = data['mensaje'];
-        this.tipoMensaje = 'alert-danger';
+        //this.mensaje = data['mensaje'];
+        //this.tipoMensaje = 'alert-danger';
+        this.notificacion.titulo = data['titulo'];
+        this.notificacion.mensaje = data['mensaje'];
+        this.notificacion.tipo = 'warning';
+        this.notificacion.showMensaje();
       }
     });
   }

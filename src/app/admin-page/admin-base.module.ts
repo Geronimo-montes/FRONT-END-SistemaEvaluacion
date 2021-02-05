@@ -6,6 +6,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AdminBaseRoutingModule } from "./admin-base-routing.module";
 import { AdminBaseComponent } from "./admin-base/admin-base.component";
 import { ComponentsModule } from "../components/components.module";
+import { ToastyModule } from "ng2-toasty";
 @NgModule({
   imports: [
     ModelModule,
@@ -15,6 +16,7 @@ import { ComponentsModule } from "../components/components.module";
     CommonModule,
     ComponentsModule,
     AdminBaseRoutingModule,
+    ToastyModule
   ],
   declarations: [
     AdminBaseComponent,

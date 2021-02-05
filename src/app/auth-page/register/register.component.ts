@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastData, ToastOptions, ToastyConfig, ToastyService } from 'ng2-toasty';
-import { Observable, Subscription, timer } from 'rxjs';
+import { NotificacionService } from 'src/app/model/notificacion.service';
 import { UserRepository } from 'src/app/model/users/user.repository';
 
 @Component({
@@ -15,7 +14,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     public repositiry: UserRepository,
     private fb: FormBuilder,
-    private toastyService: ToastyService, private toastyConfig: ToastyConfig) {
+    private notificacion: NotificacionService) {
     //this.toastyConfig.theme = 'bootstrap';
   }
 
@@ -37,25 +36,10 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    let toastOptions: ToastOptions = {
-      title: 'Prueba Toasty',
-      msg: 'Contenido MSM',
-      showClose: true,
-      timeout: 50000,
-      theme: 'bootstrap',
-      onAdd: (toast: ToastData) => {
-        console.log('Toast ' + toast.id + ' has been added!');
-      },
-      onRemove: function (toast: ToastData) {
-        console.log('Toast ' + toast.id + ' has been removed!');
-      }
-    };
+    this.notificacion.titulo = 'Notificacion de Prueba';
+    this.notificacion.mensaje = '!Prueba exitosa!';
+    this.notificacion.tipo = 'info';
 
-    this.toastyService.default(toastOptions);
-    this.toastyService.info(toastOptions);
-    this.toastyService.success(toastOptions);
-    this.toastyService.wait(toastOptions);
-    this.toastyService.error(toastOptions);
-    this.toastyService.warning(toastOptions);
+    this.notificacion.showMensaje();
   }
 }

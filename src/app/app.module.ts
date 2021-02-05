@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 import { registerLocaleData } from "@angular/common";
 import localeEs from '@angular/common/locales/es-MX';
+import { ModelModule } from "./model/model.module";
 //fehcas en español mexicano
 registerLocaleData(localeEs, 'es-MX');
 
@@ -15,6 +16,7 @@ registerLocaleData(localeEs, 'es-MX');
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ModelModule,
     AppRoutingModule,
     ToastyModule.forRoot(),
     FormsModule,
