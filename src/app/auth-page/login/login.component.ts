@@ -20,10 +20,6 @@ export class LoginComponent implements OnInit {
     this.initForm();
   }
 
-  get mensajeError(): string {
-    return this.repository.getMensaje();
-  }
-
   initForm(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')]],

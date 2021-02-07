@@ -31,16 +31,6 @@ export class ActividadFormInstrucionesComponent implements OnInit {
     });
   }
 
-  get mensaje(): string {
-    return this.newActividadRepository.getMensaje();
-  }
-  get tipoMensaje(): string {
-    return this.newActividadRepository.getTipoMensaje();
-  }
-  get ubicacion(): string {
-    return this.newActividadRepository.getUbicacion();
-  }
-
   get newActividad(): Actividad {
     return this.newActividadRepository.getNewActividad();
   }

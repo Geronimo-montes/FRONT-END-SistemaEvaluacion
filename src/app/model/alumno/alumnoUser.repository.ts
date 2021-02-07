@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actividad } from "../actividad/actividad.model";
 import { DataSourceService } from "../dataSource.service";
+import { NotificacionService } from "../notificacion.service";
 import { Alumno, Comentario } from "./alumno.model";
 
 @Injectable()
@@ -11,13 +12,10 @@ export class AlumnoUserReporsitory {
   private actividadSelected: Actividad;
   private comentarios: Comentario[];
 
-  private mensaje: string;
-  private tipoMensaje: string;
-  private formDestino: string; /*d: docente | u: credenciales | p: perfil*/
-
   constructor(
     private datasource: DataSourceService,
     private router: Router,
+    private notificacion: NotificacionService,
   ) {
     this.datasource.getAlumnoById().subscribe((data) => {
       this.alumno = data;
@@ -40,16 +38,6 @@ export class AlumnoUserReporsitory {
     return this.comentarios;
   }
 
-  getMensaje(): string {
-    return this.mensaje;
-  }
-  getTipoMensaje(): string {
-    return this.tipoMensaje;
-  }
-  getFormDestino(): string {
-    return this.formDestino;
-  }
-
   setActividadSeleted(id: number) {
     this.datasource.getActividadesAlumnoById(id).subscribe(data => {
       this.actividadSelected = data['actividad'];
@@ -68,9 +56,11 @@ export class AlumnoUserReporsitory {
     this.datasource.subirEvidencia(files, id).subscribe((data) => {
       console.log(data);
       this.actividades = data['actividades'];
-      this.tipoMensaje = (data['success']) ? 'alert-success' : 'alert-danger';
-      this.mensaje = data['mensaje'];
-      this.formDestino = data['destino'];
+
+      this.notificacion.titulo = data['titulo'];
+      this.notificacion.mensaje = data['mensaje'];
+      this.notificacion.tipo = data['tipo'];
+      this.notificacion.showMensaje();
     });
   }
 }

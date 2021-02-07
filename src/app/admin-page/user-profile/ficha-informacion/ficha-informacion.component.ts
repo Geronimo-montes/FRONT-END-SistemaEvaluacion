@@ -24,15 +24,6 @@ export class FichaInformacionComponent implements OnInit {
   get docente(): Docente {
     return this.repository.getDocente();
   }
-  get mensaje(): string {
-    return this.repository.getMensaje();
-  }
-  get tipoMensaje(): string {
-    return this.repository.getTipoMensaje();
-  }
-  get formDestino(): string {
-    return this.repository.getFormDestino();
-  }
 
   load(event) {
     const reader = new FileReader();

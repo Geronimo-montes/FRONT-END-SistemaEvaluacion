@@ -23,10 +23,10 @@ export class NotificacionService {
       timeout: 10000,
       theme: 'bootstrap',
       onAdd: (toast: ToastData) => {
-        console.log(`Toast ${toast.id} has been added!`);
+        //console.log(`Toast ${toast.id} has been added!`);
       },
       onRemove: function (toast: ToastData) {
-        console.log(`Toast ${toast.id} has been removed!`);
+        //console.log(`Toast ${toast.id} has been removed!`);
       }
     };
 

@@ -31,15 +31,6 @@ export class FormUserComponent implements OnInit {
   get usuario(): Usuario {
     return this.repository.getUsuario();
   }
-  get mensaje(): string {
-    return this.repository.getMensaje();
-  }
-  get tipoMensaje(): string {
-    return this.repository.getTipoMensaje();
-  }
-  get formDestino(): string {
-    return this.repository.getFormDestino();
-  }
 
   isValidPasswordConfirm(): string {
     if (this.formUser.controls['passwordConfirm'].value == '')

@@ -31,10 +31,6 @@ export class ActividadRepository {
   private _actividadSelected: Actividad;
   private areasFormacion: AreaFormacion[];
   private aprendizajeEsperado: AprendizajeEsperado[];
-  /**Mensaje de error*/
-  private mensaje: string;
-  private tipoMensaje: string;
-  private ubicacion: string;
 
   constructor(
     private datasource: DataSourceService,
@@ -84,42 +80,23 @@ export class ActividadRepository {
       this.aprendizajeEsperado = data;
     })
   }
-  /**Mensaje de error/success */
-  getMensaje(): string { return this.mensaje; }
-  getTipoMensaje(): string { return this.tipoMensaje; }
-  getUbicacion(): string { return this.ubicacion; }
+
 
   insterActividad(actividad: FormData) {
     this.datasource.insertActividad(actividad).subscribe((data) => {
-      if (data['success']) {
-        //this.mensaje = data['mensaje'];
-        //this.tipoMensaje = 'alert-success';
-        this.notificacion.titulo = data['titulo'];
-        this.notificacion.mensaje = data['mensaje'];
-        this.notificacion.tipo = 'success';
-        this.notificacion.showMensaje();
-      } else {
-        //this.mensaje = data['mensaje'];
-        //this.tipoMensaje = 'alert-danger';
-        this.notificacion.titulo = data['titulo'];
-        this.notificacion.mensaje = data['mensaje'];
-        this.notificacion.tipo = 'warning';
-        this.notificacion.showMensaje();
-      }
+      this.notificacion.titulo = data['titulo'];
+      this.notificacion.mensaje = data['mensaje'];
+      this.notificacion.tipo = data['tipo'];
+      this.notificacion.showMensaje();
     });
   }
 
   programarActividad(valor: any): void {
     this.datasource.programrActividad(valor).subscribe(data => {
-      if (data['success']) {
-        this.mensaje = data['mensaje'];
-        this.tipoMensaje = 'alert-success';
-        this.ubicacion = 'p';
-      } else {
-        this.mensaje = data['mensaje'];
-        this.tipoMensaje = 'alert-danger';
-        this.ubicacion = 'p';
-      }
+      this.notificacion.titulo = data['titulo'];
+      this.notificacion.mensaje = data['mensaje'];
+      this.notificacion.tipo = data['tipo'];
+      this.notificacion.showMensaje();
 
       this.datasource.getActividadesProgramadas().subscribe(data => {
         this.setEvents(data);
@@ -129,15 +106,10 @@ export class ActividadRepository {
 
   modificarActividad(valor: any): void {
     this.datasource.modificarActividad(valor).subscribe(data => {
-      if (data['success']) {
-        this.mensaje = data['mensaje'];
-        this.tipoMensaje = 'alert-success';
-        this.ubicacion = 'c';
-      } else {
-        this.mensaje = data['mensaje'];
-        this.tipoMensaje = 'alert-danger';
-        this.ubicacion = 'c';
-      }
+      this.notificacion.titulo = data['titulo'];
+      this.notificacion.mensaje = data['mensaje'];
+      this.notificacion.tipo = data['tipo'];
+      this.notificacion.showMensaje();
 
       this.datasource.getActividadesProgramadas().subscribe(data => {
         this.setEvents(data);
@@ -147,15 +119,10 @@ export class ActividadRepository {
 
   deleteActividad(id: any): void {
     this.datasource.deleteActividad(id).subscribe(data => {
-      if (data['success']) {
-        this.mensaje = data['mensaje'];
-        this.tipoMensaje = 'alert-success';
-        this.ubicacion = 'c';
-      } else {
-        this.mensaje = data['mensaje'];
-        this.tipoMensaje = 'alert-danger';
-        this.ubicacion = 'c';
-      }
+      this.notificacion.titulo = data['titulo'];
+      this.notificacion.mensaje = data['mensaje'];
+      this.notificacion.tipo = data['tipo'];
+      this.notificacion.showMensaje();
 
       this.datasource.getActividadesProgramadas().subscribe(data => {
         this.setEvents(data);

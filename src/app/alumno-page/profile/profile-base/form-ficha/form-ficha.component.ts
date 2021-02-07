@@ -26,15 +26,6 @@ export class FormFichaComponent implements OnInit {
   get actividades(): any[] {
     return this.repository.getActividades();
   }
-  get mensaje(): string {
-    return this.repository.getMensaje();
-  }
-  get tipoMensaje(): string {
-    return this.repository.getTipoMensaje();
-  }
-  get formDestino(): string {
-    return this.repository.getFormDestino();
-  }
 
   setActividad(id: number) {
     this.repository.setActividadSeleted(id);

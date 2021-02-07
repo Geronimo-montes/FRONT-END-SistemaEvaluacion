@@ -25,15 +25,6 @@ export class ActividadDetalleComponent implements OnInit {
   get actividadSelected(): any {
     return this.repository.getActividadSelected();
   }
-  get mensaje(): string {
-    return this.repository.getMensaje();
-  }
-  get tipoMensaje(): string {
-    return this.repository.getTipoMensaje();
-  }
-  get formDestino(): string {
-    return this.repository.getFormDestino();
-  }
 
   load(event) {
     this.files = event.target.files;

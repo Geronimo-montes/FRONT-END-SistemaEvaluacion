@@ -35,15 +35,6 @@ export class FormDocenteComponent implements OnInit {
   get docente(): Docente {
     return this.repository.getDocente();
   }
-  get mensaje(): string {
-    return this.repository.getMensaje();
-  }
-  get tipoMensaje(): string {
-    return this.repository.getTipoMensaje();
-  }
-  get formDestino(): string {
-    return this.repository.getFormDestino();
-  }
 
   isValidInput(fieldName, form): string {
     if (form.controls[fieldName].value == '')

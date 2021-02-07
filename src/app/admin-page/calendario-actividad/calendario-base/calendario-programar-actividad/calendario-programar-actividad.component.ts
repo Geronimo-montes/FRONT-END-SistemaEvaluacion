@@ -37,16 +37,6 @@ export class CalendarioProgramarActividadComponent {
   setActividadSelected(valor: Actividad) {
     this.repository.actividadSelected = valor;
   }
-  /**Datos del mensaje */
-  get mensaje(): string {
-    return this.repository.getMensaje();
-  }
-  get tipoMensaje(): string {
-    return this.repository.getTipoMensaje();
-  }
-  get ubicacion(): string {
-    return this.repository.getUbicacion();
-  }
 
   get actividades(): Actividad[] {
     let pageIndex = (this.SelectedPage - 1) * this.NumRowPage;

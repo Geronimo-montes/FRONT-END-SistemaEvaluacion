@@ -15,9 +15,7 @@ export class AlumnoActividadComponent implements OnInit {
   constructor(
     private repositoryUser: UserRepository,
     private repository: AlumnoUserReporsitory,
-  ) {
-
-  }
+  ) { }
 
   get usuario(): Usuario {
     return this.repositoryUser.getUsuario();

@@ -42,15 +42,6 @@ export class ProfilealumnoComponent implements OnInit {
   get alumnoSeleccionado(): Alumno {
     return this.repository.getalumnoSeleccionado();
   }
-  get mensaje(): string {
-    return this.repository.getMensaje();
-  }
-  get tipoMensaje(): string {
-    return this.repository.getTipoMensaje();
-  }
-  get formDestino(): string {
-    return this.repository.getFormDestino();
-  }
 
   isValidInput(fieldName, form): string {
     if (this.form.controls[fieldName].value == '' || this.form.controls[fieldName].value == null)

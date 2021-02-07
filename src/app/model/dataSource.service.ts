@@ -22,23 +22,23 @@ export class DataSourceService {
 
   /**Autenticacion de usuaios */
   login(user: any): Observable<any> {
-    return this.http.post(this.baseURL + 'login', user);
+    return this.http.post(`${this.baseURL}login`, user);
   }
 
   getUsuario(): Observable<Usuario> {
-    return this.http.get<Usuario>(this.baseURL + 'usuario', this.getOptions());
+    return this.http.get<Usuario>(`${this.baseURL}usuario`, this.getOptions());
   }
 
   validarRol(): Observable<any> {
-    return this.http.get(this.baseURL + 'docentevalidacion', this.getOptions());
+    return this.http.get(`${this.baseURL}docentevalidacion`, this.getOptions());
   }
 
   logOut(): Observable<boolean> {
-    return this.http.post<boolean>(this.baseURL + 'logout', 0, this.getOptions());
+    return this.http.post<boolean>(`${this.baseURL}logout`, 0, this.getOptions());
   }
 
   updateUser(user: any): Observable<any> {
-    return this.http.post(this.baseURL + 'user/update', user, this.getOptions());
+    return this.http.post(`${this.baseURL}user/update`, user, this.getOptions());
   }
 
   getToken() {
@@ -52,72 +52,72 @@ export class DataSourceService {
 
   /**Usuario Docente Metodos CRUD */
   getDocenteById(): Observable<Docente> {
-    return this.http.get<Docente>(this.baseURL + 'docente',
+    return this.http.get<Docente>(`${this.baseURL}docente`,
       this.getOptions());
   }
 
   updateDocenteById(docente: any): Observable<any> {
-    return this.http.post(this.baseURL + 'docente/update', docente, this.getOptions());
+    return this.http.post(`${this.baseURL}docente/update`, docente, this.getOptions());
   }
 
   /**Alumnos get */
   getAlumnos(grupo: string, grado: string, turno: string): Observable<Alumno[]> {
-    return this.http.get<Alumno[]>(this.baseURL + 'alumno/' + grupo + '/' + grado + '/' + turno,
+    return this.http.get<Alumno[]>(`${this.baseURL}alumno/${grupo}/${grado}/${turno}`,
       this.getOptions());
   }
 
   updateAlumnoById(alumno: FormData): Observable<any> {
-    return this.http.post(this.baseURL + 'alumno/update', alumno, this.getOptions());
+    return this.http.post(`${this.baseURL}alumno/update`, alumno, this.getOptions());
   }
 
   updatePerfil(perfil: any): any {
     let inpost = new FormData();
     inpost.append("file", perfil);
-    return this.http.post(this.baseURL + 'updateperfil', inpost, this.getOptions());
+    return this.http.post(`${this.baseURL}updateperfil`, inpost, this.getOptions());
   }
 
   getAreaFormacion(): Observable<AreaFormacion[]> {
-    return this.http.get<AreaFormacion[]>(this.baseURL + 'areaFormacion');
+    return this.http.get<AreaFormacion[]>(`${this.baseURL}areaFormacion`);
   }
 
   getAprendizajeEsperado(id: number): Observable<AprendizajeEsperado[]> {
-    return this.http.get<AprendizajeEsperado[]>(this.baseURL + 'aprendizajeEsperado/' + id);
+    return this.http.get<AprendizajeEsperado[]>(`${this.baseURL}aprendizajeEsperado/${id}`);
   }
 
   insertActividad(actividad: any): Observable<any> {
-    return this.http.post(this.baseURL + 'actividadInsert', actividad, this.getOptions());
+    return this.http.post(`${this.baseURL}actividadInsert`, actividad, this.getOptions());
   }
 
   getActividades(): Observable<Actividad[]> {
-    return this.http.get<Actividad[]>(this.baseURL + 'actividades', this.getOptions());
+    return this.http.get<Actividad[]>(`${this.baseURL}actividades`, this.getOptions());
   }
 
   getActividadById(id: number): Observable<Actividad> {
-    return this.http.get<Actividad>(this.baseURL + 'actividad/' + id, this.getOptions());
+    return this.http.get<Actividad>(`${this.baseURL}actividad/${id}`, this.getOptions());
   }
 
   getActividadesProgramadas(): Observable<ActividadProgramada[]> {
-    return this.http.get<ActividadProgramada[]>(this.baseURL + 'planTrabajo', this.getOptions());
+    return this.http.get<ActividadProgramada[]>(`${this.baseURL}planTrabajo`, this.getOptions());
   }
 
   programrActividad(actividad: any): Observable<any> {
-    return this.http.post(this.baseURL + 'planTrabajo/insert', actividad, this.getOptions());
+    return this.http.post(`${this.baseURL}planTrabajo/insert`, actividad, this.getOptions());
   }
 
   modificarActividad(actividad: any): Observable<any> {
-    return this.http.post(this.baseURL + 'planTrabajo/update', actividad, this.getOptions());
+    return this.http.post(`${this.baseURL}planTrabajo/update`, actividad, this.getOptions());
   }
 
   deleteActividad(id: number): Observable<any> {
-    return this.http.delete(this.baseURL + 'planTrabajo/delete/' + id, this.getOptions());
+    return this.http.post(`${this.baseURL}planTrabajo/delete/${id}`, this.getOptions());
   }
 
   /**Usuario alumnos Metodos CRUD */
   getAlumnoById(): Observable<Alumno> {
-    return this.http.get<Alumno>(this.baseURL + 'alumnouser', this.getOptions());
+    return this.http.get<Alumno>(`${this.baseURL}alumnouser`, this.getOptions());
   }
   getActividadesAlumno(): Observable<any> {
-    return this.http.get<any>(this.baseURL + 'actividadesalumno', this.getOptions());
+    return this.http.get<any>(`${this.baseURL}actividadesalumno`, this.getOptions());
   }
   getActividadesAlumnoById(id: number): Observable<any> {
     return this.http.get<any>(`${this.baseURL}actividadalumno/${id}`, this.getOptions());

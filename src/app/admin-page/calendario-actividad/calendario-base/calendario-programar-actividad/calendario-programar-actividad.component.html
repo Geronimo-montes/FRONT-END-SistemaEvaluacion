@@ -47,20 +47,10 @@
         </div>
 
         <div class="row m-2">
-          <div
-            *ngIf="!!mensaje && ubicacion == 'p'; then thenBlock else elseBlock">
+          <div *ngIf="!!mensajeLocal && mensajeLocal !=''"
+            class=" alert bg-danger text-white col-auto">
+            {{mensajeLocal}}
           </div>
-          <ng-template #thenBlock>
-            <div class="alert text-white col-auto" [ngClass]="tipoMensaje">
-              {{mensaje}}
-            </div>
-          </ng-template>
-          <ng-template #elseBlock>
-            <div *ngIf="!!mensajeLocal && mensajeLocal !=''"
-              class=" alert bg-danger text-white col-auto">
-              {{mensajeLocal}}
-            </div>
-          </ng-template>
 
           <div class="col-4">
             <button class="btn btn-primary" type="button"

@@ -159,19 +159,10 @@
         </button>
       </div>
 
-      <div *ngIf="!!mensaje && ubicacion == 'c'; then thenBlock else elseBlock">
+      <div *ngIf="!!mensajeLocal && mensajeLocal !=''"
+        class=" alert bg-danger text-white col-5">
+        {{mensajeLocal}}
       </div>
-      <ng-template #thenBlock>
-        <div class="alert text-white col-5" [ngClass]="tipoMensaje">
-          {{mensaje}}
-        </div>
-      </ng-template>
-      <ng-template #elseBlock>
-        <div *ngIf="!!mensajeLocal && mensajeLocal !=''"
-          class=" alert bg-danger text-white col-5">
-          {{mensajeLocal}}
-        </div>
-      </ng-template>
     </div>
 
   </div>

@@ -11,6 +11,7 @@ import { validarQueSeanIguales } from './user-profile.validator';
 })
 export class FormUserComponent implements OnInit {
   formUser: FormGroup;
+
   constructor(
     private repository: UserRepository,
     private fb: FormBuilder
@@ -26,18 +27,7 @@ export class FormUserComponent implements OnInit {
     });
   }
 
-  get usuario(): Usuario {
-    return this.repository.getUsuario();
-  }
-  get mensaje(): string {
-    return this.repository.getMensaje();
-  }
-  get tipoMensaje(): string {
-    return this.repository.getTipoMensaje();
-  }
-  get formDestino(): string {
-    return this.repository.getFormDestino();
-  }
+  get usuario(): Usuario { return this.repository.getUsuario(); }
 
   isValidPasswordConfirm(): string {
     if (this.formUser.controls['passwordConfirm'].value == '')

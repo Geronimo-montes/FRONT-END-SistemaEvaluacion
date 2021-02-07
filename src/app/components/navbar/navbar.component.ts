@@ -1,7 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES_DOCENTE } from '../sidebar/sidebar.component';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
 import { DocenteRepository } from 'src/app/model/docente/docente.repository';
 import { Docente } from 'src/app/model/docente/docente.model';
 import { UserRepository } from 'src/app/model/users/user.repository';
@@ -19,7 +18,6 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     location: Location,
-    private element: ElementRef,
     private userRepository: UserRepository,
     private repository: DocenteRepository,
   ) {

@@ -40,15 +40,6 @@ export class CalendarioComponent {
   get refresh(): Subject<any> {
     return this.repository.getRefresh();
   }
-  get mensaje(): string {
-    return this.repository.getMensaje();
-  }
-  get tipoMensaje(): string {
-    return this.repository.getTipoMensaje();
-  }
-  get ubicacion(): string {
-    return this.repository.getUbicacion();
-  }
 
   //click en el dia
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {

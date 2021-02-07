@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { DataSourceService } from "../dataSource.service";
+import { NotificacionService } from "../notificacion.service";
 import { Actividad, AprendizajeEsperado, Evidencia } from "./actividad.model";
 
 @Injectable()
@@ -8,23 +9,10 @@ export class NewActividadRepository {
   private _perfil: string = 'assets/img/theme/team-4-800x800.jpg';
   public areas: string[];
 
-  private mensaje: string;
-  private tipoMensaje: string;
-  private ubicacion: string;
-
   constructor(
     private datasource: DataSourceService,
+    private notificacion: NotificacionService,
   ) { }
-
-  getMensaje(): string {
-    return this.mensaje;
-  }
-  getTipoMensaje(): string {
-    return this.tipoMensaje;
-  }
-  getUbicacion(): string {
-    return this.ubicacion;
-  }
 
   getNewActividad(): Actividad {
     return this.newActividad;
@@ -126,13 +114,10 @@ export class NewActividadRepository {
 
   insertNewActividad() {
     this.datasource.insertActividad(JSON.stringify(this.newActividad)).subscribe(data => {
-      if (data['success']) {
-        this.mensaje = data['mensaje'];
-        this.tipoMensaje = 'alert-success';
-      } else {
-        this.mensaje = data['mensaje'];
-        this.tipoMensaje = 'alert-danger';
-      }
+      this.notificacion.titulo = data['titulo'];
+      this.notificacion.mensaje = data['mensaje'];
+      this.notificacion.tipo = data['tipo'];
+      this.notificacion.showMensaje();
     });
     this.newActividad = new Actividad();
   }

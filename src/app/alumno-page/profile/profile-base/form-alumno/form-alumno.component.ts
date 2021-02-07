@@ -39,15 +39,6 @@ export class FormAlumnoComponent implements OnInit {
   get alumno(): Alumno {
     return this.repository.getAlumno();
   }
-  get mensaje(): string {
-    return this.repository.getMensaje();
-  }
-  get tipoMensaje(): string {
-    return this.repository.getTipoMensaje();
-  }
-  get formDestino(): string {
-    return this.repository.getFormDestino();
-  }
 
   isValidInput(fieldName, form): string {
     if (form.controls[fieldName].value == '')
@@ -57,5 +48,4 @@ export class FormAlumnoComponent implements OnInit {
         && (form.controls[fieldName].dirty
           || form.controls[fieldName].touched)) ? 'is-invalid' : 'is-valid';
   }
-
 }
