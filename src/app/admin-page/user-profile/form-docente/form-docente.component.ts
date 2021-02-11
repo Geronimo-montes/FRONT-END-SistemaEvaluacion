@@ -12,7 +12,10 @@ export class FormDocenteComponent implements OnInit {
   form: FormGroup;
   public inputDisable: boolean = true;
 
-  constructor(private repository: DocenteRepository, private fb: FormBuilder) { }
+  constructor(
+    private repository: DocenteRepository,
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({

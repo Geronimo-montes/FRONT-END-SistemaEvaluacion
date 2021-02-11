@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminGuard } from '../admin.guard';
+import { AdminGuard } from '../../components/guards/admin.guard';
 import { CrudAlumnosComponent } from './crud-alumnos/crud-alumnos.component';
 import { CrudGuard } from './crud.guard';
 import { ProfilealumnoComponent } from './profilealumno/profilealumno.component';

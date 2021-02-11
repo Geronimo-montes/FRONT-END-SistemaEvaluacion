@@ -8,7 +8,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { CalendarioComponent } from './calendario-base/calendario/calendario.component';
 import { CalendarioBaseComponent } from './calendario-base/calendario-base.component';
-import { AdminGuard } from '../admin.guard';
+import { AdminGuard } from '../../components/guards/admin.guard';
 import { CalendarioActividadRoutingModule } from './calendario-actividad-routing.module';
 import { CalendarioProgramarActividadComponent } from './calendario-base/calendario-programar-actividad/calendario-programar-actividad.component';
 import { ModelModule } from 'src/app/model/model.module';

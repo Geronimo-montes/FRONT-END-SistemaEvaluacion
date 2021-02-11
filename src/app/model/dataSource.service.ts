@@ -1,5 +1,4 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { resolve } from '@angular/compiler-cli/src/ngtsc/file_system';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
@@ -56,13 +55,13 @@ export class DataSourceService {
       this.getOptions());
   }
 
-  updateDocenteById(docente: any): Observable<any> {
+  updateDocenteById(docente: any): Observable<Docente> {
     return this.http.post(`${this.baseURL}docente/update`, docente, this.getOptions());
   }
 
   /**Alumnos get */
-  getAlumnos(grupo: string, grado: string, turno: string): Observable<Alumno[]> {
-    return this.http.get<Alumno[]>(`${this.baseURL}alumno/${grupo}/${grado}/${turno}`,
+  getAlumnos(): Observable<Alumno[]> {
+    return this.http.get<Alumno[]>(`${this.baseURL}listaalumno`,
       this.getOptions());
   }
 
@@ -101,7 +100,7 @@ export class DataSourceService {
   }
 
   programrActividad(actividad: any): Observable<any> {
-    return this.http.post(`${this.baseURL}planTrabajo/insert`, actividad, this.getOptions());
+    return this.http.post(`${this.baseURL}plantrabajo/insert`, actividad, this.getOptions());
   }
 
   modificarActividad(actividad: any): Observable<any> {
@@ -113,12 +112,16 @@ export class DataSourceService {
   }
 
   /**Usuario alumnos Metodos CRUD */
-  getAlumnoById(): Observable<Alumno> {
-    return this.http.get<Alumno>(`${this.baseURL}alumnouser`, this.getOptions());
+  getUserAlumnoById(idAlumno?: string): Observable<Alumno> {
+    let valor = (idAlumno == undefined) ? idAlumno : 'noalumno';
+    return this.http.get<Alumno>(`${this.baseURL}alumnouser/${valor}`, this.getOptions());
   }
-  getActividadesAlumno(): Observable<any> {
-    return this.http.get<any>(`${this.baseURL}actividadesalumno`, this.getOptions());
+
+  getActividadesAlumno(idAlumno?: string): Observable<any> {
+    let valor = (idAlumno == undefined) ? idAlumno : 'noalumno';
+    return this.http.get<any>(`${this.baseURL}actividadesalumno/${valor}`, this.getOptions());
   }
+
   getActividadesAlumnoById(id: number): Observable<any> {
     return this.http.get<any>(`${this.baseURL}actividadalumno/${id}`, this.getOptions());
   }

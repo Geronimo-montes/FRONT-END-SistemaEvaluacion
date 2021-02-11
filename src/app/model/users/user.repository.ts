@@ -14,14 +14,15 @@ export class UserRepository {
     public router: Router,
     private cookies: CookieService,
     private notificacion: NotificacionService,
-  ) {
-    //¿Que proposito tiene llamarlo en el constructor?
+  ) { }
+
+  getUsuario(): Usuario { return this.usuario; }
+
+  setUsuario() {
     this.datasource.getUsuario().subscribe(data => {
       this.usuario = data;
     });
   }
-
-  getUsuario(): Usuario { return this.usuario; }
 
   login(user: any) { /**/
     this.datasource.login(user).subscribe(data => {
@@ -32,13 +33,11 @@ export class UserRepository {
 
       if (data['token'] !== undefined) {
         this.cookies.set('token', data['token'], new Date(new Date().getTime() + 1000 * 60 * 60));
-        this.cookies.set('rol', data['rol'], new Date(new Date().getTime() + 1000 * 60 * 60));
         setTimeout(() => {
-          if (data['rol'] === 'docente') {
-            this.router.navigateByUrl('/profile');
-          } else {
-            this.router.navigateByUrl('/userprofile');
-          }
+          if (data['user']['rol'] == 'docente')
+            this.router.navigateByUrl('/plantrabajo');
+          else
+            this.router.navigateByUrl('/alumnouserhome');
         }, 2000);
       }
     });
@@ -46,6 +45,8 @@ export class UserRepository {
 
   logOut() {
     this.datasource.logOut().subscribe(data => {
+      console.log(data);
+
       this.notificacion.titulo = data['titulo'];
       this.notificacion.mensaje = data['mensaje'];
       this.notificacion.tipo = data['tipo'];
@@ -53,12 +54,22 @@ export class UserRepository {
 
       if (data['logout']) {
         this.cookies.set('token', '', new Date(new Date().getTime() - 1000 * 60 * 60));
-        this.cookies.set('rol', '', new Date(new Date().getTime() - 1000 * 60 * 60));
+        this.usuario = null;
+
         setTimeout(() => {
           this.router.navigateByUrl('/login');
-        }, 2000);
-
+        }, 1000);
       }
+    });
+  }
+
+  updatePerfil(perfil: any) {
+    this.datasource.updatePerfil(perfil).subscribe((data) => {
+      console.log(data);
+      this.notificacion.titulo = data['titulo'];
+      this.notificacion.mensaje = data['mensaje'];
+      this.notificacion.tipo = data['tipo'];
+      this.notificacion.showMensaje();
     });
   }
 

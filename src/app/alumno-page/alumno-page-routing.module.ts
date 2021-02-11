@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AlumnoBaseComponent } from "./alumno-base/alumno-base.component";
-import { AlumnoGuard } from "./alumno.guard";
+import { AlumnoGuard } from "../components/guards/alumno.guard";
 
 const routes: Routes = [
   {

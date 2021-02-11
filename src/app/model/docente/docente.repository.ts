@@ -10,18 +10,21 @@ export class DocenteRepository implements OnInit, OnDestroy {
   constructor(
     private datasource: DataSourceService,
     private notificacion: NotificacionService,
-  ) {
-    this.datasource.getDocenteById().subscribe((data) => {
-      this.docente = <Docente>data[0];
-    });
-  }
+  ) { }
 
   ngOnInit() { }
+
   ngOnDestroy() {
     this.docente = null;
   }
 
   getDocente(): Docente { return this.docente; }
+
+  setDocente(): void {
+    this.datasource.getDocenteById().subscribe((data) => {
+      this.docente = data;
+    });
+  }
 
   updateDocnete(docente: any) {
     this.datasource.updateDocenteById(docente).subscribe((data) => {
@@ -31,16 +34,7 @@ export class DocenteRepository implements OnInit, OnDestroy {
       this.notificacion.showMensaje();
 
       if (data['success'])
-        this.docente = <Docente>data['data'][0];
-    });
-  }
-
-  updatePerfil(perfil: any) {
-    this.datasource.updatePerfil(perfil).subscribe((data) => {
-      this.notificacion.titulo = data['titulo'];
-      this.notificacion.mensaje = data['mensaje'];
-      this.notificacion.tipo = data['tipo'];
-      this.notificacion.showMensaje();
+        this.docente = data['data'];
     });
   }
 }

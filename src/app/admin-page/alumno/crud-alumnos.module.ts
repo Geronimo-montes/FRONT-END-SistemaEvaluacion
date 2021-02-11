@@ -8,7 +8,7 @@ import { TableAlumnoComponent } from './table-alumno/table-alumno.component';
 import { CrudAlumnosComponent } from './crud-alumnos/crud-alumnos.component';
 import { ProfilealumnoComponent } from './profilealumno/profilealumno.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { AdminGuard } from '../admin.guard';
+import { AdminGuard } from '../../components/guards/admin.guard';
 @NgModule({
   declarations: [
     CrudAlumnosComponent,

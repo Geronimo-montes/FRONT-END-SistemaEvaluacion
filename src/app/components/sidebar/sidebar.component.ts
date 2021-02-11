@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Docente } from 'src/app/model/docente/docente.model';
 import { DocenteRepository } from 'src/app/model/docente/docente.repository';
+import { Usuario } from 'src/app/model/users/user.model';
 import { UserRepository } from 'src/app/model/users/user.repository';
 
 declare interface RouteInfo {
@@ -10,12 +11,19 @@ declare interface RouteInfo {
   icon: string;
   class: string;
 }
+
 export const ROUTES_DOCENTE: RouteInfo[] = [
   //Para el menu lateral: se crea un arreglo con las rutas, agregando nombre e icono luego se recorre en el html
-  { path: '/profile', title: 'Mi Perfil', icon: 'ni-circle-08 text-yellow', class: '' },
+  //{ path: '/profile', title: 'Mi Perfil', icon: 'ni-circle-08 text-yellow', class: '' },
   { path: '/alumno', title: 'Alumnos', icon: 'ni-hat-3 text-blue', class: 'ni-4x' },
   { path: '/actividad', title: 'Actividades', icon: 'ni-collection text-green', class: '' },
-  { path: '/plantrabajo', title: 'Plan Trabajo', icon: 'ni-calendar-grid-58 text-orange', class: '' },
+  { path: '/plantrabajo', title: 'Calendario', icon: 'ni-calendar-grid-58 text-orange', class: '' },
+];
+
+export const ROUTES_ALUMNO: RouteInfo[] = [
+  //Para el menu lateral: se crea un arreglo con las rutas, agregando nombre e icono luego se recorre en el html
+  { path: '/alumnouserprofile', title: 'Mi Perfil', icon: 'ni-circle-08 text-yellow', class: '' },
+  { path: '/alumnouserhome', title: 'Pagina Principal', icon: 'ni-shop text-blue', class: '' },
 ];
 
 @Component({
@@ -30,19 +38,19 @@ export class SidebarComponent implements OnInit {
   constructor(
     private router: Router,
     private userRepository: UserRepository,
-    private repository: DocenteRepository,
   ) { }
 
   ngOnInit() {
-    this.menuItems = ROUTES_DOCENTE.filter(menuItem => menuItem);
+    this.menuItems = (this.usuario.rol == 'docente') ?
+      ROUTES_DOCENTE.filter(menuItem => menuItem) :
+      ROUTES_ALUMNO.filter(menuItem => menuItem);
+
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
     });
   }
 
-  get docente(): Docente {
-    return this.repository.getDocente();
-  }
+  get usuario(): Usuario { return this.userRepository.getUsuario(); }
 
   logOut() {
     this.userRepository.logOut();

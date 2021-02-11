@@ -1,9 +1,8 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { ROUTES_DOCENTE } from '../sidebar/sidebar.component';
+import { ROUTES_ALUMNO, ROUTES_DOCENTE } from '../sidebar/sidebar.component';
 import { Location } from '@angular/common';
-import { DocenteRepository } from 'src/app/model/docente/docente.repository';
-import { Docente } from 'src/app/model/docente/docente.model';
 import { UserRepository } from 'src/app/model/users/user.repository';
+import { Usuario } from 'src/app/model/users/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -19,18 +18,17 @@ export class NavbarComponent implements OnInit {
   constructor(
     location: Location,
     private userRepository: UserRepository,
-    private repository: DocenteRepository,
   ) {
     this.location = location;
   }
 
   ngOnInit() {
-    this.listTitles = ROUTES_DOCENTE.filter(listTitle => listTitle);
+    this.listTitles = (this.usuario.rol == 'docente') ?
+      ROUTES_DOCENTE.filter(listTitles => listTitles) :
+      ROUTES_ALUMNO.filter(listTitles => listTitles);
   }
 
-  get docente(): Docente {
-    return this.repository.getDocente();
-  }
+  get usuario(): Usuario { return this.userRepository.getUsuario(); }
 
   getTitle() {
     var titlee = this.location.prepareExternalUrl(this.location.path());

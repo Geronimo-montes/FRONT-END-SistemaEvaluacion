@@ -5,7 +5,7 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileBaseComponent } from './profile-base/profile-base.component';
-import { AlumnoGuard } from '../alumno.guard';
+import { AlumnoGuard } from '../../components/guards/alumno.guard';
 import { FormAlumnoComponent } from './profile-base/form-alumno/form-alumno.component';
 import { FormUserComponent } from './profile-base/form-user/form-user.component';
 import { FormFichaComponent } from './profile-base/form-ficha/form-ficha.component';

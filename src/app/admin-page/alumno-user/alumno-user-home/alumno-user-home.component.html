@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="col-xl-8 order-xl-1 mb-5 mb-xl-0">
+    <div class="card bg-secondary shadow">
+      <h5 class="card-header">Recudro sin proposito</h5>
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">
+          With supporting text below as a natural lead-in to additional
+          content.
+        </p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-4 order-xl-2">
+    <!--Actividades Atrasadas-->
+    <div class="card bg-secondary shadow">
+      <div class="card">
+        <h5 class="card-header">Actividades atrasadas</h5>
+        <ul class="list-group list-group-flush" class="card-body"
+          style="max-height: 18rem; overflow-y: auto;">
+          <li *ngFor="let a of actividadesAtrasadas"
+            class="list-group-item border">
+            <i class="ni ni-palette"></i>
+            {{ a["nombre"] }}
+            <br />
+            <h5 class="mt-2">
+              Tiempo de la Actividad
+              <strong>{{ a["duracion"] }}</strong>
+              minutos
+            </h5>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!--Actividades pendiente-->
+    <div class="card bg-secondary shadow mt-3">
+      <div class="card">
+        <h5 class="card-header">
+          Actividades de {{ date | date: "fullDate" }}
+        </h5>
+        <ul class="list-group list-group-flush" class="card-body"
+          style="max-height: 18rem; overflow-y: auto;">
+          <li *ngFor="let a of actividadesHoy" class="list-group-item border">
+            <i class="ni ni-palette"></i>
+            {{ a["nombre"] }}
+            <br />
+            <h5 class="mt-2">
+              Tiempo de la Actividad
+              <strong>{{ a["duracion"] }}</strong>
+              minutos
+            </h5>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!--Actividades pendiente-->
+    <div class="card bg-secondary shadow mt-3">
+      <div class="card">
+        <h5 class="card-header">Actividades futuras</h5>
+        <ul class="list-group list-group-flush" class="card-body"
+          style="max-height: 18rem; overflow-y: auto;">
+          <li *ngFor="let a of actividadesFuturas"
+            class="list-group-item border">
+            <i class="ni ni-palette"></i>
+            {{ a["nombre"] }}
+            <br />
+            <h5 class="mt-2">
+              Tiempo de la Actividad
+              <strong>{{ a["duracion"] }}</strong>
+              minutos
+            </h5>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

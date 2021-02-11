@@ -1,6 +1,6 @@
 <!-- Sidenav -->
-<app-sidebar></app-sidebar>
-<div class="main-content">
+<app-sidebar *ngIf="!!usuario"></app-sidebar>
+<div *ngIf="!!usuario" class="main-content">
   <!-- Top navbar -->
   <app-navbar></app-navbar>
   <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>

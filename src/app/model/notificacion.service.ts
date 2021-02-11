@@ -55,7 +55,4 @@ export class NotificacionService {
   private _titulo: string;
   private _mensaje: string;
   private _tipo: string;
-
-
-
 }

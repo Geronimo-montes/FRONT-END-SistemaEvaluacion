@@ -11,7 +11,9 @@ export class CrudAlumnosComponent implements OnInit {
   public imgPerfil: string;
   constructor(private repository: AlumnoRepository) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.repository.setListaAlumnos();
+  }
 
   get alumnos(): Alumno[] {
     return this.repository.getAlumnos();

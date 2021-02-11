@@ -10,7 +10,6 @@ import { AlumnoRepository } from 'src/app/model/alumno/alumno.repository';
 })
 export class ProfilealumnoComponent implements OnInit {
   public perfil;
-  public inputDisable = false;
   public form: FormGroup;
   public imgPerfil: string;
 
@@ -18,7 +17,7 @@ export class ProfilealumnoComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      perfil: new FormControl('', { validators: [Validators.required] }),
+      perfil: new FormControl('', { validators: [] }),
       idAlumno: new FormControl(this.alumnoSeleccionado['idAlumno'], { validators: [Validators.required] }),
       nombre: new FormControl(this.alumnoSeleccionado['nombre'], { validators: [Validators.required, Validators.minLength(4), Validators.pattern('[A-Za-z ][A-Za-z ]*')] }),
       ap1: new FormControl(this.alumnoSeleccionado['ap1'], { validators: [Validators.required, Validators.minLength(4), Validators.pattern('[A-Za-z ][A-Za-z ]*')] }),
@@ -28,8 +27,6 @@ export class ProfilealumnoComponent implements OnInit {
       grado: new FormControl(this.alumnoSeleccionado['grado'], { validators: [Validators.required, Validators.minLength(1), Validators.maxLength(1), Validators.pattern('[0-9]')] }),
       turno: new FormControl(this.alumnoSeleccionado['turno'], { validators: [Validators.required, Validators.minLength(1), Validators.maxLength(1), Validators.pattern('[A-Za-z]')] }),
       nombreTutor: new FormControl(this.alumnoSeleccionado['nombreTutor'], { validators: [Validators.required, Validators.minLength(4), Validators.pattern('[A-Za-z ][A-Za-z ]*')] }),
-      ap1Tutor: new FormControl(null, { validators: [Validators.minLength(4), Validators.pattern('[A-Za-z ][A-Za-z ]*')] }),
-      ap2Tutor: new FormControl(null, { validators: [Validators.minLength(4), Validators.pattern('[A-Za-z ][A-Za-z ]*')] }),
       telefono: new FormControl(this.alumnoSeleccionado['telefono'], { validators: [Validators.required, Validators.minLength(5), Validators.maxLength(10), Validators.pattern('[0-9]*')] }),
       email: new FormControl(this.alumnoSeleccionado['email'], { validators: [Validators.required, Validators.email] }),
       facebook: new FormControl(this.alumnoSeleccionado['facebook'], { validators: [Validators.required, Validators.minLength(4), Validators.pattern('[A-Za-z0-9/ ][A-Za-z0-9/ ]*')] }),
@@ -80,8 +77,6 @@ export class ProfilealumnoComponent implements OnInit {
     data.append('grado', this.form.controls['grado'].value);
     data.append('turno', this.form.controls['turno'].value);
     data.append('nombreTutor', this.form.controls['nombreTutor'].value);
-    data.append('ap1Tutor', this.form.controls['ap1Tutor'].value);
-    data.append('ap2Tutor', this.form.controls['ap2Tutor'].value);
     data.append('direccion', this.form.controls['direccion'].value);
     data.append('telefono', this.form.controls['telefono'].value);
     data.append('email', this.form.controls['email'].value);

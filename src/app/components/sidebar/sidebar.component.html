@@ -14,8 +14,10 @@
         src="https://www.jing.fm/clipimg/full/40-406578_gorilla-kids-logo-kids-png.png"
         class="navbar-brand-img" alt="...">
     </a>
+
     <!-- User -->
-    <ul *ngIf="!!docente" class="nav align-items-center d-md-none">
+    <ul class="nav align-items-center d-md-none">
+      <!--sadfasdf-->
       <li class="nav-item" ngbDropdown placement="bottom-right">
         <a class="nav-link nav-link-icon" role="button" ngbDropdownToggle>
           <i class="ni ni-bell-55"></i>
@@ -28,37 +30,40 @@
             here</a>
         </div>
       </li>
+      <!--sadfasdf-->
       <li class="nav-item" ngbDropdown placement="bottom-right">
-        <a class="nav-link" role="button" ngbDropdownToggle>
+        <a class="nav-link pr-0" role="button" ngbDropdownToggle>
           <div class="media align-items-center">
             <span class="avatar avatar-sm rounded-circle">
-              <img alt="Image placeholder" src="{{docente.rutaPerfil}}">
+              <!--<img alt="Image placeholder" src="assets/img/theme/team-4-800x800.jpg">-->
+              <img alt="Image placeholder" src="{{usuario.rutaPerfil}}">
             </span>
           </div>
         </a>
         <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
-          <div class=" dropdown-header noti-title">
-            <h4 class="text-overflow m-0">¡Bienvanid@ {{docente.nombre}}!</h4>
-          </div>
-          <button routerLinkActive="active" [routerLink]="['/uprofile']"
+          <!--<div class=" dropdown-header noti-title">
+            <h4 class="text-overflow m-0">¡Bienvanid@
+              {{usuario.email.slice(0,5)}}!</h4>
+          </div>-->
+          <button routerLinkActive="active" [routerLink]="['/profile']"
             class="dropdown-item">
             <i class="ni ni-single-02"></i>
             <span>Mi Perfil</span>
           </button>
-          <button routerLinkActive="active" [routerLink]="['/user-profile']"
+          <button routerLinkActive="active"
+            [routerLink]="['/plantrabajo/calendario']" class="dropdown-item">
+            <i class="ni ni-calendar-grid-58"></i>
+            <span>Calendario</span>
+          </button>
+          <button routerLinkActive="active" [routerLink]="['/profile']"
             class="dropdown-item">
             <i class="ni ni-settings-gear-65"></i>
-            <span>Settings</span>
+            <span>Preferencias</span>
           </button>
-          <button routerLinkActive="active" [routerLink]="['/user-profile']"
-            class="dropdown-item">
-            <i class="ni ni-calendar-grid-58"></i>
-            <span>Activity</span>
-          </button>
-          <button routerLinkActive="active" [routerLink]="['/user-profile']"
+          <button routerLinkAcstive="active" [routerLink]="['/profile']"
             class="dropdown-item">
             <i class="ni ni-support-16"></i>
-            <span>Support</span>
+            <span>Soporte</span>
           </button>
           <div class="dropdown-divider"></div>
           <button class="dropdown-item" (click)="logOut()">

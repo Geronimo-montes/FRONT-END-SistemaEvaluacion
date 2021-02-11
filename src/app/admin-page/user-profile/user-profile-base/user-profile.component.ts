@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DocenteRepository } from '../../../model/docente/docente.repository';
 import { Docente } from '../../../model/docente/docente.model';
 import { UserRepository } from 'src/app/model/users/user.repository';
@@ -15,7 +15,10 @@ export class UserProfileComponent implements OnInit {
     private repositoryUser: UserRepository,
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.repositoryUser.setUsuario();
+    this.repository.setDocente();
+  }
 
   get usuario(): Usuario {
     return this.repositoryUser.getUsuario();

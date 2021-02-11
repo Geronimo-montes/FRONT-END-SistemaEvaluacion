@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { UserProfileRoutingModule } from './user-profile-routing.module';
-import { AdminGuard } from '../admin.guard';
+import { AdminGuard } from '../../components/guards/admin.guard';
 import { FichaInformacionComponent } from './ficha-informacion/ficha-informacion.component';
 import { FormDocenteComponent } from './form-docente/form-docente.component';
 import { FormUserComponent } from './form-user/form-user.component';

@@ -107,23 +107,23 @@ export class CalendarioProgramarActividadComponent {
     this.mensajeLocal = '';
 
     if (this.actividadSelected != undefined) {
-      if (this.time.hour >= 8 && this.time.hour <= 16) {
+      //if (this.time.hour >= 8 && this.time.hour <= 16) {
 
-        if (this.model.year >= fechaactual.getFullYear() &&
-          this.model.month >= fechaactual.getMonth() &&
-          this.model.day >= fechaactual.getDate()) {
+      //if (this.model.year >= fechaactual.getFullYear() &&
+      //  this.model.month >= fechaactual.getMonth() &&
+      //  this.model.day >= fechaactual.getDate()) {
 
-          const actividad = {
-            idPlanTrabajo: this.actividadSelected.idPlanTrabajo,
-            fecha: fecha,
-            hora: hora,
-          }
-          this.repository.programarActividad(actividad);
-        }
-        else
-          this.mensajeLocal = '¡Fecha no valida!.';
-      } else
-        this.mensajeLocal = 'Solo puede prograrmar Actividades de 8:00 - 16:00';
+      const actividad = {
+        idPlanTrabajo: this.actividadSelected.idPlanTrabajo,
+        fecha: fecha,
+        hora: hora,
+      }
+      this.repository.programarActividad(actividad);
+      //}
+      //else
+      //this.mensajeLocal = '¡Fecha no valida!.';
+      //} else
+      //  this.mensajeLocal = 'Solo puede prograrmar Actividades de 8:00 - 16:00';
     }
   }
 }

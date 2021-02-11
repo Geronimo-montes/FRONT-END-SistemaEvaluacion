@@ -24,6 +24,6 @@ import { NotificacionService } from "./notificacion.service";
 		ActividadProgramadaRepository,
 		AlumnoUserReporsitory,
 		NotificacionService,
-	]
+	],
 })
 export class ModelModule { }

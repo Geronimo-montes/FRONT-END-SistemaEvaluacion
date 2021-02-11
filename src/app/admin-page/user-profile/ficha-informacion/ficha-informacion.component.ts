@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Docente } from 'src/app/model/docente/docente.model';
 import { DocenteRepository } from 'src/app/model/docente/docente.repository';
+import { Usuario } from 'src/app/model/users/user.model';
+import { UserRepository } from 'src/app/model/users/user.repository';
 
 @Component({
   selector: 'app-ficha-informacion',
@@ -12,18 +14,21 @@ export class FichaInformacionComponent implements OnInit {
   form: FormGroup;
   public imgPerfil: string;
 
-  constructor(private repository: DocenteRepository, private fb: FormBuilder) { }
+  constructor(
+    private repository: DocenteRepository,
+    private userRepository: UserRepository,
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       perfil: new FormControl(null, { validators: [Validators.required] })
     });
-    this.imgPerfil = this.docente['rutaPerfil'];
+    this.imgPerfil = this.usuario.rutaPerfil;
   }
 
-  get docente(): Docente {
-    return this.repository.getDocente();
-  }
+  get usuario(): Usuario { return this.userRepository.getUsuario(); }
+  get docente(): Docente { return this.repository.getDocente(); }
 
   load(event) {
     const reader = new FileReader();
@@ -39,6 +44,6 @@ export class FichaInformacionComponent implements OnInit {
       };
     }
     let file = event.target.files[0];
-    this.repository.updatePerfil(file);
+    this.userRepository.updatePerfil(file);
   }
 }

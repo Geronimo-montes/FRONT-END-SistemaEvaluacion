@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
   {
@@ -12,10 +12,12 @@ const routes: Routes = [
   }, {
     path: '',
     loadChildren: './admin-page/admin-base.module#AdminBaseModule',
-  }, {
+  },
+  /* {
     path: '',
     loadChildren: './alumno-page/alumno-page.module#AlumnoPageModule',
-  }, {
+  }, */
+  {
     path: '**',
     redirectTo: 'login',
   }

@@ -5,7 +5,7 @@ import { NgbDatepickerModule, NgbModalModule, NgbModule } from '@ng-bootstrap/ng
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { ModelModule } from 'src/app/model/model.module';
-import { AdminGuard } from '../admin.guard';
+import { AdminGuard } from '../../components/guards/admin.guard';
 import { ActividadFichaComponent } from './actividad-ficha/actividad-ficha.component';
 import { ActividadTableComponent } from './actividad-table/actividad-table.component';
 import { ActividadFormComponent } from './actividad-form/actividad-form.component';

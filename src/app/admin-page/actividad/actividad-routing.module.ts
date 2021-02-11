@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ActividadTableComponent } from './actividad-table/actividad-table.component';
 import { ActividadFormComponent } from './actividad-form/actividad-form.component';
-import { AdminGuard } from '../admin.guard';
+import { AdminGuard } from '../../components/guards/admin.guard';
 import { ActividadBaseComponent } from './actividad-base/actividad-base.component';
 
 const routes: Routes = [

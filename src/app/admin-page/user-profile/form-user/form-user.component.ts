@@ -13,9 +13,13 @@ export class FormUserComponent implements OnInit {
   formUser: FormGroup;
 
   constructor(
-    private repository: UserRepository,
-    private fb: FormBuilder
+    private repositoryUser: UserRepository,
+    private fb: FormBuilder,
   ) { }
+
+  get usuario(): Usuario {
+    return this.repositoryUser.getUsuario();
+  }
 
   ngOnInit(): void {
     this.formUser = this.fb.group({
@@ -26,8 +30,6 @@ export class FormUserComponent implements OnInit {
       validators: validarQueSeanIguales
     });
   }
-
-  get usuario(): Usuario { return this.repository.getUsuario(); }
 
   isValidPasswordConfirm(): string {
     if (this.formUser.controls['passwordConfirm'].value == '')
@@ -56,6 +58,6 @@ export class FormUserComponent implements OnInit {
       id: this.usuario.idUsuario,
     };
 
-    this.repository.updateUser(user);
+    this.repositoryUser.updateUser(user);
   }
 }

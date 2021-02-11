@@ -1,11 +1,12 @@
 <div *ngIf="!!actividades" class="container-fluid mt--8 bg-secondary">
-  <div class="row">
+  <div class="row justify-content-center">
     <!--Programar actividad-->
-    <div class="col-xl-6 order-xl-1">
-      <router-outlet></router-outlet>
+    <div class="col-xl-10 order-xl-1 mb-xl-0">
+      <!--<router-outlet></router-outlet>-->
+      <app-calendario></app-calendario>
     </div>
     <!--Calendarion de actividades-->
-    <div class="col-xl-6 order-xl-2 mb-5 mb-xl-0">
+    <div class="col-xl-10 order-xl-2 mt-5">
       <app-calendario-programar-actividad></app-calendario-programar-actividad>
     </div>
   </div>
