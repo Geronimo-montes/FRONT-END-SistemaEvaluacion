@@ -12,12 +12,7 @@ const routes: Routes = [
   }, {
     path: '',
     loadChildren: './admin-page/admin-base.module#AdminBaseModule',
-  },
-  /* {
-    path: '',
-    loadChildren: './alumno-page/alumno-page.module#AlumnoPageModule',
-  }, */
-  {
+  }, {
     path: '**',
     redirectTo: 'login',
   }
